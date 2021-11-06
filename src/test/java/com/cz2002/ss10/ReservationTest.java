@@ -58,21 +58,23 @@ public class ReservationTest {
     @Test
     public void removeReservationAfterPeriodExpiry() {
         // create reservation and add to reservations array
-        Reservation expiredReservation = Reservation(8888888,LocalDate.now(), LocalTime.now(),12345678, "Test Customer", 4);
+        Reservation expiredReservation = new Reservation(8888888,LocalDate.now(), LocalTime.now(),12345678, "Test Customer", 4);
         reservations.add(expiredReservation);
+
+        int expiredReservationId = expiredReservation.getReservationId();
+        int expiredReservationTableNum = expiredReservation.getTableNumber();
 
         // access reservation after period expiry
         // should remove reservation
-        // TODO: make it a static method?
-        RestaurantService.checkReservation(expiredReservation.getReservationId());
+        RestaurantService.checkReservation(expiredReservationId);
 
         // check that reservation has been removed
         Assert.assertEquals(null, reservations
               .stream()
-              .filter(reservation -> reservation.getReservationId().equals(expiredReservation.getReservationId())).findFirst().orElse(null));
+              .filter(reservation -> reservation.getReservationId() == expiredReservationId).findFirst().orElse(null));
 
         // check reservation table is set to unoccupied
-        Table reservationTable = tables.stream().filter(table -> table.getTableNumber().equals(expiredReservation.getTableNumber())).findFirst().orElse(null);
+        Table reservationTable = tables.stream().filter(table -> table.getTableNumber() == expiredReservationTableNum).findFirst().orElse(null);
         Assert.assertEquals(false, reservationTable.getOccupancy());
     }
 
@@ -83,20 +85,23 @@ public class ReservationTest {
     @Test
     public void retainReservationBeforePeriodExpiry() {
         // create reservation and add to reservations array
-        Reservation validReservation = Reservation(8888888,LocalDate.of(2021, 12, 25), LocalTime.of(16, 20, 45) ,12345678, "Test Customer", 4);
+        Reservation validReservation = new Reservation(8888888,LocalDate.of(2021, 12, 25), LocalTime.of(16, 20, 45) ,12345678, "Test Customer", 4);
         reservations.add(validReservation);
+
+        int validReservationId = validReservation.getReservationId();
+        int validReservationTableNum = validReservation.getTableNumber();
 
         // access reservation after period expiry
         // should retain reservation
-        RestaurantService.checkReservation(validReservation.getReservationId());
+        RestaurantService.checkReservation(validReservationId);
 
         // check that reservation still exists
         Assert.assertNotNull(reservations
               .stream()
-              .filter(reservation -> reservation.getReservationId().equals(validReservation.getReservationId())).findFirst().orElse(null));
+              .filter(reservation -> reservation.getReservationId() == validReservationId).findFirst().orElse(null));
 
         // check reservation table is still set to occupied
-        Table reservationTable = tables.stream().filter(table -> table.getTableNumber().equals(validReservation.getTableNumber())).findFirst().orElse(null);
+        Table reservationTable = tables.stream().filter(table -> table.getTableNumber() == validReservationTableNum).findFirst().orElse(null);
         Assert.assertEquals(true, reservationTable.getOccupancy()); 
     }
     
