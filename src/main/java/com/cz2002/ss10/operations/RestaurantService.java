@@ -63,7 +63,7 @@ public class RestaurantService {
 	 * 
 	 * @param reservationId
 	 */
-	public void checkReservation(int reservationId) {
+	public static void checkReservation(int reservationId) {
 		// TODO - implement RestaurantService.checkReservation
 		throw new UnsupportedOperationException();
 	}
