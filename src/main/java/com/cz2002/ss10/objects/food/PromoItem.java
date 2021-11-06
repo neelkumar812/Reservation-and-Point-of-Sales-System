@@ -2,15 +2,21 @@ package com.cz2002.ss10.objects.food;
 
 import java.util.*;
 
-public class PromoItem {
+public class PromoItem extends RestaurantItem {
 
 	private ArrayList<MenuItem> promotionItems;
-	private double price;
-	private String description;
-	private String name;
 
 	public ArrayList<MenuItem> getPromotionItems() {
 		return this.promotionItems;
+	}
+
+	PromoItem(){
+		super();
+	}
+
+	PromoItem(double price, String description, String name, int noOfAvailability, ArrayList<MenuItem> promotionItems){
+		super(price, description, name, noOfAvailability);
+		this.promotionItems = promotionItems;
 	}
 
 	/**
@@ -28,42 +34,6 @@ public class PromoItem {
 	 */
 	public void setPromotionItems(ArrayList<MenuItem> promotionItems) {
 		this.promotionItems = promotionItems;
-	}
-
-	public double getPrice() {
-		return this.price;
-	}
-
-	/**
-	 * 
-	 * @param price
-	 */
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	/**
-	 * 
-	 * @param description
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

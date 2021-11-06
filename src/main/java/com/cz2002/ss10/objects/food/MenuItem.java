@@ -1,57 +1,22 @@
 package com.cz2002.ss10.objects.food;
 
-public class MenuItem {
+public class MenuItem extends RestaurantItem {
 
 	public enum MenuItemType {
 		MAIN, DRINK, DESSERT, APPETISERS, OTHERS
 	}
 
-	private double price;
-	private String description;
-	private String name;
 	private MenuItemType itemType;
 
-	public void getPrice() {
-		// TODO - implement MenuItem.getPrice
-		throw new UnsupportedOperationException();
+	MenuItem(){
+		super();
 	}
 
-	/**
-	 * 
-	 * @param price
-	 */
-	public void setPrice(int price) {
-		// TODO - implement MenuItem.setPrice
-		throw new UnsupportedOperationException();
-	}
+	MenuItem(double price, String description, String name, int noOfAvailability, MenuItemType itemType){
+        super(price, description, name, noOfAvailability);
+		this.itemType = itemType;
+    }
 
-	public void getDescription() {
-		// TODO - implement MenuItem.getDescription
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param description
-	 */
-	public void setDescription(int description) {
-		// TODO - implement MenuItem.setDescription
-		throw new UnsupportedOperationException();
-	}
-
-	public void getName() {
-		// TODO - implement MenuItem.getName
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param name
-	 */
-	public void setName(int name) {
-		// TODO - implement MenuItem.setName
-		throw new UnsupportedOperationException();
-	}
 
 	public void getMenuItemType() {
 		// TODO - implement MenuItem.getMenuItemType
