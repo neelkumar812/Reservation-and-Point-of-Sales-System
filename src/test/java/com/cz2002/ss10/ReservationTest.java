@@ -1,53 +1,69 @@
 package com.cz2002.ss10;
 
 import com.cz2002.ss10.operations.*;
-import com.cz2002.ss10.objects.*;
 import com.cz2002.ss10.objects.logistics.*;
+import com.cz2002.ss10.operations.RestaurantService.ReservationNotFoundException;
 
 import java.time.*;
 import java.util.*;
 
+import org.junit.After;
 import org.junit.Assert;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReservationTest {
     /**
      * Set up test environment
      */
-    private static ArrayList<Reservation> reservations;
-    private static ArrayList<Table> tables;
+    private ArrayList<Reservation> reservations;
+    private ArrayList<Table> tables;
+    private RestaurantService restaurantService;
 
-    @Before
-    public static void setUpRestaurant() {
+    @BeforeClass
+    public void setUpRestaurant() {
         reservations = new ArrayList<Reservation>();
         tables = new ArrayList<Table>();
+        restaurantService = new RestaurantService();
+    }
+
+    @After
+    public void clearRestaurant(){
+        reservations.clear();
+        tables.clear();
     }
 
     /**
-     * 
+     * Expect no error if reservation exists even if full reservation capacity
      */
-    @Test
+    @Test(expected = Test.None.class /* no exception expected */)
     public void fullReservationExistingReservation() {
+        // create reservations until full occupancy (all tables booked)
+        setToFullReservations(10);
 
+        // check existing reservation
+        restaurantService.checkReservation(1);
     }
 
     /**
-     * 
+     * Throw ReservationNotFoundException if reservation does not exists
+     * When attempting to create new reservation, reject due to full reservation capcity
      */
-    @Test
+    @Test(expected=ReservationNotFoundException.class)
     public void fullReservationNonexistentReservation() {
-        
-    }
+        try{
+        // create reservations until full occupancy (all tables booked)
+        setToFullReservations(10);
 
-    /**
-     * Return error if staff makes reservation with invalid
-     */
-    @Test
-    public void fullReservationInvalidReservation() {
-        // TODO: Change int to operation corresponding to reservation
+        // check null reservation
+        restaurantService.checkReservation(0);
+        }
+        finally {
+            // enter input to create new reservation
+
+            // assert failed creation due to full reservation capacity
+        }
     }
 
     /**
@@ -66,7 +82,7 @@ public class ReservationTest {
 
         // access reservation after period expiry
         // should remove reservation
-        RestaurantService.checkReservation(expiredReservationId);
+        restaurantService.checkReservation(expiredReservationId);
 
         // check that reservation has been removed
         Assert.assertEquals(null, reservations
@@ -93,7 +109,7 @@ public class ReservationTest {
 
         // access reservation after period expiry
         // should retain reservation
-        RestaurantService.checkReservation(validReservationId);
+        restaurantService.checkReservation(validReservationId);
 
         // check that reservation still exists
         Assert.assertNotNull(reservations
@@ -103,6 +119,18 @@ public class ReservationTest {
         // check reservation table is still set to occupied
         Table reservationTable = tables.stream().filter(table -> table.getTableNumber() == validReservationTableNum).findFirst().orElse(null);
         Assert.assertEquals(true, reservationTable.getOccupancy()); 
+    }
+
+    public void setToFullReservations(int tableCount){
+        // create tableCount number of table objects
+        for (int i=1; i <= tableCount; i++) {
+            tables.add(new Table(4, i, false));
+        }
+
+        // create tableCount number of reservations (all tables booked)
+        for (int i=1; i <= tableCount; i++) {
+            reservations.add(new Reservation(i, LocalDate.of(2021, 12, 25), LocalTime.of(16, 20, 45), new Random().nextInt(900000000) + 100000000, "Test Customer", 4));
+        }
     }
     
 }
