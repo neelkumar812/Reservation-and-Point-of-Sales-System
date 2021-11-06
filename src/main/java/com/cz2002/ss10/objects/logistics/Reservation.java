@@ -26,6 +26,14 @@ public class Reservation {
 		throw new UnsupportedOperationException();
 	}
 
+    public int getReservationId(){
+        return this.reservationId;
+    }
+
+    public int getTableNumber(){
+        return this.tableNumber;
+    }
+
 	public void cancelReservation() {
 		// TODO - implement Reservation.cancelReservation
 		throw new UnsupportedOperationException();

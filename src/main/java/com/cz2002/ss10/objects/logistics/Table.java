@@ -12,6 +12,10 @@ public class Table {
 		throw new UnsupportedOperationException();
 	}
 
+    public int getTableNumber(){
+        return this.tableNumber;
+    }
+
 	/**
 	 * 
 	 * @param isOccupied
