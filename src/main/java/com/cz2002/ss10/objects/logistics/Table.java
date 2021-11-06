@@ -5,7 +5,12 @@ public class Table {
 	private int seatingCapacity;
 	private int tableNumber;
 	private Boolean isOccupied;
-	public int reservationPeriod;
+
+    public Table(int seatingCapacity, int tableNumber, Boolean isOccupied){
+        this.seatingCapacity = seatingCapacity;
+        this.tableNumber = tableNumber;
+        this.isOccupied = isOccupied;
+    }
 
 	public Boolean getOccupancy() {
 		// TODO - implement Table.getOccupancy
