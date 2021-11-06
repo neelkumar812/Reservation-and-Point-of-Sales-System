@@ -1,5 +1,9 @@
 package com.cz2002.ss10;
 
+import com.cz2002.ss10.objects.food.*;
+import com.cz2002.ss10.objects.logistics.*;
+import com.cz2002.ss10.objects.person.*;
+
 import java.util.ArrayList;
 import java.time.LocalTime;  
 import java.util.*;
@@ -11,11 +15,11 @@ public class RestaurantApp {
 	private ArrayList<MenuItem> menuItems;
 	private ArrayList<PromoItem> promotionItems;
 	private ArrayList<Reservation> reservations;
-	private ArrayList<Staff> staffList;
-	private ArrayList<RevenueReport> revenueReportList;
+	private ArrayList<Staff> staffs;
+	private ArrayList<RevenueReport> revenueReports;
 	private LocalTime openingTime;
 	private LocalTime closingTime;
-	private ArrayList<OrderInvoice> orderInvoices;
+	private ArrayList<Order> orders;
 
 	public void setPromotionItems(ArrayList<PromoItem> promotionItems) {
 		this.promotionItems = promotionItems;
