@@ -28,6 +28,9 @@ public class ReservationCsv implements IExtractCsv {
 	public String[] formatReservationToString(ArrayList<Reservation> reservationList) {
 		// TODO - implement ReservationCsv.formatReservationToString
 		throw new UnsupportedOperationException();
+		int size = reservationList.size();
+		String rL[] = reservationList.toArray(new String[size]);
+		return rL;
 	}
 
 }
