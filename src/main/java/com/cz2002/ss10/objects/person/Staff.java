@@ -15,7 +15,10 @@ public class Staff {
 	 * @param jobTitle
 	 */
 	public Staff(String name, char gender, int id, String jobTitle) {
-		// TODO - implement Staff.Staff
+		this.gender = gender;
+		this.name = name;
+		this.employeeID = id;
+		this.jobTitle = jobTitle;
 		throw new UnsupportedOperationException();
 	}
 
