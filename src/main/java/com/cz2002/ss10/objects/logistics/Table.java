@@ -4,30 +4,35 @@ public class Table {
 
 	private int seatingCapacity;
 	private int tableNumber;
-	private Boolean isOccupied;
+	private Boolean isOccupied = false;
+
+	/**
+	 * @param seatingCapacity
+	 * @param tableNumber
+	 * @param isOccupied
+	 */
 
     public Table(int seatingCapacity, int tableNumber, Boolean isOccupied){
         this.seatingCapacity = seatingCapacity;
         this.tableNumber = tableNumber;
         this.isOccupied = isOccupied;
     }
-
+	//returns true for occupied, false for vacant
 	public Boolean getOccupancy() {
-		// TODO - implement Table.getOccupancy
-		throw new UnsupportedOperationException();
+		return this.isOccupied;
 	}
-
     public int getTableNumber(){
         return this.tableNumber;
     }
-
+	public int getSeatingCap(){
+		return this.seatingCapacity;
+	}
 	/**
 	 * 
 	 * @param isOccupied
 	 */
 	public void setOccupancy(Boolean isOccupied) {
-		// TODO - implement Table.setOccupancy
+		this.isOccupied = true;
 		throw new UnsupportedOperationException();
 	}
-
 }
