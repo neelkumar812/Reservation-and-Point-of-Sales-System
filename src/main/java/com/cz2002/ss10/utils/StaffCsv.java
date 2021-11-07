@@ -34,6 +34,9 @@ public class StaffCsv implements IExtractCsv, IExportCsv {
 	public String[] formatStaffToString(ArrayList<Staff> staffList) {
 		// TODO - implement StaffCsv.formatStaffToString
 		throw new UnsupportedOperationException();
+		int size = staffList.size();
+		String sL[] = staffList.toArray(new String[size]);
+		return sL;
 	}
 
 }
