@@ -23,7 +23,12 @@ public class Reservation {
 	 */
 	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
 		// TODO - implement Reservation.Reservation
-		throw new UnsupportedOperationException();
+		reservationId=resId;
+		reservationDate=resDate;
+		reservationTime=resTime;
+		customerContact=contactNumber;
+		customerName=name;
+		this.dinerSize = dinerSize;
 	}
 
     public int getReservationId(){
@@ -36,7 +41,7 @@ public class Reservation {
 
 	public void cancelReservation() {
 		// TODO - implement Reservation.cancelReservation
-		throw new UnsupportedOperationException();
+		this = null;
 	}
 
 }
