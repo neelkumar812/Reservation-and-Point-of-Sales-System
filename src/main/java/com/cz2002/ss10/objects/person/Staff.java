@@ -16,7 +16,10 @@ public class Staff {
 	 */
 	public Staff(String name, char gender, int id, String jobTitle) {
 		// TODO - implement Staff.Staff
-		throw new UnsupportedOperationException();
+		this.name = name;
+		this.gender = gender;
+		employeeID=id;
+		this.jobTitle=jobTitle;
 	}
 
 }
