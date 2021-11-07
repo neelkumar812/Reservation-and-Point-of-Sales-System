@@ -71,9 +71,9 @@ public class MenuItem extends RestaurantItem {
     public MenuItemType convertToItemType(int type) {
         return type == 1 ? MenuItemType.MAIN :
                 	type == 2 ? MenuItemType.DESSERT :
-                        type == 3 ? MenuItemType.DRINK :
-							type == 4 ? MenuItemType.APPETISERS :
-                               type == 5? MenuItemType.OTHERS:
+                        	type == 3 ? MenuItemType.DRINK :
+					type == 4 ? MenuItemType.APPETISERS :
+                               			type == 5? MenuItemType.OTHERS:
 							   		MenuItemType.ALL;
     }
 
