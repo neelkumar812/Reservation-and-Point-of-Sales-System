@@ -16,16 +16,24 @@ public class RestaurantItem {
     private double restaurantItemPrice;
 
     /**
+     * The stock of the restaurant item.
+     */
+    private int restaurantItemStock;
+
+    /**
      * Constructor to pass in all required parameters for a restaurant item.
      *
      * @param restaurantItemID    This restaurant item's ID.
      * @param restaurantItemName  This restaurant item's name.
      * @param restaurantItemPrice This restaurant item's price.
+     * @param restaurantItemStock This restaurant item's stocks.
      */
-    RestaurantItem(int restaurantItemID, String restaurantItemName, double restaurantItemPrice) {
+    RestaurantItem(int restaurantItemID, String restaurantItemName, double restaurantItemPrice, int restaurantItemStock) {
         this.restaurantItemID = restaurantItemID;
         this.restaurantItemName = restaurantItemName;
         this.restaurantItemPrice = restaurantItemPrice;
+        this.restaurantItemStock = restaurantItemStock;
+
     }
 
      /**
@@ -83,20 +91,21 @@ public class RestaurantItem {
     }
 
     /**
-     * A method to read from a CSV string to convert to an object instance.
-     * This needs to be overridden if CSV data must be retrieved from a file.
+     * Accessor for Restaurant Item type.
      *
-     * @param csv A string array of the CSV file.
+     * @return Gets the restaurant item's Stock.
      */
-// To DO
+    public int getStock() {
+        return restaurantItemStock;
+    }
 
     /**
-     * A method to convert to CSV.
-     * This needs to be overridden if files need to be saved to CSV.
+     * Mutator for Restaurant Item Stock.
      *
-     * @return A String array of the CSV file.
+     * @param restaurantItemStock Sets the restaurant item's ID.
      */
-//To Do
-
+    public void setStock(int restaurantItemStock) {
+        this.restaurantItemStock = restaurantItemStock;
+    }
 
 }

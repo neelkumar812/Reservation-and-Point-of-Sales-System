@@ -29,10 +29,11 @@ import java.util.*;
      * @param promoMain    This Promo item's main ID.
      * @param promoDessert This Promo item's dessert ID.
      * @param promoDrink   This Promo item's drink ID.
+     * @param promoStock   This Promo item's current stock.
      */
-    public PromoItem(int promoID, String promoName, double promoPrice, int promoMain, int promoDessert, int promoDrink) {
+    public PromoItem(int promoID, String promoName, double promoPrice, int promoMain, int promoDessert, int promoDrink, int promoStock) {
         
-		super(promoID, promoName, promoPrice); //called from parent
+		super(promoID, promoName, promoPrice, promoStock); //called from parent
         this.promoMain = promoMain;
         this.promoDessert = promoDessert;
         this.promoDrink = promoDrink;
