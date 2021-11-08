@@ -25,10 +25,11 @@ public class MenuItem extends RestaurantItem {
      * @param type        Menu item's type.
      * @param description Menu item's description.
      * @param price       Menu item's price.
+	 * @param stock       Menu item's stock.
      */
-    public MenuItem(int id, String name, int itemType, String description, double price) {
+    public MenuItem(int id, String name, int itemType, String description, double price, int stock) {
 
-        super(id, name, price); // Called from restaurant class
+        super(id, name, price, stock); // Called from restaurant class
 		this.itemType = convertToItemType(itemType);     
         this.description = description;
     }
@@ -71,9 +72,9 @@ public class MenuItem extends RestaurantItem {
     public MenuItemType convertToItemType(int type) {
         return type == 1 ? MenuItemType.MAIN :
                 	type == 2 ? MenuItemType.DESSERT :
-                        	type == 3 ? MenuItemType.DRINK :
-					type == 4 ? MenuItemType.APPETISERS :
-                               			type == 5? MenuItemType.OTHERS:
+                        type == 3 ? MenuItemType.DRINK :
+							type == 4 ? MenuItemType.APPETISERS :
+                               type == 5? MenuItemType.OTHERS:
 							   		MenuItemType.ALL;
     }
 

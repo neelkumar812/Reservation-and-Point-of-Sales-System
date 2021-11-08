@@ -15,13 +15,14 @@ public class Staff {
 	 * @param jobTitle
 	 */
 	public Staff(String name, char gender, int id, String jobTitle) {
-		// TODO - implement Staff.Staff
-		this.name = name;
 		this.gender = gender;
-		employeeID=id;
-		this.jobTitle=jobTitle;
+		this.name = name;
+		this.employeeID = id;
+		this.jobTitle = jobTitle;
+		throw new UnsupportedOperationException();
 	}
 
+<<<<<<< HEAD
 	public int getStaffID(){
 		return employeeID;
 	}
@@ -29,3 +30,6 @@ public class Staff {
 
 
 }
+=======
+}
+>>>>>>> ff64d95ee4c231f30d86004d9e0cb9fb248d6f0c
