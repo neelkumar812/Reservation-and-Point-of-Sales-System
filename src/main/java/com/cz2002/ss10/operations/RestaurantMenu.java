@@ -16,53 +16,7 @@ import java.util.stream.Stream;
 
 public class RestaurantMenu {
 
-	/**
-     * Scanner Object
-     */
 
-	 Scanner sc = new Scanner (System.in);
-	 public static Scanner instance;
-
-	
-	/**
-     * The Food Menu Items Management Menu
-     *
-     * @return Exit Code. Return 1 to exit the program and -1 to exit to main menu
-     */
-
-    protected int generateMenuScreen() {
-
-        System.out.println("Options Available");
-        System.out.println("1) Print existing menu");
-        System.out.println("2) Create a new menu item");
-        System.out.println("3) Edit an existing menu item's details");
-        System.out.println("4) Delete a menu item");
-        System.out.println("5) Back to main menu");
-        System.out.println("0) Exit Application");
-
-        int choice = doMenuChoice(5,0);
-        switch (choice) {
-            case 1: // Prints menu
-                this.printMenu();
-                break;
-            case 2: // Create new menu item
-                this.addMenuItem();
-                break;
-            case 3: // Edit an existing menu item
-                this.editMenuItem();
-                break;
-            case 4: // Delete an existing menu item
-                this.removeMenuItem();
-                break;
-            case 5:
-                return -1;
-            case 0:
-                return 1;
-            default:
-			System.out.println("Invalid Option Entered");
-        }
-        return 0;
-    }
 
 	/**
      * Prints the menu of items stored in the CSV file.
@@ -86,7 +40,7 @@ public class RestaurantMenu {
 	 * @param name
 	 * @param itemType
 	 */
-	public void addMenuItem() {
+	public void addMenuItem(int itemType, String name, String description, double price) {
 		// TODO - implement RestaurantMenu.addMenuItem
 
 
