@@ -96,6 +96,8 @@ public class FoodMenuUI {
                         System.out.println("Please Choose a Valid Option");
 
                 } while (choice < 0 || choice > 5)
+
+                RestaurantMenu.printMenu(printType);
             }
         }
 
@@ -114,7 +116,7 @@ public class FoodMenuUI {
             System.out.println("3) Drink");
             System.out.println("4) Appetiser");
 
-            newItemType = sc.nextInt;
+            newItemType = sc.nextInt();
 
         } while (newItemType < 1 || newItemType > 4)
 
@@ -140,14 +142,83 @@ public class FoodMenuUI {
 
     private void editMenuItemUI() {
 
+        int editItemID;
+        String editedItemName;
+        int editedItemType;
+        String editedItemDescription;
+        double editedItemPrice;
+
+        // Insert Logic to Print Existing Menu
+
+        System.out.println("Existing Menu: ");
+        RestaurantMenu.printMenu(MenuItem.MenuItemType.ALL);
         
-        
+        //Insert Logic to find menu item 
+
+        boolean menuItemFound = false;
+
+        while (!menuItemFound) {
+            System.out.println("Enter the ID of the menu item to be edited: \n");
+            editItemID = sc.nextInt(); 
+            if (MenuItem.retrieveMenuItem(editItemID) == null)
+                System.out.println("Invalid ID. Please enter a valid menu item ID.");
+
+            else menuItemFound = true;
+        }
+
+        // Get Params
+
+        do {
+
+            System.out.println("Enter what type you want to change: ");
+            System.out.println("1) Main");
+            System.out.println("2) Dessert");
+            System.out.println("3) Drink");
+            System.out.println("4) Appetiser");
+
+            newItemType = sc.nextInt();
+
+        } while (newItemType < 1 || newItemType > 4)
+
+        System.out.println("Enter new menu item name: ");
+        sc.nextLine(); 
+        editedItemName = sc.nextLine();
+
+        System.out.println("Enter new menu item description: ");
+        editedItemDescription = sc.nextLine();
+
+        System.out.println("Enter new menu item price: ");
+        editedItemPrice = sc.nextDouble();
+
+        RestaurantMenu.addMenuItem(editItemId, editedItemType, editedItemName, editedItemDescription, editedItemPrice);
+
     }
 
+    private void deleteMenuItemUI() {
 
+        int deleteItemID;
 
+        // Insert Logic to Print Existing Menu
 
+        System.out.println("Existing Menu: ");
+        RestaurantMenu.printMenu(MenuItem.MenuItemType.ALL);
+            
+        //Insert Logic to find menu item 
+    
+        boolean menuItemFound = false;
+    
+        while (!menuItemFound) {
+            System.out.println("Enter the ID of the menu item to be deleted: \n");
+            deleteItemID = sc.nextInt(); 
+            if (MenuItem.retrieveMenuItem(editItemID) == null)
+                System.out.println("Invalid ID. Please enter a valid menu item ID.");
+    
+            else menuItemFound = true;
+        }
 
+        RestaurantMenu.deleteMenuItem(deleteItemID);
+
+    }
 
 
 }

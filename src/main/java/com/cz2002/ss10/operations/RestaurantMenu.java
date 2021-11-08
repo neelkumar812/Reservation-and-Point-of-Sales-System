@@ -51,7 +51,7 @@ public class RestaurantMenu {
 	 * 
 	 * @param name
 	 */
-	public void removeMenuItem() {
+	public void deleteMenuItem(int itemId) {
 		// TODO - implement RestaurantMenu.removeMenuItem
 		throw new UnsupportedOperationException();
 	}
@@ -60,7 +60,7 @@ public class RestaurantMenu {
 	 * 
 	 * @param name
 	 */
-	public void editMenuItem() {
+	public void editMenuItem(int itemId, int itemType, String name, String description, double price) {
 		// TODO - implement RestaurantMenu.removePromotionItem
 		throw new UnsupportedOperationException();
 	}
