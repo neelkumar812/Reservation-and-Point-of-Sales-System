@@ -3,13 +3,33 @@ package com.cz2002.ss10.utils;
 import com.cz2002.ss10.objects.food.*;
 
 import java.util.*;
+import java.io.*.;
+
 
 public class MenuItemCsv implements IExtractCsv {
 
     @Override
     public Map<String, List<String>> extractInputFromCSV(String fileName) {
         // TODO Auto-generated method stub
-        return null;
+
+		String line ="";
+        try{
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			List<String> values = new ArrayList<>();
+			while((line = br.readLine()) != null){
+				values.add(line.split(","));
+			}
+		}catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		String key = Files.readAllLines(Paths.get(fileName)).get(0); 
+
+		Map<String, List<String>> map = new HashMap<>();
+
+		map.put(key,values[i]);
     }
 
 	/**
