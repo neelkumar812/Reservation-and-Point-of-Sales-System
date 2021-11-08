@@ -22,4 +22,10 @@ public class Staff {
 		this.jobTitle=jobTitle;
 	}
 
+	public int getStaffID(){
+		return employeeID;
+	}
+
+
+
 }
