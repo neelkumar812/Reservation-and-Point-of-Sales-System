@@ -2,7 +2,7 @@ package com.cz2002.ss10.objects.logistics;
 
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Order {
@@ -10,7 +10,7 @@ public class Order {
 	private Staff staff;
 	private String membershipType;
 	private int tableNumber;
-	private LocalTime createdAt;
+	private LocalDateTime createdAt;
 	private int orderId;
 	private ArrayList<MenuItem> orderItems;
 	private Boolean isPaid;
@@ -18,10 +18,16 @@ public class Order {
 	/**
 	 * 
 	 * @param orderId
+	 * @param 
 	 */
-	public Order(int orderId) {
-		// TODO - implement Order.Order
-		throw new UnsupportedOperationException();
+	public Order(Staff staff, String membershipType, int tableNumber, int orderId, ArrayList<MenuItem> orderItems, Boolean isPaid) {
+		this.staff = staff;
+		this.membershipType = membershipType;
+		this.tableNumber = tableNumber;
+		this.createdAt = LocalDateTime.now();
+		this.orderId = orderId;
+		this.orderItems = orderItems;
+		this.isPaid = isPaid;
 	}
 
 	public void printOrderInvoice() {
@@ -52,9 +58,8 @@ public class Order {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updatePaymentStatus() {
-		// TODO - implement Order.updatePaymentStatus
-		throw new UnsupportedOperationException();
+	public void updatePaymentStatus(Boolean isPaid) {
+		this.isPaid = isPaid;
 	}
 
 	public void getOrder() {

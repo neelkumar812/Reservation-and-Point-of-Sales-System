@@ -22,7 +22,6 @@ public class Staff {
 		
 	}
 
-<<<<<<< HEAD
 	public int getStaffID(){
 		return employeeID;
 	}
@@ -30,6 +29,3 @@ public class Staff {
 
 
 }
-=======
-}
->>>>>>> ff64d95ee4c231f30d86004d9e0cb9fb248d6f0c
