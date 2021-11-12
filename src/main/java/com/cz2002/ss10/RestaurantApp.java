@@ -12,7 +12,15 @@ import java.util.*;
 public class RestaurantApp {
     
 	private ArrayList<Table> tables;
-	private ArrayList<MenuItem> menuItems;
+
+    /**
+     * The list of menuitems loaded into the program
+     */	
+	public ArrayList<MenuItem> menuItems;
+
+	/**
+     * The list of promoitems loaded into the program
+     */
 	private ArrayList<PromoItem> promotionItems;
 	private ArrayList<Reservation> reservations;
 	private ArrayList<Staff> staffs;
@@ -25,6 +33,31 @@ public class RestaurantApp {
 	public void setPromotionItems(ArrayList<PromoItem> promotionItems) {
 		this.promotionItems = promotionItems;
 	}
+
+	    /**
+     * Initializes all of the necessary items of the application
+     * Items include loading saved menu items etc
+     */
+    private static void init() {
+        MenuItemCSVHelper menuItemCsv = MenuItemCSVHelper.getInstance();
+        PromoCSVHelper promotionCsv = PromoCSVHelper.getInstance();
+
+        try {
+            System.out.println("Loading Menu Items from file...");
+            menuItems = menuItemCsv.readFromCsv();
+            System.out.println(menuItems.size() + " menu items loaded from file");
+
+            System.out.println("Loading Promotions from file...");
+            promotions = promotionCsv.readFromCsv();
+            System.out.println(promotions.size() + " promotions loaded from file.");
+
+ 
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("[ERROR] Failed to read CSV from data folder. (" + e.getLocalizedMessage() + ")");
+        }
+
+        System.out.println("Initializing Program...");
 
 	/**
 	 * 

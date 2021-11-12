@@ -1,10 +1,9 @@
 package com.cz2002.ss10.operations;
 
+import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.*;
-import com.cz2002.ss10.objects.food.MenuItem.MenuItemType;
-
 import java.util.*;
-import java.util.stream.Stream;
+
 
 /**
  * RestaurantMenu Class
@@ -16,22 +15,52 @@ import java.util.stream.Stream;
 
 public class RestaurantMenu {
 
-
-
 	/**
-     * Prints the menu of items stored in the CSV file.
-     * Uses {@link MainApp#menuItems} to facilitate printing operations.
-     **/
-    private void printMenu() {};
+	 * 
+	 * @param price
+	 * @param description
+	 * @param name
+	 * @param itemType
+	 */
+	public void printMenu(int printType) {
+
+		ArrayList<MenuItem> menuItemsFiltered = new ArrayList<>(); //declare new empty arraylist
 
 
-
-	public ArrayList<MenuItem> getMenu() {
-		// TODO - implement RestaurantMenu.getMenu
-
-		//Returns an Array List
-		throw new UnsupportedOperationException();
+		
 	}
+
+	    /**
+     * Method returning an ArrayList filtered by enum type.
+     * Uses {@link MainApp#menuItems} to retrieval operations.
+     *
+     * @param targetItemType type of the menu item objects to be retrieved.
+     * @return menuItemsFiltered ArrayList containing the menu item type selected
+     */
+	
+    public static ArrayList<MenuItem> retrieveMenuItemListFiltered(MenuItem.MenuItemType targetItemType) {
+
+        ArrayList<MenuItem> menuItemsFiltered = new ArrayList<>(); //declare new empty arraylist
+
+        //send in master first if ALL
+        if (targetItemType == MenuItem.MenuItemType.ALL) {
+            return MainApp.menuItems; //returns original array if ALL is selected.
+        }
+
+        for (int i = 0; i < (MainApp.menuItems.size()); i++) { //for loop to run through menuitems and to filter out
+
+            MenuItem menuItemObj = MainApp.menuItems.get(i); //gets a menu item object while the loop is running
+
+            //need to change to enum
+            if (targetItemType == menuItemObj.getType()) { //"Menu item of target item types found."
+                menuItemsFiltered.add(menuItemObj); //add the found object into the filtered array list
+            }
+
+        }
+        return menuItemsFiltered;
+    }
+
+
 
 	/**
 	 * 

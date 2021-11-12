@@ -2,6 +2,14 @@ package com.cz2002.ss10.UI;
 import java.util.*;
 import com.cz2002.ss10.objects.food.*;
 
+/**
+ * FoodMenuUI Class
+ *
+ * @author Sneha Ravisankar
+ * @version 1.0
+ * @since 2021-11-06
+ */
+
 public class FoodMenuUI {
 
     /**
@@ -62,8 +70,7 @@ public class FoodMenuUI {
                     System.out.println("3) Drink");
                     System.out.println("4) Appetiser");
                     System.out.println("5) All");
-
-                    int choice = sc.nextInt();
+                    int selection = sc.nextInt();
 
                     MenuItem.MenuItemType printType;
                     switch (selection) {
