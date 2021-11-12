@@ -22,7 +22,6 @@ public class Reservation {
 	 * @param dinerSize
 	 */
 	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
-		// TODO - implement Reservation.Reservation
 		reservationId=resId;
 		reservationDate=resDate;
 		reservationTime=resTime;

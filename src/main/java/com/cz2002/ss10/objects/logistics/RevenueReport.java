@@ -2,6 +2,14 @@ package com.cz2002.ss10.objects.logistics;
 
 import java.time.*;
 
+/**
+ * ReveneuReport Class
+ *
+ * @author Neel Kumar 
+ * @version 1.0
+ * @since 2021-11-09
+ */
+
 public class RevenueReport {
 
 	public enum ReportDuration {
@@ -15,7 +23,13 @@ public class RevenueReport {
 	private double cost;
 
 	public void printReport() {
-		// TODO - implement RevenueReport.printReport
+		System.out.println("========= Revenue Report =========");
+		System.out.println("Date: " + date);
+		System.out.println("Period: " + period);
+		System.out.println("Revenue: " + revenue);
+		System.out.println("Profit: " + profit);
+		System.out.println("Cost: " + cost);
+		System.out.println("==================================");
 		throw new UnsupportedOperationException();
 	}
 

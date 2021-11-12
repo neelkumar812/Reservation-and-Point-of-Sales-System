@@ -10,9 +10,9 @@ public class RestaurantService {
 
 
     Scanner sc = new Scanner(System.in);
+    
     private static final int SEATCAP = 25;
     private Table[] tableList = new Table[SEATCAP];
-
     //Constructor to initialize all tables in increasing order of seating capacity.
     public RestaurantService(){
         for(int i = 0;i<SEATCAP; i++){
@@ -52,10 +52,6 @@ public class RestaurantService {
      */
     public void createNewOrder(Staff staff, String membershipType, int tableNumber, ArrayList<MenuItem> orderItems) {
         
-
-
-
-
         throw new UnsupportedOperationException();
     }
 

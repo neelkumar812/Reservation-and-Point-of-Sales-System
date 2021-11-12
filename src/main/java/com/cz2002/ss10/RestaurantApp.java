@@ -11,7 +11,7 @@ import java.util.*;
 // should this class be renamed?
 public class RestaurantApp {
     
-	private ArrayList<Table> tables;
+	
 	private ArrayList<MenuItem> menuItems;
 	private ArrayList<PromoItem> promotionItems;
 	private ArrayList<Reservation> reservations;
