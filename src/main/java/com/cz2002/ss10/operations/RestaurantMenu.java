@@ -22,45 +22,16 @@ public class RestaurantMenu {
 	 * @param name
 	 * @param itemType
 	 */
-	public void printMenu(int printType) {
+	public void printMenu(MenuItem.MenuItemType printType) {
 
-		ArrayList<MenuItem> menuItemsFiltered = new ArrayList<>(); //declare new empty arraylist
+		//Need to debug the retrive Menu item List function
 
-
-		
+		ArrayList<MenuItem> filteredMenu = MenuItem.retrieveMenuItemListFiltered(printType);
+        System.out.printf("%-5s %-50s %-10s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
+        for (MenuItem mi : filteredMenu) {
+            System.out.printf("%-5s %-50s %-10s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
+        }	
 	}
-
-	    /**
-     * Method returning an ArrayList filtered by enum type.
-     * Uses {@link MainApp#menuItems} to retrieval operations.
-     *
-     * @param targetItemType type of the menu item objects to be retrieved.
-     * @return menuItemsFiltered ArrayList containing the menu item type selected
-     */
-	
-    public static ArrayList<MenuItem> retrieveMenuItemListFiltered(MenuItem.MenuItemType targetItemType) {
-
-        ArrayList<MenuItem> menuItemsFiltered = new ArrayList<>(); //declare new empty arraylist
-
-        //send in master first if ALL
-        if (targetItemType == MenuItem.MenuItemType.ALL) {
-            return MainApp.menuItems; //returns original array if ALL is selected.
-        }
-
-        for (int i = 0; i < (MainApp.menuItems.size()); i++) { //for loop to run through menuitems and to filter out
-
-            MenuItem menuItemObj = MainApp.menuItems.get(i); //gets a menu item object while the loop is running
-
-            //need to change to enum
-            if (targetItemType == menuItemObj.getType()) { //"Menu item of target item types found."
-                menuItemsFiltered.add(menuItemObj); //add the found object into the filtered array list
-            }
-
-        }
-        return menuItemsFiltered;
-    }
-
-
 
 	/**
 	 * 
@@ -70,10 +41,21 @@ public class RestaurantMenu {
 	 * @param itemType
 	 */
 	public void addMenuItem(int itemType, String name, String description, double price) {
-		// TODO - implement RestaurantMenu.addMenuItem
+
+            //basically gets the last object in the menuItem array
+            MenuItem menuItemObj = RestaurantApp.menuItems.get((RestaurantApp.menuItems.size()) - 1);
+
+            //gets the ID value from the last object and +1 to create a new PK
+            int id = menuItemObj.getId() + 1;
+
+            MenuItem menuItem = new MenuItem(id, name, itemType, description, price);
+            RestaurantApp.menuItems.add(menuItem); //adds the RestaurantItem object to the menu array
 
 
-		throw new UnsupportedOperationException();
+			// IMPORTANT: Implement the save to CSV Function
+
+        System.out.println("Add successful. New menu item has been successfully added.");
+
 	}
 
 	/**
@@ -81,8 +63,25 @@ public class RestaurantMenu {
 	 * @param name
 	 */
 	public void deleteMenuItem(int itemId) {
-		// TODO - implement RestaurantMenu.removeMenuItem
-		throw new UnsupportedOperationException();
+
+		//Note to self, if the current item is a part of the promotion, need to handle the deletion over there as well
+
+
+	// Implement:	MenuItemCSVHelper menuHelper = MenuItemCSVHelper.getInstance();
+
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
+
+            if (itemId == menuItemObj.getId()) { //if we can find the target item
+
+                    RestaurantApp.menuItems.remove(i); //delete using i as for loop index
+                    //menuHelper.writeToCsv(RestaurantApp.menuItems); // calls IO method to save the new array into the CSV file
+                    System.out.println("Delete Successful. Target menu item deleted!");
+                    return;
+			}
+		}
+
 	}
 
 	/**
@@ -90,8 +89,26 @@ public class RestaurantMenu {
 	 * @param name
 	 */
 	public void editMenuItem(int itemId, int itemType, String name, String description, double price) {
-		// TODO - implement RestaurantMenu.removePromotionItem
-		throw new UnsupportedOperationException();
+
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //when you do this, you actually retrieve the whole object
+
+            if (itemId == menuItemObj.getId()) {
+
+                    menuItemObj.setName(name);
+                    menuItemObj.setMenuItemType(itemType);
+                    menuItemObj.setDescription(description);
+                    menuItemObj.setPrice(price);
+                    //at this point, the object has been edited with the new values
+
+		// Important Save the Menu Item CSV Here
+                    System.out.println("Menu item successfuly edited!");
+                    return;
+
+            }
+
+        }
 	}
 
 	public ArrayList<PromoItem> getPromotionItems() {

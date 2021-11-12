@@ -1,4 +1,7 @@
 package com.cz2002.ss10.objects.food;
+import java.util.*;
+
+import com.cz2002.ss10.RestaurantApp;
 
 /**
  * MenuItem Class
@@ -27,8 +30,8 @@ public class MenuItem extends RestaurantItem {
      * @param price       Menu item's price.
 	 * @param stock       Menu item's stock.
      */
-    public MenuItem(int id, String name, int itemType, String description, double price, int stock) {
-        super(id, name, price, stock); // Called from restaurant class
+    public MenuItem(int id, String name, int itemType, String description, double price) {
+        super(id, name, price); // Called from restaurant class
 		this.itemType = convertToItemType(itemType);     
         this.description = description;
     }
@@ -44,7 +47,6 @@ public class MenuItem extends RestaurantItem {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-		throw new UnsupportedOperationException();
 	}
 
 
@@ -56,9 +58,9 @@ public class MenuItem extends RestaurantItem {
 	 * 
 	 * @param menuItemType
 	 */
-	public void setMenuItemType(MenuItemType itemType) {
-		this.itemType = itemType;
-		throw new UnsupportedOperationException();
+	public void setMenuItemType(int itemType) {
+		this.itemType = convertToItemType(itemType);
+
 	}
 
 
@@ -87,6 +89,60 @@ public class MenuItem extends RestaurantItem {
         return "Name: " + this.getName() + "\n" + 
                 "Description: " + this.getDescription() + "\n" + 
                 "Price: $" + String.format("%.2f", this.getPrice());
+    }
+
+    /**
+     * Method returning a MenuItem object that matches the input targetItemID.
+     * Uses {@link RestaurantApp#menuItems} to retrieval operations.
+     *
+     * @param targetItemID ID of the menu item object to be retrieved.
+     * @return menuItemObj Object containing menu item attributes.
+     */
+
+    public static MenuItem retrieveMenuItem(int targetItemID) {
+
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
+
+            if (targetItemID == menuItemObj.getId()) { //"Target menu item found."
+                return menuItemObj;
+            }
+
+        }
+        return null; //"Target menu item not found."
+    }
+
+
+
+	/**
+     * Method returning an ArrayList filtered by enum type.
+     * Uses {@link RestaurantApp#menuItems} to retrieval operations.
+     *
+     * @param targetItemType type of the menu item objects to be retrieved.
+     * @return menuItemsFiltered ArrayList containing the menu item type selected
+     */
+
+    public static ArrayList<MenuItem> retrieveMenuItemListFiltered(MenuItem.MenuItemType targetItemType) {
+
+        ArrayList<MenuItem> menuItemsFiltered = new ArrayList<>(); //declare new empty arraylist
+
+        //send in master first if ALL
+        if (targetItemType == MenuItem.MenuItemType.ALL) {
+            return RestaurantApp.menuItems; //returns original array if ALL is selected.
+        }
+
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) { //for loop to run through menuitems and to filter out
+
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //gets a menu item object while the loop is running
+
+            //need to change to enum
+            if (targetItemType == menuItemObj.getMenuItemType()) { //"Menu item of target item types found."
+                menuItemsFiltered.add(menuItemObj); //add the found object into the filtered array list
+            }
+
+        }
+        return menuItemsFiltered;
     }
 
 }
