@@ -53,7 +53,7 @@ public class FoodMenuUI {
                         return 1;
 
                     default:
-                        throw new MenuChoiceInvalidException("Food Item Menu");
+                       System.out.println("Invalid Choice.")
 
                 }
 
