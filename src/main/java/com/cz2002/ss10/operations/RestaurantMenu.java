@@ -2,6 +2,7 @@ package com.cz2002.ss10.operations;
 
 import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.*;
+
 import java.util.*;
 
 
@@ -22,7 +23,7 @@ public class RestaurantMenu {
 	 * @param name
 	 * @param itemType
 	 */
-	public void printMenu(MenuItem.MenuItemType printType) {
+	public static void printMenu(MenuItem.MenuItemType printType) {
 
 		//Need to debug the retrive Menu item List function
 
@@ -40,7 +41,7 @@ public class RestaurantMenu {
 	 * @param name
 	 * @param itemType
 	 */
-	public void addMenuItem(int itemType, String name, String description, double price) {
+	public static void addMenuItem(int itemType, String name, String description, double price) {
 
             //basically gets the last object in the menuItem array
             MenuItem menuItemObj = RestaurantApp.menuItems.get((RestaurantApp.menuItems.size()) - 1);
@@ -63,7 +64,7 @@ public class RestaurantMenu {
 	 * 
 	 * @param name
 	 */
-	public void editMenuItem(int itemId, int itemType, String name, String description, double price) {
+	public static void editMenuItem(int itemId, int itemType, String name, String description, double price) {
 
         for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
 
@@ -89,7 +90,7 @@ public class RestaurantMenu {
 	 * 
 	 * @param name
 	 */
-	public void deleteMenuItem(int itemId) {
+	public static void deleteMenuItem(int itemId) {
 
 		//Note to self, if the current item is a part of the promotion, need to handle the deletion over there as well
 
