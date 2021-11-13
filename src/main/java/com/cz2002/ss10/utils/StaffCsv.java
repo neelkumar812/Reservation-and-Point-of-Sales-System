@@ -24,9 +24,9 @@ public class StaffCsv implements IExtractCsv, IExportCsv {
 		File f = new File(filePath);
 		FileWriter writer = new FileWriter(f, true);
 		String[] header = { "Staff Name", "Staff ID", "Gender", "Job Title" };
-		writer.write(String.join(System.getProperty("line.separator"),header));
+		writer.write(String.join(",",header));
 		writer.write("\n");
-		writer.write(formattedCsvString);
+		writer.write(System.getProperty("line.separator"));
 		writer.close();
 		}
 		catch (IOException ioError) {
