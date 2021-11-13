@@ -58,6 +58,33 @@ public class RestaurantMenu {
 
 	}
 
+
+	/**
+	 * 
+	 * @param name
+	 */
+	public void editMenuItem(int itemId, int itemType, String name, String description, double price) {
+
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //when you do this, you actually retrieve the whole object
+
+            if (itemId == menuItemObj.getId()) {
+
+                    menuItemObj.setName(name);
+                    menuItemObj.setMenuItemType(itemType);
+                    menuItemObj.setDescription(description);
+                    menuItemObj.setPrice(price);
+
+		// Important Save the Menu Item CSV Here
+                    System.out.println("Menu item successfuly edited!");
+                    return;
+
+            }
+
+        }
+	}
+
 	/**
 	 * 
 	 * @param name
@@ -84,52 +111,42 @@ public class RestaurantMenu {
 
 	}
 
+
 	/**
 	 * 
-	 * @param name
+	 * @param id
 	 */
-	public void editMenuItem(int itemId, int itemType, String name, String description, double price) {
 
-        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
-
-            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //when you do this, you actually retrieve the whole object
-
-            if (itemId == menuItemObj.getId()) {
-
-                    menuItemObj.setName(name);
-                    menuItemObj.setMenuItemType(itemType);
-                    menuItemObj.setDescription(description);
-                    menuItemObj.setPrice(price);
-                    //at this point, the object has been edited with the new values
-
-		// Important Save the Menu Item CSV Here
-                    System.out.println("Menu item successfuly edited!");
-                    return;
-
-            }
-
-        }
-	}
-
-	public ArrayList<PromoItem> getPromotionItems() {
+	public ArrayList<PromoItem> printPromotionItems() {
 		// TODO - implement RestaurantMenu.getPromotionItems
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param name
+	 * @param id
 	 */
-	public void removePromotionItem(String name) {
+	public void createPromotionItem(int id) {
+		// TODO - implement RestaurantMenu.removePromotionItem
+		throw new UnsupportedOperationException();
+	}
+
+
+
+	/**
+	 * 
+	 * @param id
+	 */
+	public void editPromotionItem(int id) {
 		// TODO - implement RestaurantMenu.removePromotionItem
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param name
+	 * @param id
 	 */
-	public void editPromotionItem(String name) {
+	public void deletePromotionItem(int id) {
 		// TODO - implement RestaurantMenu.removePromotionItem
 		throw new UnsupportedOperationException();
 	}

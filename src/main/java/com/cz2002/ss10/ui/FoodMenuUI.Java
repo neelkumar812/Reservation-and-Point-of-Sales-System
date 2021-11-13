@@ -1,6 +1,7 @@
 package com.cz2002.ss10.ui;
 import java.util.*;
 import com.cz2002.ss10.objects.food.*;
+import com.cz2002.ss10.operations.RestaurantMenu.*;
 
 /**
  * FoodMenuUI Class
@@ -24,15 +25,19 @@ public class FoodMenuUI {
          */
         
         public int generateMenuScreen() {
+
+            int choice;
+
+
             do {
                 System.out.println("Menu Items Operations");
-                System.out.println("1) Print existing menu");
-                System.out.println("2) Create a new menu item");
-                System.out.println("3) Edit an existing menu item's details");
-                System.out.println("4) Delete a menu item");
-                System.out.println("5) Back to main menu");
-                System.out.println("0) Exit Application");
-                int choice = sc.nextInt();
+                System.out.println("1. Print existing menu");
+                System.out.println("2. Create new menu item");
+                System.out.println("3. Edit an existing menu item's details");
+                System.out.println("4. Delete menu item");
+                System.out.println("5. Back to main menu");
+                System.out.println("0. Exit Application");
+                choice = sc.nextInt();
 
                 switch (choice) {
                     case 1: // Prints menu
@@ -53,15 +58,20 @@ public class FoodMenuUI {
                         return 1;
 
                     default:
-                       System.out.println("Invalid Choice.")
+                       System.out.println("Invalid Choice.");
 
                 }
 
-            } while (choice < 0 || choice > 5)
+            return 0;
+
+            } while (choice < 0 || choice > 5);
         }
 
 
-        private void printMenuUI {
+        private void printMenuUI() {
+
+            int selection;
+            MenuItem.MenuItemType printType;
 
                 do {
                     System.out.println("Enter the number of the item type you would like to print: \n");
@@ -70,30 +80,29 @@ public class FoodMenuUI {
                     System.out.println("3) Drink");
                     System.out.println("4) Appetiser");
                     System.out.println("5) All");
-                    int selection = sc.nextInt();
+                    selection = sc.nextInt();
 
-                    MenuItem.MenuItemType printType;
                     switch (selection) {
                         case 1:
                             printType = MenuItem.MenuItemType.MAIN;
-                            printHeader("Mains");
+                            System.out.println("Mains");
                             break;
                         case 2:
                             printType = MenuItem.MenuItemType.DESSERT;
-                            printHeader("Desserts");
+                            System.out.println("Desserts");
                             break;
                         case 3:
                             printType = MenuItem.MenuItemType.DRINK;
-                            printHeader("Drinks");
+                            System.out.println("Drinks");
                             break;
                         case 4:
-                            printType = MenuItem.MenuItemType.APPETISER;
-                            printHeader("All Items");
+                            printType = MenuItem.MenuItemType.APPETISERS;
+                            System.out.println("All Items");
                             break;
 
                         case 5:
                         printType = MenuItem.MenuItemType.ALL;
-                        printHeader("All Items");
+                        System.out.println("All Items");
                         break;
 
                         case 0:
@@ -102,10 +111,10 @@ public class FoodMenuUI {
                         default: 
                         System.out.println("Please Choose a Valid Option");
 
-                } while (choice < 0 || choice > 5)
+                }        
+            } while (selection < 0 || selection > 5); 
 
-                RestaurantMenu.printMenu(printType);
-            }
+            RestaurantMenu.printMenu(printType);
         }
 
         private void addNewMenuItemUI() {
@@ -125,7 +134,7 @@ public class FoodMenuUI {
 
             newItemType = sc.nextInt();
 
-        } while (newItemType < 1 || newItemType > 4)
+        } while (newItemType < 1 || newItemType > 4);
 
         System.out.println("Adding Item....");
 
@@ -175,6 +184,8 @@ public class FoodMenuUI {
 
         // Get Params
 
+        int newItemType;
+
         do {
 
             System.out.println("Enter what type you want to change: ");
@@ -185,19 +196,19 @@ public class FoodMenuUI {
 
             newItemType = sc.nextInt();
 
-        } while (newItemType < 1 || newItemType > 4)
+        } while (newItemType < 1 || newItemType > 4);
 
-        System.out.println("Enter new menu item name: ");
+        System.out.println("Enter new name: ");
         sc.nextLine(); 
         editedItemName = sc.nextLine();
 
-        System.out.println("Enter new menu item description: ");
+        System.out.println("Enter new description: ");
         editedItemDescription = sc.nextLine();
 
-        System.out.println("Enter new menu item price: ");
+        System.out.println("Enter new price: ");
         editedItemPrice = sc.nextDouble();
 
-        RestaurantMenu.addMenuItem(editItemId, editedItemType, editedItemName, editedItemDescription, editedItemPrice);
+        RestaurantMenu.addMenuItem(editItemID, editedItemType, editedItemName, editedItemDescription, editedItemPrice);
 
     }
 
@@ -217,7 +228,7 @@ public class FoodMenuUI {
         while (!menuItemFound) {
             System.out.println("Enter the ID of the menu item to be deleted: \n");
             deleteItemID = sc.nextInt(); 
-            if (MenuItem.retrieveMenuItem(editItemID) == null)
+            if (MenuItem.retrieveMenuItem(deleteItemID) == null)
                 System.out.println("Invalid ID. Please enter a valid menu item ID.");
     
             else menuItemFound = true;
