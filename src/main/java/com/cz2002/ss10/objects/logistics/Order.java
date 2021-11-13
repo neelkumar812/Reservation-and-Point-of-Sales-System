@@ -15,6 +15,7 @@ public class Order {
 	private ArrayList<MenuItem> orderItems;
 	private Boolean isPaid;
 	private LocalDateTime paidAt;
+	private double subtotal;
 
 	/**
 	 * 
@@ -29,7 +30,7 @@ public class Order {
 		this.orderId = orderId;
 		this.orderItems = orderItems;
 		this.isPaid = false; //yet to be paid
-		paidAt=-1; //yet to be paid
+		paidAt= null; //yet to be paid
 		 
 	}
 
@@ -37,7 +38,7 @@ public class Order {
 		// TODO - mark isPaid as Paid
 		isPaid=true;
 		paidAt=LocalDateTime.now();
-		this.getTable().freeState(tableNumber);
+		this.getTable().freeState(tableNumber); // should be handled one level higher in settlePayment
 		System.out.println("Order paid and table is now available");
 	}
 
@@ -47,15 +48,23 @@ public class Order {
         return staff;
     }
 
+	public int getOrderId(){
+		return orderId;
+	}
+
 	public String getMembershipType() {
         return membershipType;
     }
+
+	public double getSubtotal(){
+		return getSubtotal();
+	}
 
 	public int getTableNumber() {
         return tableNumber;
     }
 
-	public int getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
