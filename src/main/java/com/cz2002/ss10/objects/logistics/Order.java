@@ -81,6 +81,10 @@ public class Order {
 		return isPaid;
 	}
 
+	public LocalDateTime getPaidAt(){
+		return paidAt;
+	}
+
 	public double calculateSubtotal() {
 		// TODO - implement Order.calculateTotal
 		double subtotal = 0;
