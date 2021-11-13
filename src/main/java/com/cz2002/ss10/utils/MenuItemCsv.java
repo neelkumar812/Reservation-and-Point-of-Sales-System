@@ -24,28 +24,6 @@ public class MenuItemCsv extends baseCsv {
     private MenuItemCsv() {
     }
 
-    // public Map<String, List<String>> extractInputFromCSV(String fileName) {
-
-	// 	String line ="";
-    //     try{
-	// 		BufferedReader br = new BufferedReader(new FileReader(fileName));
-	// 		List<String> values = new ArrayList<>();
-	// 		while((line = br.readLine()) != null){
-	// 			values.add(line.split(","));
-	// 		}
-	// 	}catch(FileNotFoundException e){
-	// 		e.printStackTrace();
-	// 	}
-	// 	catch(IOException e){
-	// 		e.printStackTrace();
-	// 	}
-	// 	String key = Files.readAllLines(Paths.get(fileName)).get(0); 
-
-	// 	Map<String, List<String>> map = new HashMap<>();
-
-	// 	map.put(key,values[i]);
-    // }
-
 	/**
      * Gets the singleton instasvMenuItemCsv that reads from menu.csv
      *
@@ -96,15 +74,6 @@ public class MenuItemCsv extends baseCsv {
 	 */
 	public String[] formatMenuToString(ArrayList<MenuItem> menuList) {
 		// TODO - implement MenuItemCsv.formatMenuToString
-
-
-
-
-
-
-
-
-
 
 
 		throw new UnsupportedOperationException();
