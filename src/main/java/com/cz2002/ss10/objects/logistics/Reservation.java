@@ -22,7 +22,6 @@ public class Reservation {
 	 * @param dinerSize
 	 */
 	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
-		// TODO - implement Reservation.Reservation
 		reservationId=resId;
 		reservationDate=resDate;
 		reservationTime=resTime;
@@ -56,8 +55,19 @@ public class Reservation {
     }
 
 	public void cancelReservation() {
+<<<<<<< HEAD
 		// TODO - implement Reservation.cancelReservation
+		this.reservationDate = null;
+		this.reservationTime= null;
+	    this.tableNumber = -1;
+		this.dinerSize= -1;
+		this.customerContact = -1;
+		
 		System.out.println("Reservation for "+ this.customerName + "is cancelled (Reservation ID: "+ this.reservationId+")");
+
+		this.reservationId = -1;
+		this.customerName= null;
+		
 	}
 
 }
