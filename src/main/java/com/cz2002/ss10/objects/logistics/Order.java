@@ -42,7 +42,7 @@ public class Order {
 	}
 
 	
-    }
+    
 	public Staff getStaff() {
         return staff;
     }
