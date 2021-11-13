@@ -24,7 +24,6 @@ public class RestaurantApp {
 	static private ArrayList<PromoItem> promotionItems;
 	static private ArrayList<Reservation> reservations;
 	static private ArrayList<Staff> staffs;
-	static private ArrayList<RevenueReport> revenueReports;
 	static private LocalTime openingTime;
 	static private LocalTime closingTime;
 	static private ArrayList<Order> orders;
