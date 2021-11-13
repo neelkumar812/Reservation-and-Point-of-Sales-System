@@ -4,7 +4,7 @@ import java.time.*;
 
 public class Reservation {
 
-	private int reservationId;
+	private int reservationId;	//unique no.
 	private LocalDate reservationDate;
 	private LocalTime reservationTime;
 	private int customerContact;
@@ -30,24 +30,48 @@ public class Reservation {
 		this.dinerSize = dinerSize;
 	}
 
+	public void setReservationId(int resId){
+        this.reservationId=resId;
+    }
+
     public int getReservationId(){
         return this.reservationId;
+    }
+
+	public void setReservationDate(LocalDate resDate){
+        this.reservationDate = resDate;
     }
 
 	public LocalDate getReservationDate(){
         return this.reservationDate;
     }
 
-    public LocalDate getReservationTime(){
+	 public void setReservationTime(LocalTime time){
+        this.reservationTime = time;
+    }
+
+    public LocalTime getReservationTime(){
         return this.reservationTime;
+    }
+
+	public void setCustomerContact(int contactNumber){
+        this.customerContact= contactNumber;
     }
 
 	public int getCustomerContact(){
         return this.customerContact;
     }
 
+	public void setTableNumber(int tableNo){
+        this.tableNumber= tableNo;
+    }
+
 	public int getTableNumber(){
         return this.tableNumber;
+    }
+
+	public void setDinerSize(int size){
+        this.dinerSize = size;
     }
 
 	public int getDinerSize(){
@@ -55,7 +79,6 @@ public class Reservation {
     }
 
 	public void cancelReservation() {
-<<<<<<< HEAD
 		// TODO - implement Reservation.cancelReservation
 		this.reservationDate = null;
 		this.reservationTime= null;
