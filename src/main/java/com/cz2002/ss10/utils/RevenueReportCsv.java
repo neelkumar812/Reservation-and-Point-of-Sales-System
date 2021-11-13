@@ -105,7 +105,7 @@ public class RevenueReportCsv implements IExportCsv {
 			String price = String.valueOf(RestaurantApp.menuItems.get(index).getPrice());
 			String itemType = RestaurantApp.menuItems.get(index++).getMenuItemType().toString();
 			ArrayList<String> itemInfo = new ArrayList<String>();
-			itemInfo.addAll(Arrays.asList(((Integer)itemMap.get(itemName)).toString(), price, itemType));
+			itemInfo.addAll(Arrays.asList(itemName, ((Integer)itemMap.get(itemName)).toString(), price, itemType));
 			itemStringMap.put(itemName, itemInfo);
 		}
 		index = 0;
@@ -114,7 +114,7 @@ public class RevenueReportCsv implements IExportCsv {
 			String price = String.valueOf(RestaurantApp.promotionItems.get(index++).getPrice());
 			String itemType = "Promotion Item";
 			ArrayList<String> itemInfo = new ArrayList<String>();
-			itemInfo.addAll(Arrays.asList(((Integer)itemMap.get(itemName)).toString(), price, itemType));
+			itemInfo.addAll(Arrays.asList(itemName, ((Integer)itemMap.get(itemName)).toString(), price, itemType));
 			itemStringMap.put(itemName, itemInfo);
 		}
 	
@@ -122,7 +122,7 @@ public class RevenueReportCsv implements IExportCsv {
 		setTotalRevenue(ordersForDuration.stream().map(order -> order.getSubtotal()).mapToDouble(total -> total).sum());
 
 		// convert all orders to string
-		String outputAsStrings = ordersForDuration.stream().map(order -> toRows(order))
+		String outputAsStrings = itemStringMap.entrySet().stream().map(entry -> toRows(entry.getValue()))
 				.collect(Collectors.joining(System.getProperty("line.separator"))); // OS dependent line separator
 
 		return outputAsStrings;
@@ -140,11 +140,11 @@ public class RevenueReportCsv implements IExportCsv {
 	}
 
 	// convert menu items to individual sale items, item type, price
-	private String toRows(Order order) {
+	// Item Name | Quantity Sold | Price | Item Type
+	private String toRows(ArrayList<String> itemFields) {
 		return Stream
-				.of(((Integer) order.getOrderId()).toString(), ((Integer) order.getStaff().getStaffID()).toString(),
-						order.getMembershipType(), ((Integer) order.getTableNumber()).toString(),
-						String.valueOf(order.getSubtotal()), order.getCreatedAt().toString())
+				.of(itemFields.get(0), itemFields.get(1),
+						itemFields.get(2), itemFields.get(3))
 				.map(value -> value.replaceAll("\"", "\"\""))
 				.map(value -> Stream.of("\"", ",").anyMatch(value::contains) ? "\"" + value + "\"" : value)
 				.collect(Collectors.joining(","));

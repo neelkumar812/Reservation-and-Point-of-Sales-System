@@ -144,4 +144,22 @@ public class MenuItem extends RestaurantItem {
         return menuItemsFiltered;
     }
 
+        /**
+     * Returns true if the filtered array list contains the menu item type.
+     *
+     * @param menuArrayList    filtered array list that contains menu items based on enum specified
+     * @param newPromoItemType type of the menu item added to the promotion
+     * @param textParameter    text for the menu item type
+     */
+    public static boolean menuTypeChecker(ArrayList<MenuItem> menuArrayList, int newPromoItemType, String textParameter) {
+        for (MenuItem menuItemObj : menuArrayList) {
+            if (newPromoItemType == menuItemObj.getId()) { //"Target menu item found."
+                return true;
+            }
+        }
+        //implied else
+        System.out.println("No " + textParameter + " exists with this ID.");
+        return false;
+    }
+
 }

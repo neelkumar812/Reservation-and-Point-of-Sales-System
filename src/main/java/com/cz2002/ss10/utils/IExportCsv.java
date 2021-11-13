@@ -10,6 +10,6 @@ public interface IExportCsv {
 	 * @param strings
 	 * @param fileName
 	 */
-	void exportOutputToCSV(String formattedCsvString, String fileName) throws IOException;
+	void exportOutputToCSV(String formattedCsvString, String filePath) throws IOException;
 
 }
