@@ -3,14 +3,17 @@ package com.cz2002.ss10.objects.logistics;
 import java.time.*;
 
 public class Reservation {
+	public enum ReservationSession {AM,PM}
 
 	private int reservationId;	//unique no.
 	private LocalDate reservationDate;
 	private LocalTime reservationTime;
-	private int customerContact;
+	private ReservationSession sess;
+	private int customerContact;	//assume customer contact number is unqiue
 	private int tableNumber;
 	private String customerName;
 	private int dinerSize;
+	
 	
 	/**
 	 * 
@@ -21,10 +24,11 @@ public class Reservation {
 	 * @param name
 	 * @param dinerSize
 	 */
-	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
-		reservationId=resId;
+	public Reservation(LocalDate resDate, LocalTime resTime,char session, int contactNumber, String name, int dinerSize) {
+		reservationId=contactNumber+10;
 		reservationDate=resDate;
 		reservationTime=resTime;
+		this.sess = session;
 		customerContact=contactNumber;
 		customerName=name;
 		this.dinerSize = dinerSize;
