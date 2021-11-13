@@ -1,82 +1,48 @@
 package com.cz2002.ss10.utils;
 
+import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.*;
 
+import com.opencsv.*;
+import com.opencsv.exceptions.CsvException;
+
 import java.util.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileReader;
 
 
-public class MenuItemCsv extends baseCsv {
-
-	/**
-     * Path to Menu Items CSV File in the data folder. Defaults to menu.csv.
-     */
-    private String menuItemCsv = "menu.csv";
-
-    /**
-     * Singleton instance of this class.
-     */
-    private static MenuItemCsv mInstance;
-
-    /**
-     * Default Constructor to initialize this class with menu.csv as the CSV file.
-     */
-    private MenuItemCsv() {
-    }
+public class MenuItemCsv implements IExtractCsv {
 
 	/**
-     * Gets the singleton instasvMenuItemCsv that reads from menu.csv
-     *
-     * @return Instance of this class
-     */
-    public static MenuItemCsv getInstance() {
-        if (mInstance == null) mInstance =  new MenuItemCsv();
-        return mInstance;
-    }
-
-
-    //Debug
-	/**
-     * Reads the CSV file and parses it into an array list of menu item objects.
-     *
-     * @return ArrayList of Menu Item Objects.
-     * @throws IOException Unable to read from file.
-     */
-    public ArrayList<MenuItem> readFromCsv() throws IOException {
-        if (!FileIOHelper.exists(this.menuItemCsv)) return new ArrayList<>(); // Empty array list
-        BufferedReader csvFile = FileIOHelper.getFileBufferedReader(this.menuItemCsv);
-        List<String[]> csvLines = readAll(csvFile, 1);
-        ArrayList<MenuItem> items = new ArrayList<>();
-        if (csvLines.size() == 0) return items;
-        csvLines.forEach((str) -> items.add(new MenuItem(str)));
-        return items;
-    }
-
-    /**
-     * Writes to the CSV File.
-     *
-     * @param items ArrayList of Menu items to save.
-     * @throws IOException Unable to write to file.
-     */
-    public void writeToCsv(ArrayList<MenuItem> items) throws IOException {
-        String[] header = {"ID", "Name", "Price", "Type", "Description"};
-        BufferedWriter csvFile = FileIOHelper.getFileBufferedWriter(this.menuItemCsv);
-        ArrayList<String[]> toWrite = new ArrayList<>();
-        toWrite.add(header);
-        items.forEach((i) -> toWrite.add(i.toCsv()));
-        writeToCsvFile(toWrite, csvFile);
-    }
-
-
-	/**
-	 * 
-	 * @param menuList
+	 * @param filePath path on which csv lies on
 	 */
-	public String[] formatMenuToString(ArrayList<MenuItem> menuList) {
-		// TODO - implement MenuItemCsv.formatMenuToString
+    public Map<String, List<String>> extractInputFromCSV(String filePath) {
 
+		Map<String, List<String>> menuItemMap = new HashMap<String, List<String>>();
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+			List<String[]> r = reader.readAll(); // nested lists of lists
+			r.forEach(menuItem -> menuItemMap.put(menuItem[0],getMenuInfoAsList(menuItem)));
 
-		throw new UnsupportedOperationException();
+			return menuItemMap;
+		}
+		catch (FileNotFoundException error) {
+			throw new RuntimeException("File not found at specified file path!", error);
+		}
+		catch (IOException error) {
+			throw new RuntimeException("Bad input obtained!", error);
+		}
+		catch (CsvException error) {
+			throw new RuntimeException("Error encountered converting from CSV!", error);
+		}
+
+		
+    }
+
+	private List<String> getMenuInfoAsList(String[] menuItem) {
+		List<String> menuInfo = new ArrayList<String>();
+		menuInfo.addAll(Arrays.asList(menuItem[1], menuItem[2], menuItem[3], menuItem[4]));
+		return menuInfo;
 	}
 
 	/**
@@ -84,7 +50,22 @@ public class MenuItemCsv extends baseCsv {
 	 * @param menuList
 	 */
 	public void insertMenuList(Map<String, List<String>> menuList) {
-		// TODO - implement MenuItemCsv.insertMenuList
+		for (Map.Entry<String, List<String>> entry : menuList.entrySet()) {
+			// get menu info
+			List<String> menuInfo = entry.getValue();
+
+			// add MenuItem object to MenuItems ArrayList in RestaurantApp
+			RestaurantApp.menuItems.add(new MenuItem((int)Integer.parseInt(entry.getKey()), menuInfo.get(0), (int)Integer.valueOf(menuInfo.get(1)), menuInfo.get(2), Double.valueOf(menuInfo.get(3))));
+		}
+		
+	}
+
+	/**
+	 * 
+	 * @param menuList
+	 */
+	public String[] formatMenuToString(ArrayList<MenuItem> menuList) {
+		// TODO - implement MenuItemCsv.formatMenuToString
 		throw new UnsupportedOperationException();
 	}
 
