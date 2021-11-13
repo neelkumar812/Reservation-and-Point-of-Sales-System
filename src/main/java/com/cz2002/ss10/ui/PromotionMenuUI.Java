@@ -1,6 +1,7 @@
 package com.cz2002.ss10.ui;
 import java.util.*;
 import com.cz2002.ss10.objects.food.*;
+import com.cz2002.ss10.operations.RestaurantMenu;
 
 /**
  * PromotionMenuUI Class
@@ -66,33 +67,17 @@ public class PromotionMenuUI {
 
     /**
      * Prints the menu of promotions stored in the CSV file.
-     * Uses {@link RestaurantApp#promotions} and {@link MenuItem#retrieveMenuItem(int)}.
+     * 
      */
     private void printPromotionUI() {
 
-        //Code to print all promotions
-       System.out.println("All Promotions");
-        int n = 1;
-        System.out.printf("%-5s %-10s %-10s %-10s\n", "ID", "Name", "Price",  "Description");
-
-        for (int i = 0; i < RestaurantApp.promotions.size(); i++) {
-            PromotionItem pi = RestaurantApp.promotions.get(i);
-            MenuItem mainItem = MenuItem.retrieveMenuItem(pi.getPromoMain());
-            MenuItem dessertItem = MenuItem.retrieveMenuItem(pi.getPromoDessert());
-            MenuItem drinkItem = MenuItem.retrieveMenuItem(pi.getPromoDrink());
-
-            String tempDescription = ("Served with the following items: ");
-            String tempMain = ("[" + pi.getPromoMain() + "]");
-            String tempDessert = ("[" + pi.getPromoDessert() + "]");
-            String tempDrink = ("[" + pi.getPromoDrink() + "]");
-
-            System.out.printf("%-5s %-10s %-10s %-10s\n", pi.getId(), pi.getName(), pi.getPrice(), tempDescription);
-            System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Main: ", tempMain, mainItem.getName());
-            System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Dessert: ", tempDessert, dessertItem.getName());
-            System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n\n", "", "", "", "Drink: ", tempDrink, drinkItem.getName());
-        }
+        RestaurantMenu.printPromotionItems();
 
     }
+
+    
+
+
 
 
 

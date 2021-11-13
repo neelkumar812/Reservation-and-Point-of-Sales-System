@@ -118,8 +118,27 @@ public class RestaurantMenu {
 	 * @param id
 	 */
 
-	public ArrayList<PromoItem> printPromotionItems() {
-		// TODO - implement RestaurantMenu.getPromotionItems
+	public static void printPromotionItems() {
+
+		System.out.println("All Promotions");
+		System.out.printf("%-5s %-10s %-10s %-10s\n", "ID", "Name", "Price",  "Description");
+ 
+		 for (int i = 0; i < RestaurantApp.promotionItems.size(); i++) {
+			 PromoItem pi = RestaurantApp.promotionItems.get(i);
+			 MenuItem mainItem = MenuItem.retrieveMenuItem(pi.getPromoMain());
+			 MenuItem dessertItem = MenuItem.retrieveMenuItem(pi.getPromoDessert());
+			 MenuItem drinkItem = MenuItem.retrieveMenuItem(pi.getPromoDrink());
+ 
+			 String tempDescription = ("Served with the following items: ");
+			 String tempMain = ("[" + pi.getPromoMain() + "]");
+			 String tempDessert = ("[" + pi.getPromoDessert() + "]");
+			 String tempDrink = ("[" + pi.getPromoDrink() + "]");
+ 
+			 System.out.printf("%-5s %-10s %-10s %-10s\n", pi.getId(), pi.getName(), pi.getPrice(), tempDescription);
+			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Main: ", tempMain, mainItem.getName());
+			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Dessert: ", tempDessert, dessertItem.getName());
+			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n\n", "", "", "", "Drink: ", tempDrink, drinkItem.getName());
+		 }
 		throw new UnsupportedOperationException();
 	}
 

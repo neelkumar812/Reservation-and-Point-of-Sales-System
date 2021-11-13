@@ -21,7 +21,7 @@ public class RestaurantApp {
 	/**
      * The list of promoitems loaded into the program
      */
-	static private ArrayList<PromoItem> promotionItems;
+	static public ArrayList<PromoItem> promotionItems;
 	static private ArrayList<Reservation> reservations;
 	static private ArrayList<Staff> staffs;
 	static private LocalTime openingTime;
