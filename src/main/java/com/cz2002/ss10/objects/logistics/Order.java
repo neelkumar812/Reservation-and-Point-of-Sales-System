@@ -20,7 +20,6 @@ public class Order {
 	/**
 	 * 
 	 * @param orderId
-	 * @param
 	 */
 	public Order(Staff staff, String membershipType, int tableNumber, int orderId,
 			ArrayList<RestaurantItem> orderItems) {
@@ -36,13 +35,11 @@ public class Order {
 	}
 
 	public void markAsPaid() {
-		// TODO - mark isPaid as Paid
+		//TODO - mark isPaid as Paid
 		isPaid = true;
 		paidAt = LocalDateTime.now();
 		this.getTable().freeState(tableNumber); // should be handled one level higher in settlePayment
 		System.out.println("Order paid and table is now available");
-	}
-
 	}
 
 	public Staff getStaff() {
@@ -82,7 +79,7 @@ public class Order {
 	}
 
 	public double calculateSubtotal() {
-		// TODO - implement Order.calculateTotal
+		//
 		double subtotal = 0;
 		this.orderItems.forEach((n) -> {
 			subtotal += n.getPrice();
@@ -92,7 +89,7 @@ public class Order {
 	}
 
 	public void printOrderInvoice() {
-		// TODO - implement Order.printOrderInvoice
+		//TODO - implement Order.printOrderInvoice
 		throw new UnsupportedOperationException();
 	}
 
@@ -101,7 +98,6 @@ public class Order {
 	 * @param item
 	 */
 	public void addItem(MenuItem item) {
-		// TODO - implement Order.addItem
 		throw new UnsupportedOperationException();
 		orderItems.add(item);
 		System.out.println("Item has been added");
@@ -125,7 +121,6 @@ public class Order {
 	}
 
 	public void getOrder() {
-		// TODO - implement Order.getOrder
 		throw new UnsupportedOperationException();
 		this.orderItems.forEach((n) -> {
 			subtotal += n.getPrice();

@@ -5,7 +5,6 @@ import com.cz2002.ss10.RestaurantApp;
 
 /**
  * MenuItem Class
- *
  * @author Sneha Ravisankar
  * @version 1.0
  * @since 2021-11-06

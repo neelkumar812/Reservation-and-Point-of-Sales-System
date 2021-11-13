@@ -1,10 +1,12 @@
 package com.cz2002.ss10.operations;
 
+import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
 import java.util.*;
 import java.time.*;
+import com.cz2002.ss10.RestaurantApp;
 
 public class RestaurantService {
 
@@ -50,8 +52,9 @@ public class RestaurantService {
      * @param tableNumber
      * @param orderItems
      */
-    public void createNewOrder(Staff staff, String membershipType, int tableNumber, ArrayList<MenuItem> orderItems) {
-        
+    public static void createNewOrder(Staff staff, String membershipType, int tableNumber, ArrayList<MenuItem> orderItems) {
+        Order temp = new Order(staff, membershipType, tableNumber, orderId, orderItems);
+        orders.add(temp);
         throw new UnsupportedOperationException();
     }
 
@@ -92,7 +95,7 @@ public class RestaurantService {
      * 
      * @param reservationId
      */
-    public void checkReservation(int reservationId) {
+    public static void checkReservation(int reservationId) {
         // TODO - implement RestaurantService.checkReservation
         try {
             throw new ReservationNotFoundException("Reservation of id: " + reservationId + " not found!");

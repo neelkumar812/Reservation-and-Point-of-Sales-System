@@ -1,5 +1,11 @@
 package com.cz2002.ss10.objects.logistics;
 
+/** Table Class
+ *
+ * @author Neel Kumar 
+ * @version 1.0
+ * @since 2021-11-10
+ */
 public class Table {
 
 	private int seatingCapacity;
