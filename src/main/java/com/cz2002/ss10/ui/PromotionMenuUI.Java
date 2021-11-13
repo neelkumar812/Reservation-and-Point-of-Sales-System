@@ -94,10 +94,10 @@ public class PromotionMenuUI {
         boolean dessertFound = false;
         boolean drinkFound = false;
 
-        ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.APPETISERS);
-        ArrayList<MenuItem> filteredMainMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.MAIN); 
-        ArrayList<MenuItem> filteredDessertMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.DESSERT);
-        ArrayList<MenuItem> filteredDrinkMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.DRINK);
+        ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.APPETISERS);
+        ArrayList<MenuItem> filteredMainMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.MAIN); 
+        ArrayList<MenuItem> filteredDessertMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DESSERT);
+        ArrayList<MenuItem> filteredDrinkMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DRINK);
 
         System.out.println("Enter new promotion set name: ");
         sc.nextLine(); 
@@ -183,10 +183,10 @@ public class PromotionMenuUI {
 
 
         //have to create 3 temporary arrays here to filter out.
-        ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.APPETISERS);
-        ArrayList<MenuItem> filteredMainMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.MAIN);   
-        ArrayList<MenuItem> filteredDessertMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.DESSERT);
-        ArrayList<MenuItem> filteredDrinkMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.DRINK);
+        ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.APPETISERS);
+        ArrayList<MenuItem> filteredMainMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.MAIN);   
+        ArrayList<MenuItem> filteredDessertMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DESSERT);
+        ArrayList<MenuItem> filteredDrinkMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DRINK);
 
         System.out.println("Enter edited promotion set name: ");
         sc.nextLine(); //required if previous scanner takes in int, and now string is required

@@ -19,8 +19,7 @@ public class FoodMenuUI{
     Scanner sc = new Scanner(System.in);
 
         /**
-         * Main Menu Screen For user to contol menu functionalities 
-         *
+         * Main Menu Screen For staff to contol menu functionality 
          */
         
         public int menuScreen() {
@@ -36,16 +35,16 @@ public class FoodMenuUI{
                 choice = sc.nextInt();
 
                 switch (choice) {
-                    case 1: // Prints menu
+                    case 1: 
                         this.printMenuUI();
                         break;
-                    case 2: // Create new menu item
+                    case 2: 
                         this.addNewMenuItemUI();
                         break;
-                    case 3: // Edit an existing menu item
+                    case 3: 
                         this.editMenuItemUI();
                         break;
-                    case 4: // Delete an existing menu item
+                    case 4: 
                         this.deleteMenuItemUI();
                         break;
                     case 5:
@@ -61,10 +60,8 @@ public class FoodMenuUI{
 
 
         private void printMenuUI() {
-
             int selection;
             MenuItem.MenuItemType type = MenuItem.MenuItemType.ALL;
-
                 do {
                     System.out.println("Enter the number of the item type you would like to print: \n");
                     System.out.println("1. Appetiser");
@@ -104,12 +101,9 @@ public class FoodMenuUI{
                             return;
                         
                         default: 
-                        System.out.println("Please Choose a Valid Option");
-
+                        System.out.println("Please Choose a Valid Option.");
                 } 
-
             } while (selection < 0 || selection > 5); 
-
             RestaurantMenu.printMenu(type);
         }
 
@@ -124,9 +118,7 @@ public class FoodMenuUI{
             System.out.println("2. Main");
             System.out.println("3. Drink");
             System.out.println("4. Dessert");
-
             newItemType = sc.nextInt();
-
         } while (newItemType < 1 || newItemType > 4);
 
         System.out.println("Enter new menu item name: ");
@@ -143,7 +135,6 @@ public class FoodMenuUI{
         System.out.println("Add successful. New menu item has been successfully added.");
         }
 
-
     private void editMenuItemUI() {
         int editItemID;
         String updatedItemName;
@@ -152,12 +143,10 @@ public class FoodMenuUI{
         double updatedItemPrice;
 
        //Insert Logic to  print existing menu
-
         System.out.println("Existing Menu: ");
         RestaurantMenu.printMenu(MenuItem.MenuItemType.ALL);
         
-        //Insert Logic to find menu item 
-
+        //Insert Logic to find menu item  
         boolean menuItemExists = false;
         while (!menuItemExists) {
             System.out.println("Enter the ID of Menu item to be updated: \n");

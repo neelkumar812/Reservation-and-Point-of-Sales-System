@@ -20,10 +20,10 @@ public class RestaurantMenu {
 	 * @param printType
 	 */
 	public static void printMenu(MenuItem.MenuItemType printType) {
-		ArrayList<MenuItem> filteredMenu = MenuItem.retrieveMenuItemListFiltered(printType);
-        System.out.printf("%-5s %-50s %-10s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
-        for (MenuItem item : filteredMenu) {
-            System.out.printf("%-5s %-50s %-10s %-6s %-9s\n", item.getId(), item.getName(), item.getMenuItemType(), item.getPrice(), item.getDescription());
+		ArrayList<MenuItem> funneledMenu = MenuItem.funneledMenuItemList(printType);
+        System.out.printf("%-10s %-50s %-10s %-10s %-10s\n", "ID", "Name", "Type", "Price", "Description");
+        for (MenuItem item : funneledMenu) {
+            System.out.printf("%-10s %-50s %-10s %-10s %-10s\n", item.getId(), item.getName(), item.getMenuItemType(), item.getPrice(), item.getDescription());
         }	
 	}
 
@@ -48,6 +48,7 @@ public class RestaurantMenu {
 
 	/**
 	 * 
+	 * Edits the object in the arraylist
 	 * @param name
 	 */
 	public static void editMenuItem(int itemId, int itemType, String name, String description, double price) {
@@ -71,7 +72,6 @@ public class RestaurantMenu {
 	public static void deleteMenuItem(int itemID) {
 
 		//Note to self, if the current item is a part of the promotion, need to handle the deletion over there as well
-
 		//If there is a promotion dependent on this item then delete the promotion as well
         for (int i = 0; i < RestaurantApp.menuItems.size(); i++) {
             MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
@@ -88,8 +88,8 @@ public class RestaurantMenu {
 		// Basically the normal deletion (Deletes the item aswell, even if it was in the promotion)
         for (int m = 0; m <RestaurantApp.menuItems.size(); m++) {
             MenuItem menuItemObj1 = RestaurantApp.menuItems.get(m);
-            if (itemID == menuItemObj1.getId()) { //if we can find the target item
-                    RestaurantApp.menuItems.remove(m); //delete using i as for loop index
+            if (itemID == menuItemObj1.getId()) { 
+                    RestaurantApp.menuItems.remove(m); 
                     System.out.println("Item Deleted");
                     return;
 			}
@@ -145,6 +145,8 @@ public class RestaurantMenu {
 		int PromoID = promotionObj.getId()+1;
 		PromoItem promotion = new PromoItem(PromoID, PromoName, PromoPrice, PromoAppetiser, PromoMain, PromoDessert, PromoDrink);
 		RestaurantApp.promotionItems.add(promotion);
+		System.out.println("Promotion Has Been Created");
+
 	}
 
 	/**
@@ -165,7 +167,7 @@ public class RestaurantMenu {
                     promo.setPromoMain(PromoMain);
                     promo.setPromoDessert(PromoDessert);
                     promo.setPromoDrink(PromoDrink);
-                    System.out.println("Edit successful. Target promotion successfully edited!");
+                    System.out.println("Promotion Has Been Edited");
                     return;
 				}
 			}

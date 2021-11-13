@@ -108,7 +108,7 @@ public class MenuItem extends RestaurantItem {
      * @return menuItemFunnel 
      */
 
-    public static ArrayList<MenuItem> retrieveMenuItemListFiltered(MenuItem.MenuItemType desiredType) {
+    public static ArrayList<MenuItem> funneledMenuItemList(MenuItem.MenuItemType desiredType) {
 
         ArrayList<MenuItem> menuItemFunnel = new ArrayList<>();
         if (desiredType == MenuItem.MenuItemType.ALL) {
