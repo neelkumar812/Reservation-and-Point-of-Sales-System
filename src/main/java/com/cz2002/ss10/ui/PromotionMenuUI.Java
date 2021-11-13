@@ -89,6 +89,7 @@ public class PromotionMenuUI {
         int newPromoMain = 1;
         int newPromoDessert = 2;
         int newPromoDrink = 3;
+        boolean appetiserFound = false;
         boolean mainFound = false;
         boolean dessertFound = false;
         boolean drinkFound = false;
@@ -108,28 +109,24 @@ public class PromotionMenuUI {
 
         //Code to print filtered menu of appetisers 
         System.out.println("All Appetiser Items");
-        int k = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredAppetisersMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            k++;
         }
 
-        while (!mainFound) {
+        while (!appetiserFound) {
             System.out.println("Enter new promotion's appetiser ID: ");
             newPromoAppetiser = sc.nextInt();
             mainFound = MenuItem.menuTypeChecker(filteredAppetisersMenu, newPromoAppetiser, "Main");
-            if (!mainFound) System.out.println("Main not found. Please enter a valid main ID.");
+            if (!appetiserFound) System.out.println("Main not found. Please enter a valid main ID.");
         }
 
 
         //Code to print filtered menu of mains
         System.out.println("All Main Items");
-        int k = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredMainMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            k++;
         }
 
         while (!mainFound) {
@@ -141,11 +138,9 @@ public class PromotionMenuUI {
 
         //Code to print filtered menu of desserts
         System.out.println("All Dessert Items");
-        int l = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredDessertMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            l++;
         }
 
         while (!dessertFound) {
@@ -158,11 +153,9 @@ public class PromotionMenuUI {
 
         //Code to print filtered menu of drinks
         System.out.println("All Drink Items");
-        int m = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredDrinkMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            m++;
         }
 
         while (!drinkFound) {
@@ -185,55 +178,51 @@ public class PromotionMenuUI {
 
     private void editPromotionUI(){
 
-        int editPromoID = 1;
         String editPromoName;
         double editPromoPrice;
         int editPromoAppetiser = 0;
         int editPromoMain = 1;
         int editPromoDessert = 2;
         int editPromoDrink = 3;
+        boolean appetiserFound = false; 
         boolean mainFound = false;
         boolean dessertFound = false;
         boolean drinkFound = false;
-        boolean promoFound = false;
+
 
         //have to create 3 temporary arrays here to filter out.
         ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.APPETISERS);
-        ArrayList<MenuItem> filteredMainMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.MAIN); //the main here is just for main dishes
+        ArrayList<MenuItem> filteredMainMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.MAIN);   
         ArrayList<MenuItem> filteredDessertMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.DESSERT);
         ArrayList<MenuItem> filteredDrinkMenu = MenuItem.retrieveMenuItemListFiltered(MenuItem.MenuItemType.DRINK);
 
-        System.out.println("Enter new promotion set name: ");
+        System.out.println("Enter edited promotion set name: ");
         sc.nextLine(); //required if previous scanner takes in int, and now string is required
         editPromoName = sc.nextLine();
 
-        System.out.println("Enter new promotion's price: ");
+        System.out.println("Enter edited promotion's price: ");
         editPromoPrice = sc.nextInt();
 
         //Code to print filtered menu of appetisers 
         System.out.println("All Appetiser Items");
-        int k = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredAppetisersMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            k++;
         }
 
-        while (!mainFound) {
-            System.out.println("Enter new promotion's main ID: ");
+        while (!appetiserFound) {
+            System.out.println("Enter edited promotion's Appetiser ID: ");
             editPromoMain = sc.nextInt();
             mainFound = MenuItem.menuTypeChecker(filteredAppetisersMenu, editPromoMain, "Main");
-            if (!mainFound) System.out.println("Main not found. Please enter a valid main ID.");
+            if (!appetiserFound) System.out.println("Main not found. Please enter a valid main ID.");
         }
 
 
         //Code to print filtered menu of mains
         System.out.println("All Main Items");
-        int k = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredMainMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            k++;
         }
 
         while (!mainFound) {
@@ -245,11 +234,9 @@ public class PromotionMenuUI {
 
         //Code to print filtered menu of desserts
         System.out.println("All Dessert Items");
-        int l = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredDessertMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            l++;
         }
 
         while (!dessertFound) {
@@ -262,11 +249,9 @@ public class PromotionMenuUI {
 
         //Code to print filtered menu of drinks
         System.out.println("All Drink Items");
-        int m = 1;
         System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem mi : filteredDrinkMenu) {
             System.out.printf("%-5s %-50s %-6s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
-            m++;
         }
 
         while (!drinkFound) {
@@ -275,8 +260,6 @@ public class PromotionMenuUI {
             drinkFound = MenuItem.menuTypeChecker(filteredDrinkMenu, editPromoDrink, "Drink");
             if (!drinkFound) System.out.println("Drink not found. Please enter a valid drink ID.");
         }
-        
-        //PromoCSVHelper promoHelper = PromoCSVHelper.getInstance();
 
         RestaurantMenu.editPromoItem(editPromoName, editPromoPrice, editPromoAppetiser, editPromoMain, editPromoDessert, editPromoDrink);
 

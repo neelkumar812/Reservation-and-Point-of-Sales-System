@@ -46,6 +46,8 @@ public class RestaurantMenu {
             MenuItem menuItem = new MenuItem(id, name, itemType, description, price);
             RestaurantApp.menuItems.add(menuItem); //adds the RestaurantItem object to the menu array
 
+			
+
 
 			// IMPORTANT: Implement the save to CSV Function
 
@@ -88,8 +90,6 @@ public class RestaurantMenu {
 
 		//Note to self, if the current item is a part of the promotion, need to handle the deletion over there as well
 
-		MenuItemCSVHelper menuHelper = MenuItemCSVHelper.getInstance();
-
         String tempPromoName;
 
         for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
@@ -97,8 +97,6 @@ public class RestaurantMenu {
             MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
 
             if (itemId == menuItemObj.getId()) { //if we can find the target item
-
-                    //PromoCSVHelper promoHelper = PromoCSVHelper.getInstance(); //bring in promo helper class to do I/O
 
                     //problem here is the promotionItems size becomes smaller, and it prematurely exits the loop.
 
@@ -188,7 +186,6 @@ public class RestaurantMenu {
 		PromoItem promotion = new PromoItem(PromoID, PromoName, PromoPrice, PromoAppetiser, PromoMain, PromoDessert, PromoDrink);
 		RestaurantApp.promotionItems.add(promotion);
 
-		// PromoCSVHelper promotionHelper = PromoCSVHelper.getInstance();
 		// promotionHelper.writeToCsv(RestaurantApp.promotionItems);
 
 	}
@@ -212,10 +209,10 @@ public class RestaurantMenu {
 
                     promo.setName(PromoName);
                     promo.setPrice(PromoPrice);
+					promo.setPromoMain(PromoAppetiser);
                     promo.setPromoMain(PromoMain);
                     promo.setPromoDessert(PromoDessert);
                     promo.setPromoDrink(PromoDrink);
-                    //at this point, the object has been edited with the new values
 
                     //promoHelper.writeToCsv(RestaurantApp.promotionItems); // calls IO method to save the array into the CSV file
                     System.out.println("Edit successful. Target promotion successfully edited!");
