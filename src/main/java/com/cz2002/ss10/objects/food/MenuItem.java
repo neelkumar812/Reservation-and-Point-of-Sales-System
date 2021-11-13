@@ -145,7 +145,7 @@ public class MenuItem extends RestaurantItem {
         return menuItemsFiltered;
     }
 
-        /**
+    /**
      * Returns true if the filtered array list contains the menu item type.
      *
      * @param menuArrayList    filtered array list that contains menu items based on enum specified
