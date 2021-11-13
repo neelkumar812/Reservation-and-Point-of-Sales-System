@@ -16,18 +16,17 @@ public class RestaurantApp {
     /**
      * The list of menuitems loaded into the program
      */	
-	public ArrayList<MenuItem> menuItems;
+	static public ArrayList<MenuItem> menuItems;
 
 	/**
      * The list of promoitems loaded into the program
      */
-	private ArrayList<PromoItem> promotionItems;
-	private ArrayList<Reservation> reservations;
-	private ArrayList<Staff> staffs;
-	private ArrayList<RevenueReport> revenueReports;
-	private LocalTime openingTime;
-	private LocalTime closingTime;
-	private ArrayList<Order> orders;
+	static public ArrayList<PromoItem> promotionItems;
+	static private ArrayList<Reservation> reservations;
+	static private ArrayList<Staff> staffs;
+	static private LocalTime openingTime;
+	static private LocalTime closingTime;
+	static private ArrayList<Order> orders;
 	Scanner sc = new Scanner(System.in);
 
 	public void setPromotionItems(ArrayList<PromoItem> promotionItems) {

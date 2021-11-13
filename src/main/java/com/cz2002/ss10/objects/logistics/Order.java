@@ -12,69 +12,82 @@ public class Order {
 	private int tableNumber;
 	private LocalDateTime createdAt;
 	private int orderId;
-	private ArrayList<MenuItem> orderItems;
+	private ArrayList<RestaurantItem> orderItems;
 	private Boolean isPaid;
 	private LocalDateTime paidAt;
+	private double subtotal;
 
 	/**
 	 * 
 	 * @param orderId
-	 * @param 
+	 * @param
 	 */
-	public Order(Staff staff, String membershipType, int tableNumber, int orderId, ArrayList<MenuItem> orderItems) {
+	public Order(Staff staff, String membershipType, int tableNumber, int orderId,
+			ArrayList<RestaurantItem> orderItems) {
 		this.staff = staff;
 		this.membershipType = membershipType;
 		this.tableNumber = tableNumber;
 		this.createdAt = LocalDateTime.now();
 		this.orderId = orderId;
 		this.orderItems = orderItems;
-		this.isPaid = false; //yet to be paid
-		paidAt=-1; //yet to be paid
-		 
+		this.isPaid = false; // yet to be paid
+		paidAt = null; // yet to be paid
+
 	}
 
 	public void markAsPaid() {
 		// TODO - mark isPaid as Paid
-		isPaid=true;
-		paidAt=LocalDateTime.now();
-		this.getTable().freeState(tableNumber);
+		isPaid = true;
+		paidAt = LocalDateTime.now();
+		this.getTable().freeState(tableNumber); // should be handled one level higher in settlePayment
 		System.out.println("Order paid and table is now available");
 	}
 
-	
-    
+	}
+
 	public Staff getStaff() {
-        return staff;
-    }
+		return staff;
+	}
+
+	public ArrayList<RestaurantItem> getOrderItems() {
+		return this.orderItems;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
 
 	public String getMembershipType() {
-        return membershipType;
-    }
+		return membershipType;
+	}
+
+	public double getSubtotal() {
+		return getSubtotal();
+	}
 
 	public int getTableNumber() {
-        return tableNumber;
-    }
+		return tableNumber;
+	}
 
-	public int getCreatedAt() {
-        return createdAt;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
 	public int orderId() {
-        return orderId;
-    }
-
-	public ArrayList<MenuItem> getOrderItems() {
-        return orderItems;
+		return orderId;
 	}
 
 	public Boolean getIsPaid() {
-        return isPaid;
-    }
+		return isPaid;
+	}
 
 	public double calculateSubtotal() {
 		// TODO - implement Order.calculateTotal
-		double subtotal=0;
-		this.orderItems.forEach((n)->{ subtotal+=super.n.getPrice();});
+		double subtotal = 0;
+		this.orderItems.forEach((n) -> {
+			subtotal += n.getPrice();
+		});
+		this.subtotal = subtotal;
 		return subtotal;
 	}
 
@@ -91,7 +104,7 @@ public class Order {
 		// TODO - implement Order.addItem
 		throw new UnsupportedOperationException();
 		orderItems.add(item);
-		System.println("Item has been added");
+		System.out.println("Item has been added");
 	}
 
 	/**
@@ -100,10 +113,10 @@ public class Order {
 	 */
 	public void removeItem(MenuItem item) {
 		// TODO - implement Order.removeItem
-		this.orderItems.forEach((n)->{ 
-			if(orderItems.get(n)==item)
+		this.orderItems.forEach((n) -> {
+			if (orderItems.get(n) == item)
 				orderItems.remove(n);
-				break;
+			break;
 		});
 	}
 
@@ -114,25 +127,19 @@ public class Order {
 	public void getOrder() {
 		// TODO - implement Order.getOrder
 		throw new UnsupportedOperationException();
-		this.orderItems.forEach((n)->{ subtotal+=super.n.getPrice();});
+		this.orderItems.forEach((n) -> {
+			subtotal += n.getPrice();
+		});
 
 	}
 	/*
-	public String[] forCsv() {
-        String[] data = new String[8];
-        data[0] = this.orderId + "";
-        StringBuilder buil = new StringBuilder();
-        for (OrderItem n : this.orderItems) {
-            buil.append(n.toCompiledString()).append(",");
-        }
-        data[1] = buil.toString().replaceAll(", $", ""); 
-        data[2] = this.staff + "";
-        data[3] = this.membershipType + "";
-        data[4] = this.tableNumber + "";
-        data[5] = this.createdAt + "";
-        data[6] = this.orderItems + "";
-        data[7] = this.isPaid+ "";
-        return data;
-    }*/
+	 * public String[] forCsv() { String[] data = new String[8]; data[0] =
+	 * this.orderId + ""; StringBuilder buil = new StringBuilder(); for (OrderItem n
+	 * : this.orderItems) { buil.append(n.toCompiledString()).append(","); } data[1]
+	 * = buil.toString().replaceAll(", $", ""); data[2] = this.staff + ""; data[3] =
+	 * this.membershipType + ""; data[4] = this.tableNumber + ""; data[5] =
+	 * this.createdAt + ""; data[6] = this.orderItems + ""; data[7] = this.isPaid+
+	 * ""; return data; }
+	 */
 
 }

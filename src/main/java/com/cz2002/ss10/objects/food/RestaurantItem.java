@@ -15,10 +15,10 @@ public class RestaurantItem {
      */
     private double restaurantItemPrice;
 
-    /**
-     * The stock of the restaurant item.
-     */
-    private int restaurantItemStock;
+    // /**
+    //  * The stock of the restaurant item.
+    //  */
+    // private int restaurantItemStock;
 
     /**
      * Constructor to pass in all required parameters for a restaurant item.
@@ -26,13 +26,13 @@ public class RestaurantItem {
      * @param restaurantItemID    This restaurant item's ID.
      * @param restaurantItemName  This restaurant item's name.
      * @param restaurantItemPrice This restaurant item's price.
-     * @param restaurantItemStock This restaurant item's stocks.
+    //  * @param restaurantItemStock This restaurant item's stocks.
      */
-    RestaurantItem(int restaurantItemID, String restaurantItemName, double restaurantItemPrice, int restaurantItemStock) {
+    RestaurantItem(int restaurantItemID, String restaurantItemName, double restaurantItemPrice) {
         this.restaurantItemID = restaurantItemID;
         this.restaurantItemName = restaurantItemName;
         this.restaurantItemPrice = restaurantItemPrice;
-        this.restaurantItemStock = restaurantItemStock;
+        // this.restaurantItemStock = restaurantItemStock;
 
     }
 
@@ -90,22 +90,22 @@ public class RestaurantItem {
         this.restaurantItemPrice = restaurantItemPrice;
     }
 
-    /**
-     * Accessor for Restaurant Item type.
-     *
-     * @return Gets the restaurant item's Stock.
-     */
-    public int getStock() {
-        return restaurantItemStock;
-    }
+    // /**
+    //  * Accessor for Restaurant Item type.
+    //  *
+    //  * @return Gets the restaurant item's Stock.
+    //  */
+    // public int getStock() {
+    //     return restaurantItemStock;
+    // }
 
-    /**
-     * Mutator for Restaurant Item Stock.
-     *
-     * @param restaurantItemStock Sets the restaurant item's ID.
-     */
-    public void setStock(int restaurantItemStock) {
-        this.restaurantItemStock = restaurantItemStock;
-    }
+    // /**
+    //  * Mutator for Restaurant Item Stock.
+    //  *
+    //  * @param restaurantItemStock Sets the restaurant item's ID.
+    //  */
+    // public void setStock(int restaurantItemStock) {
+    //     this.restaurantItemStock = restaurantItemStock;
+    // }
 
 }

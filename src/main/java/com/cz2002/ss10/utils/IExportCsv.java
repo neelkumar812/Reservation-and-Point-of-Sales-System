@@ -1,5 +1,7 @@
 package com.cz2002.ss10.utils;
 
+import java.io.IOException;
+
 public interface IExportCsv {
 
 	/**
@@ -8,6 +10,6 @@ public interface IExportCsv {
 	 * @param strings
 	 * @param fileName
 	 */
-	void exportOutputToCSV(String[] headers, String[] strings, String fileName);
+	void exportOutputToCSV(String formattedCsvString, String fileName) throws IOException;
 
 }

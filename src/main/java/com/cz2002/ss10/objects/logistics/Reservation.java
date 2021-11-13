@@ -4,14 +4,14 @@ import java.time.*;
 
 public class Reservation {
 
+	private int reservationId;
 	private LocalDate reservationDate;
 	private LocalTime reservationTime;
-	private int tableNumber;
-	private int dinerSize;
-	private String customerName;
 	private int customerContact;
-	private int reservationId;
-
+	private int tableNumber;
+	private String customerName;
+	private int dinerSize;
+	
 	/**
 	 * 
 	 * @param resId
@@ -34,13 +34,40 @@ public class Reservation {
         return this.reservationId;
     }
 
-    public int getTableNumber(){
+	public LocalDate getReservationDate(){
+        return this.reservationDate;
+    }
+
+    public LocalDate getReservationTime(){
+        return this.reservationTime;
+    }
+
+	public int getCustomerContact(){
+        return this.customerContact;
+    }
+
+	public int getTableNumber(){
         return this.tableNumber;
     }
 
+	public int getDinerSize(){
+        return this.dinerSize;
+    }
+
 	public void cancelReservation() {
+<<<<<<< HEAD
 		// TODO - implement Reservation.cancelReservation
-		this = null;
+		this.reservationDate = null;
+		this.reservationTime= null;
+	    this.tableNumber = -1;
+		this.dinerSize= -1;
+		this.customerContact = -1;
+		
+		System.out.println("Reservation for "+ this.customerName + "is cancelled (Reservation ID: "+ this.reservationId+")");
+
+		this.reservationId = -1;
+		this.customerName= null;
+		
 	}
 
 }

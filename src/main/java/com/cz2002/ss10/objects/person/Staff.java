@@ -26,6 +26,18 @@ public class Staff {
 		return employeeID;
 	}
 
+	public String getStaffName(){
+		return name;
+	}
+
+	public String getGender(){
+		return Character.toString(gender);
+	}
+
+	public String getJobTitle(){
+		return getJobTitle();
+	}
+
 
 
 }
