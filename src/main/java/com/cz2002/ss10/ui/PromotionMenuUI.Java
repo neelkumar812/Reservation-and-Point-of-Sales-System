@@ -1,6 +1,7 @@
 package com.cz2002.ss10.ui;
 import java.util.*;
 import com.cz2002.ss10.objects.food.*;
+import com.cz2002.ss10.operations.RestaurantMenu;
 
 /**
  * PromotionMenuUI Class
@@ -23,7 +24,20 @@ public class PromotionMenuUI {
      */
 
     protected int generateMenuScreen() {
+        
+        int choice;
+        
         do {
+
+            System.out.println("Promotion Item Management");
+            System.out.println("1) View existing promotions");
+            System.out.println("2) Create a new promotion");
+            System.out.println("3) Update an existing promotion");
+            System.out.println("4) Delete a promotion");
+            System.out.println("5) Back to main menu");
+            System.out.println("0) Exit Application");
+
+            choice = sc.nextInt();
             switch (choice) {
     
                 case 1: // Prints existing promotions
@@ -44,12 +58,28 @@ public class PromotionMenuUI {
                 case 0:
                     return 1;
                 default:
-                    System.out.println("Invalid choice.")
+                    System.out.println("Invalid choice.");
             }
             return 0;
     
-        } while (choice < 0 || choice > 5)
+        } while (choice < 0 || choice > 5);
     }
+
+    /**
+     * Prints the menu of promotions stored in the CSV file.
+     * 
+     */
+    private void printPromotionUI() {
+
+        RestaurantMenu.printPromotionItems();
+
+    }
+
+    
+
+
+
+
 
    
 }

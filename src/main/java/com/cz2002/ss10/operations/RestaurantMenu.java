@@ -2,6 +2,7 @@ package com.cz2002.ss10.operations;
 
 import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.*;
+
 import java.util.*;
 
 
@@ -22,7 +23,7 @@ public class RestaurantMenu {
 	 * @param name
 	 * @param itemType
 	 */
-	public void printMenu(MenuItem.MenuItemType printType) {
+	public static void printMenu(MenuItem.MenuItemType printType) {
 
 		//Need to debug the retrive Menu item List function
 
@@ -40,7 +41,7 @@ public class RestaurantMenu {
 	 * @param name
 	 * @param itemType
 	 */
-	public void addMenuItem(int itemType, String name, String description, double price) {
+	public static void addMenuItem(int itemType, String name, String description, double price) {
 
             //basically gets the last object in the menuItem array
             MenuItem menuItemObj = RestaurantApp.menuItems.get((RestaurantApp.menuItems.size()) - 1);
@@ -58,11 +59,38 @@ public class RestaurantMenu {
 
 	}
 
+
 	/**
 	 * 
 	 * @param name
 	 */
-	public void deleteMenuItem(int itemId) {
+	public static void editMenuItem(int itemId, int itemType, String name, String description, double price) {
+
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //when you do this, you actually retrieve the whole object
+
+            if (itemId == menuItemObj.getId()) {
+
+                    menuItemObj.setName(name);
+                    menuItemObj.setMenuItemType(itemType);
+                    menuItemObj.setDescription(description);
+                    menuItemObj.setPrice(price);
+
+		// Important Save the Menu Item CSV Here
+                    System.out.println("Menu item successfuly edited!");
+                    return;
+
+            }
+
+        }
+	}
+
+	/**
+	 * 
+	 * @param name
+	 */
+	public static void deleteMenuItem(int itemId) {
 
 		//Note to self, if the current item is a part of the promotion, need to handle the deletion over there as well
 
@@ -84,52 +112,61 @@ public class RestaurantMenu {
 
 	}
 
+
 	/**
 	 * 
-	 * @param name
+	 * @param id
 	 */
-	public void editMenuItem(int itemId, int itemType, String name, String description, double price) {
 
-        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+	public static void printPromotionItems() {
 
-            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //when you do this, you actually retrieve the whole object
-
-            if (itemId == menuItemObj.getId()) {
-
-                    menuItemObj.setName(name);
-                    menuItemObj.setMenuItemType(itemType);
-                    menuItemObj.setDescription(description);
-                    menuItemObj.setPrice(price);
-                    //at this point, the object has been edited with the new values
-
-		// Important Save the Menu Item CSV Here
-                    System.out.println("Menu item successfuly edited!");
-                    return;
-
-            }
-
-        }
-	}
-
-	public ArrayList<PromoItem> getPromotionItems() {
-		// TODO - implement RestaurantMenu.getPromotionItems
+		System.out.println("All Promotions");
+		System.out.printf("%-5s %-10s %-10s %-10s\n", "ID", "Name", "Price",  "Description");
+ 
+		 for (int i = 0; i < RestaurantApp.promotionItems.size(); i++) {
+			 PromoItem pi = RestaurantApp.promotionItems.get(i);
+			 MenuItem mainItem = MenuItem.retrieveMenuItem(pi.getPromoMain());
+			 MenuItem dessertItem = MenuItem.retrieveMenuItem(pi.getPromoDessert());
+			 MenuItem drinkItem = MenuItem.retrieveMenuItem(pi.getPromoDrink());
+ 
+			 String tempDescription = ("Served with the following items: ");
+			 String tempMain = ("[" + pi.getPromoMain() + "]");
+			 String tempDessert = ("[" + pi.getPromoDessert() + "]");
+			 String tempDrink = ("[" + pi.getPromoDrink() + "]");
+ 
+			 System.out.printf("%-5s %-10s %-10s %-10s\n", pi.getId(), pi.getName(), pi.getPrice(), tempDescription);
+			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Main: ", tempMain, mainItem.getName());
+			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Dessert: ", tempDessert, dessertItem.getName());
+			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n\n", "", "", "", "Drink: ", tempDrink, drinkItem.getName());
+		 }
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param name
+	 * @param id
 	 */
-	public void removePromotionItem(String name) {
+	public void createPromotionItem(int id) {
+		// TODO - implement RestaurantMenu.removePromotionItem
+		throw new UnsupportedOperationException();
+	}
+
+
+
+	/**
+	 * 
+	 * @param id
+	 */
+	public void editPromotionItem(int id) {
 		// TODO - implement RestaurantMenu.removePromotionItem
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param name
+	 * @param id
 	 */
-	public void editPromotionItem(String name) {
+	public void deletePromotionItem(int id) {
 		// TODO - implement RestaurantMenu.removePromotionItem
 		throw new UnsupportedOperationException();
 	}
