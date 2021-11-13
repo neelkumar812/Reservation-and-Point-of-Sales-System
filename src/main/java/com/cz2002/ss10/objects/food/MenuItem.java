@@ -20,22 +20,29 @@ public class MenuItem extends RestaurantItem {
 	private MenuItemType itemType;
 
 	/**
-     * Constructor to pass in all required parameters for menu item.
+     * Method to Construct Menu Item Object
      *
-     * @param id          Menu item's ID.
-     * @param name        Menu item's name.
-     * @param type        Menu item's type.
-     * @param description Menu item's description.
-     * @param price       Menu item's price.
-	 * @param stock       Menu item's stock.
+     * @param id          
+     * @param name       
+     * @param itemType        
+     * @param description 
+     * @param price       
      */
     public MenuItem(int id, String name, int itemType, String description, double price) {
-        super(id, name, price); // Called from restaurant class
-		this.itemType = convertToItemType(itemType);     
+        super(id, name, price); 
+		this.itemType = intToItemType(itemType);     
         this.description = description;
     }
 
+    /**
+	 * 
+	 * Accessors and Mutators
+	 */
 
+	/**
+	 * 
+	 * @return description of the item 
+	 */
 	public String getDescription() {
 		return description;
 	}
@@ -48,7 +55,10 @@ public class MenuItem extends RestaurantItem {
 		this.description = description;
 	}
 
-
+	/**
+	 * 
+	 * @return type of the item 
+	 */
 	public MenuItemType getMenuItemType() {
 		return itemType;
 	}
@@ -58,107 +68,74 @@ public class MenuItem extends RestaurantItem {
 	 * @param menuItemType
 	 */
 	public void setMenuItemType(int itemType) {
-		this.itemType = convertToItemType(itemType);
+		this.itemType = intToItemType(itemType);
 
 	}
 
 
 	/**
-     * Method that takes in integer of menu type to convert into its corresponding enum type equivalent.
      *
      * @param type The menu item's type, in integer form.
      * @return The menu item's type in its enum equivalent form.
      */
-    public MenuItemType convertToItemType(int type) {
-        return type == 1 ? MenuItemType.MAIN :
-                	type == 2 ? MenuItemType.DESSERT :
+    public MenuItemType intToItemType(int type) {
+        return type == 1 ? MenuItemType.APPETISERS :
+                	type == 2 ? MenuItemType.MAIN :
                         type == 3 ? MenuItemType.DRINK :
-							type == 4 ? MenuItemType.APPETISERS :
+							type == 4 ? MenuItemType.DESSERT :
                                type == 5? MenuItemType.OTHERS:
 							   		MenuItemType.ALL;
     }
 
-	/**
-     * Prints a menu item's details.
-     * Formatted to fit a console table of size 60.
-     *
-     * @return Parsed string of the Menu Item.
-     */
-    public String printItemDetail() {
-        return "Name: " + this.getName() + "\n" + 
-                "Description: " + this.getDescription() + "\n" + 
-                "Price: $" + String.format("%.2f", this.getPrice());
-    }
 
     /**
-     * Method returning a MenuItem object that matches the input targetItemID.
-     * Uses {@link RestaurantApp#menuItems} to retrieval operations.
-     *
-     * @param targetItemID ID of the menu item object to be retrieved.
-     * @return menuItemObj Object containing menu item attributes.
+     * Find and return menu item of a specific item ID.
+     * @param itemId Id of the menu item desired.
+     * @return menu item object with the associated ID.
      */
 
-    public static MenuItem retrieveMenuItem(int targetItemID) {
+    public static MenuItem retrieveMenuItem(int itemId) {
 
         for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
-
-            MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
-
-            if (targetItemID == menuItemObj.getId()) { //"Target menu item found."
-                return menuItemObj;
-            }
-
-        }
-        return null; //"Target menu item not found."
+            MenuItem itemObj = RestaurantApp.menuItems.get(i);
+            if (itemId == itemObj.getId()) return itemObj;
+        } return null; 
     }
 
-
-
 	/**
-     * Method returning an ArrayList filtered by enum type.
-     * Uses {@link RestaurantApp#menuItems} to retrieval operations.
      *
-     * @param targetItemType type of the menu item objects to be retrieved.
-     * @return menuItemsFiltered ArrayList containing the menu item type selected
+     * @param desiredType 
+     * @return menuItemFunnel 
      */
 
-    public static ArrayList<MenuItem> retrieveMenuItemListFiltered(MenuItem.MenuItemType targetItemType) {
+    public static ArrayList<MenuItem> retrieveMenuItemListFiltered(MenuItem.MenuItemType desiredType) {
 
-        ArrayList<MenuItem> menuItemsFiltered = new ArrayList<>(); //declare new empty arraylist
-
-        //send in master first if ALL
-        if (targetItemType == MenuItem.MenuItemType.ALL) {
-            return RestaurantApp.menuItems; //returns original array if ALL is selected.
+        ArrayList<MenuItem> menuItemFunnel = new ArrayList<>();
+        if (desiredType == MenuItem.MenuItemType.ALL) {
+            return RestaurantApp.menuItems; 
         }
-
-        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) { //for loop to run through menuitems and to filter out
-
-            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //gets a menu item object while the loop is running
-
-            //need to change to enum
-            if (targetItemType == menuItemObj.getMenuItemType()) { //"Menu item of target item types found."
-                menuItemsFiltered.add(menuItemObj); //add the found object into the filtered array list
+        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
+            MenuItem itemObj = RestaurantApp.menuItems.get(i);
+            if (desiredType == itemObj.getMenuItemType()) { 
+                menuItemFunnel.add(itemObj);
             }
-
         }
-        return menuItemsFiltered;
+        return menuItemFunnel;
     }
 
     /**
-     * Returns true if the filtered array list contains the menu item type.
+     * Checks type of the items in the array
      *
-     * @param menuArrayList    filtered array list that contains menu items based on enum specified
-     * @param newPromoItemType type of the menu item added to the promotion
-     * @param textParameter    text for the menu item type
+     * @param menuArrayList    Make an arraylist with only items of desired type
+     * @param desiredItemType type of the menu item added to the promotion
      */
-    public static boolean menuTypeChecker(ArrayList<MenuItem> menuArrayList, int newPromoItemType, String textParameter) {
-        for (MenuItem menuItemObj : menuArrayList) {
-            if (newPromoItemType == menuItemObj.getId()) { //"Target menu item found."
+    public static boolean menuTypeChecker(ArrayList<MenuItem> menuArrayList, int desiredItemType) {
+        for (MenuItem itemObj : menuArrayList) { 
+            if (desiredItemType == itemObj.getId()) { 
                 return true;
             }
-        }
-        //implied else
-        System.out.println("No " + textParameter + " exists with this ID.");
+        } 
+        System.out.println("Item not found");
         return false;
     }
 

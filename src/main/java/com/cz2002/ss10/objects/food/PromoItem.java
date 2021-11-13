@@ -15,25 +15,21 @@ import com.cz2002.ss10.RestaurantApp;
  public class PromoItem extends RestaurantItem{
 
 	private ArrayList<MenuItem> PromoItems;
-	/**
-     * The ID of the Promo item's components.
-     */
     private int promoMain;
     private int promoDessert;
     private int promoDrink;
     private int promoAppetiser;
 
 	/**
-     * Constructor to pass in all attributes
+     * PromoItem Object Constructor
      *
-     * @param promoID         This Promo item's ID.
-     * @param promoName       This Promo item's name.
-     * @param promoPrice      This Promo item's price.
-     * @param promoMain       This Promo item's main ID.
-     * @param promoAppetiser  This Promo item's appetiser ID.
-     * @param promoDessert    This Promo item's dessert ID.
-     * @param promoDrink      This Promo item's drink ID.
-     * @param promoStock      This Promo item's current stock.
+     * @param promoID         
+     * @param promoName       
+     * @param promoPrice      
+     * @param promoMain       
+     * @param promoAppetiser  
+     * @param promoDessert    
+     * @param promoDrink      
      */
     public PromoItem(int promoID, String promoName, double promoPrice, int promoMain, int promoAppetiser, int promoDessert, int promoDrink) {
         
@@ -44,15 +40,15 @@ import com.cz2002.ss10.RestaurantApp;
         this.promoDrink = promoDrink;
     }
 
-	public ArrayList<MenuItem> getPromoItems() {
+    /**
+	 * Accessors and Mutators
+	 */
 
-		//Is this how an Array List Returns? 
+	public ArrayList<MenuItem> getPromoItems() {
 		return PromoItems;
 	}
 
-
 	/**
-	 * 
 	 * @param PromoItems
 	 */
 	public void setPromoItems(ArrayList<MenuItem> PromoItems) {
@@ -60,93 +56,78 @@ import com.cz2002.ss10.RestaurantApp;
 	}
 
 	/**
-     * Accessor for Promotion item's main.
      *
-     * @return Gets the Promotion item's main.
+     * @return Main Item in the promotion.
      */
     public int getPromoMain() {
         return promoMain;
     }
 
     /**
-     * Mutator for Promotion item's main.
-     *
-     * @param promoMain Sets the Promotion item's main.
+     * @param promoMain
      */
     public void setPromoMain(int promoMain) {
         this.promoMain = promoMain;
     }
 
     /**
-     * Accessor for Promotion item's appetiser.
-     *
-     * @return Gets the Promotion item's appetiser.
+     * @return The Appetiser in the promotion item.
      */
     public int getPromoAppetiser() {
         return promoAppetiser;
     }
 
     /**
-     * Mutator for Promotion item's Appetiser.
-     *
-     * @param promoAppetiser Sets the Promotion item's appetiser.
+     * @param promoAppetiser
      */
     public void setPromoAppetiser(int promoAppetiser) {
         this.promoAppetiser = promoAppetiser;
     }
 
     /**
-     * Accessor for Promotion item's dessert.
-     *
-     * @return Gets the Promotion item's dessert.
+     * @return Dessert in the promotion item.
      */
     public int getPromoDessert() {
         return promoDessert;
     }
 
     /**
-     * Mutator for Promotion item's main.
-     *
-     * @param promoDessert Sets the Promotion item's dessert.
+
+     * @param promoDessert
      */
     public void setPromoDessert(int promoDessert) {
         this.promoDessert = promoDessert;
     }
 
     /**
-     * Accessor for Promotion item's drink.
-     *
-     * @return Gets the Promotion item's drink.
+     * @return Drink in the promoItem.
      */
     public int getPromoDrink() {
         return promoDrink;
     }
 
     /**
-     * Mutator for Promotion item's drink.
-     *
-     * @param promoDrink Sets the Promotion item's drink.
+     * @param promoDrink
      */
     public void setPromoDrink(int promoDrink) {
         this.promoDrink = promoDrink;
     }
 
     /**
-     * Returns a PromotionItem object that matches the input targetPromoID.
+     * Finds and returns promotion object of desired ID
      *
-     * @param targetPromoID ID of the promotion object to be retrieved.
-     * @return promoObj Object containing a promotion item's attributes.
+     * @param promoID
+     * @return promotionObject
      */
 
-    public static PromoItem retrievePromotion(int targetPromoID) {
+    public static PromoItem retrievePromotion(int promoID) {
         for (int i = 0; i < (RestaurantApp.promotionItems.size()); i++) {
-            PromoItem promoObj = RestaurantApp.promotionItems.get(i);
-            if (targetPromoID == promoObj.getId()) {
-                //System.out.println("Target promotion found.");
-                return promoObj;
+            PromoItem promotionObject = RestaurantApp.promotionItems.get(i);
+            if (promoID == promotionObject.getId()) {
+                return promotionObject;
             }
         }
-        return null; //"Target promotion not found."
+        return null; 
     }
 
 
