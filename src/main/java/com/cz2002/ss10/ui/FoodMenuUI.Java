@@ -207,7 +207,7 @@ public class FoodMenuUI{
         System.out.println("Enter new price: ");
         editedItemPrice = sc.nextDouble();
 
-        RestaurantMenu.addMenuItem( editedItemType, editedItemName, editedItemDescription, editedItemPrice);
+        RestaurantMenu.addMenuItem(editedItemType, editedItemName, editedItemDescription, editedItemPrice);
 
     }
 
