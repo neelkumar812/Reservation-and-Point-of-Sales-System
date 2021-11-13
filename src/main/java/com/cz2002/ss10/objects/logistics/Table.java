@@ -1,38 +1,54 @@
 package com.cz2002.ss10.objects.logistics;
 
+
+import java.util.*;
+
 public class Table {
 
-	private int seatingCapacity;
+	public enum tableState {TABLE_AVAIL, TABLE_OCCUPIED, TABLE_RESERVED}
+	public enum tableSeats {ONE_SEATER(1), TWO_SEATER(2), THREE_SEATER(3), FOUR_SEATER(4)}	//restaurant can only sit 1-4 people ,COVID RESTRICTIONS
+
+	
 	private int tableNumber;
-	private Boolean isOccupied = false;
+	private tableState state;
+	private tableSeats noOfSeats;
 
 	/**
-	 * @param seatingCapacity
+	 * @param noOfSeats
 	 * @param tableNumber
-	 * @param isOccupied
+	 * @param state
 	 */
 
-    public Table(int seatingCapacity, int tableNumber, Boolean isOccupied){
-        this.seatingCapacity = seatingCapacity;
+    public Table(int seatingCapacity, int tableNumber){
         this.tableNumber = tableNumber;
-        this.isOccupied = isOccupied;
+        state=tableState.TABLE_OCCUPIED;
+
+		if (seatingCapacity==1)
+			noOfSeats = tableSeats.ONE_SEATER;
+		else if(seatingCapacity==2)
+			noOfSeats = tableSeats.TWO_SEATER;
+		else if(seatingCapacity==3)
+			noOfSeats = tableSeats.THREE_SEATER;
+		else if(seatingCapacity==4)
+			noOfSeats = tableSeats.FOUR_SEATER;
+			
     }
-	//returns true for occupied, false for vacant
-	public Boolean getOccupancy() {
-		return this.isOccupied;
+	
+	public tableState getTableState() {
+		return this.state;
 	}
+
+	public void setTableState(tableState state) {
+		this.state = state;
+	}
+
     public int getTableNumber(){
         return this.tableNumber;
     }
-	public int getSeatingCap(){
-		return this.seatingCapacity;
+
+	public void setTableSeats(tableNumber NoSeats) {
+		this.noOfSeats = noOfSeats;
 	}
-	/**
-	 * 
-	 * @param isOccupied
-	 */
-	public void setOccupancy(Boolean isOccupied) {
-		this.isOccupied = true;
-		throw new UnsupportedOperationException();
-	}
+
+	
 }
