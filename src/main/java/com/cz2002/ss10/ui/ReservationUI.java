@@ -177,7 +177,7 @@ public class ReservationUI{
                 if (tableNum > 0) {
                     int lastNum = MainApp.reservations.get(MainApp.reservations.size() - 1).getResvId() + 1;
                     tempObj = new Reservation(resvDate,resvTime,resvSession,telNo,custName,dinerSize);
-                    MainApp.reservations.add(tempObj);
+                    RestaurantApp.reservations.add(tempObj);
 
                     System.out.println("Your reservation has been successfully recorded! Your assigned table is " + tableNum + ".");
                 } else {
@@ -201,7 +201,7 @@ public class ReservationUI{
     private void checkReservationBooking() {
         int count = 0;
         //Scanner input = new Scanner(System.in);
-        printHeader("Checking of reservation booking");
+        System.out.println("Checking of reservation booking");
         System.out.print("Enter your telephone number linked to reservation(s): ");
         int telNo = input.nextInt();
 
@@ -263,7 +263,7 @@ public class ReservationUI{
         printHeader("List of all Reservations");
         System.out.printf("%-6s %-15s %-10s %-10s %-15s %-30s %-3s %-9s\n", "ID", "Date", "Session", "Time", "Tel. No", "Name", "Pax", "Table No.");
         printBreaks();
-        for (Reservation r : MainApp.reservations) {
+        for (Reservation r : RestaurantApp.reservations) {
             printReservationLine(r);
         }
     }
@@ -275,13 +275,13 @@ public class ReservationUI{
      */
     private void printReservationLine(Reservation r) {
         System.out.printf("%-6d %-15s %-10s %-10s %-15s %-30s %-3d %-9d\n",
-                r.getResvId(),
-                DateTimeFormatHelper.formatToStringDate(r.getResvDate()),
+                r.getReservationId(),
+                DateTimeFormatHelper.formatToStringDate(r.getReservationDate()),
                 r.getResvSession() == Reservation.ReservationSession.AM_SESSION ? 'AM' : 'PM',
-                DateTimeFormatHelper.formatToStringTime(r.getResvTime()),
-                r.getCustTelNo(),
-                r.getCustName(),
-                r.getNumPax(),
+                DateTimeFormatHelper.formatToStringTime(r.getReservationTime()),
+                r.getCustomerContact(),
+                r.getCustomerName(),
+                r.getDinerSize(),
                 r.getTableNum());
     }
 
@@ -298,7 +298,7 @@ public class ReservationUI{
         System.out.printf("%-6s %-15s %-10s %-10s %-15s %-30s %-3s %-9s\n", "ID", "Date", "Session", "Time", "Tel. No", "Name", "Pax", "Table No.");
         printBreaks();
         for (Reservation r : MainApp.reservations) {
-            if (telNo.equals(r.getCustTelNo())) {
+            if (telNo.equals(r.getCustomerContact())) {
                 printReservationLine(r);
                 count++;
             }
