@@ -16,6 +16,8 @@ import java.util.*;
 
 public class OrderUI{
 
+    //private static final int SEATCAP = 25;
+    //private Table[] tableList = new Table[SEATCAP];
     Scanner sc = new Scanner(System.in);
 
     private int stuff;
@@ -24,39 +26,67 @@ public class OrderUI{
     public OrderUI(){
 
     }
-
     public void createNewOrder(){
-        String isMember;
+
         int flag = 0;
+
+        String isMember;
+        int tempTableNumber;
+        Staff tempStaff;
+        ArrayList<MenuItem> tempOrderItems;
+
+
+
         System.out.println("Welcome to the order creation page!");
-        do{
-            System.out.println("Is the customer a member? ");
-            isMember = sc.next().toLowerCase();
-            if(isMember == "yes"){
-                flag = 0;
-            }
-            else if(isMember == "no"){
-                flag = 0;
-            }
-            else{
-                flag = 1;
-                System.out.println("Please enter either 'yes' or 'no' only");
-            }
-        }while(flag != 1);
-        do{
-            System.out.println("Please enter table number");
-            isMember = sc.next().toLowerCase();
-            if(isMember == "yes"){
-                flag = 0;
-            }
-            else if(isMember == "no"){
-                flag = 0;
-            }
-            else{
-                flag = 1;
-                System.out.println("Please enter either 'yes' or 'no' only");
-            }
-        }while(flag != 1);
+        
+        //Ask if member
+        System.out.println("Is the customer a member? ");
+        isMember = sc.next().toLowerCase();
+        if(isMember == "yes"){
+            flag = 0;
+        }
+        else if (isMember == "no"){
+            flag = 0;
+        }
+        else{
+            flag = 1;
+            System.out.println("Please enter either 'yes' or 'no' only");
+        }
+       
+        //Ask table number
+        System.out.println("Please enter table number");
+        tempTableNumber = sc.nextInt();
+        if(tempTableNumber < 25 && this.[tempTableNumber-1].getOccupancy == false){
+            flag = 0;            
+        }
+        else if(tempTableNumber > 0 && this.[tempTableNumber-1].getOccupancy == false){
+            flag = 0;
+         }
+        else{
+            flag = 1;
+            System.out.println("Please enter a table from the available list");
+        }
+
+        //Ask Staff Details 
+        System.out.println(" Please enter Staff Details");
+        System.out.println("============================");
+        System.out.println("         Staff name? ");
+        tempStaff.setName(sc.next());
+        System.out.println("        Staff gender? ");
+        tempStaff.setGender(sc.next());
+        System.out.println("      Staff employeeID? ");
+        tempStaff.setStaffID(sc.nextInt());
+        System.out.println("       Staff job title? ");
+        tempStaff.setJobTitle(sc.next());
+        System.out.println("============================");
+
+        //Ask the items ordered
+        /**
+         * @snesboola can help out with this part, basically this section asks the staff to input everything the user ordered. 
+         * I think if you can also reference to another class which takes user input for orderitems?
+         */
+        RestaurantService.createNewOrder(tempStaff, isMember, tempTableNumber, tempOrderItems);
+        } 
     }
 
 

@@ -1,8 +1,17 @@
 package com.cz2002.ss10.objects.logistics;
 
+<<<<<<< HEAD
 
 import java.util.*;
 
+=======
+/** Table Class
+ *
+ * @author Neel Kumar 
+ * @version 1.0
+ * @since 2021-11-10
+ */
+>>>>>>> 159c734e73d5e490afcc801c4e04faad95d42612
 public class Table {
 
 	public enum tableState {TABLE_AVAIL, TABLE_OCCUPIED, TABLE_RESERVED}

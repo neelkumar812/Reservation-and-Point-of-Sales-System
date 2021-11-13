@@ -3,6 +3,7 @@ package com.cz2002.ss10;
 import com.cz2002.ss10.objects.food.*;
 import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
+import com.cz2002.ss10.ui.OrderUI;
 
 import java.util.ArrayList;
 import java.time.LocalTime;  
@@ -15,7 +16,7 @@ public class RestaurantApp {
 
     /**
      * The list of menuitems loaded into the program
-     */	
+   */	
 	static public ArrayList<MenuItem> menuItems;
 
 	/**
@@ -24,9 +25,9 @@ public class RestaurantApp {
 	static public ArrayList<PromoItem> promotionItems;
 	static public ArrayList<Reservation> reservations;
 	static public ArrayList<Staff> staffs;
-	static private LocalTime openingTime;
-	static private LocalTime closingTime;
-	static private ArrayList<Order> orders;
+	static public LocalTime openingTime;
+	static public LocalTime closingTime;
+	static public ArrayList<Order> orders;
 	Scanner sc = new Scanner(System.in);
 
 	public void setPromotionItems(ArrayList<PromoItem> promotionItems) {
@@ -81,10 +82,11 @@ public class RestaurantApp {
 	 * @param operation
 	 */
 	public void handleService(int operation) {
+
+
 		
 		throw new UnsupportedOperationException();
 	}
-
-	//hello
+	//help
 
 }
