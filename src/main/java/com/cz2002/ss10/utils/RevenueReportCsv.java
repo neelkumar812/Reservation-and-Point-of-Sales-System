@@ -89,7 +89,7 @@ public class RevenueReportCsv implements IExportCsv {
 		while (RestaurantApp.promotionItems.size() > index) {
 			itemMap.put(RestaurantApp.promotionItems.get(index++).getName(), 0);
 		}
-		Iterator<Order> iterator = orders.iterator();
+		Iterator<Order> iterator = ordersForDuration.iterator();
 		while (iterator.hasNext()){
 			for (RestaurantItem orderItem : iterator.next().getOrderItems()){
 				// update sale count for every item sold
@@ -119,7 +119,7 @@ public class RevenueReportCsv implements IExportCsv {
 		}
 	
 		// calculate and set total revenue
-		setTotalRevenue(orders.stream().map(order -> order.getSubtotal()).mapToDouble(total -> total).sum());
+		setTotalRevenue(ordersForDuration.stream().map(order -> order.getSubtotal()).mapToDouble(total -> total).sum());
 
 		// convert all orders to string
 		String outputAsStrings = ordersForDuration.stream().map(order -> toRows(order))
@@ -140,7 +140,6 @@ public class RevenueReportCsv implements IExportCsv {
 	}
 
 	// convert menu items to individual sale items, item type, price
-	// add total revenue
 	private String toRows(Order order) {
 		return Stream
 				.of(((Integer) order.getOrderId()).toString(), ((Integer) order.getStaff().getStaffID()).toString(),
