@@ -8,6 +8,6 @@ public interface IExtractCsv {
 	 * 
 	 * @param fileName
 	 */
-	Map<String, List<String>> extractInputFromCSV(String fileName);
+	Map<String, List<String>> extractInputFromCSV(String filePath);
 
 }
