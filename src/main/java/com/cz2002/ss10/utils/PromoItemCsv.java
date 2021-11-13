@@ -20,14 +20,8 @@ public class PromoItemCsv implements IExtractCsv {
 
 		Map<String, List<String>> promoItemMap = new HashMap<String, List<String>>();
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
-			List<String[]> r = reader.readAll();
-			String[] promoItems = r.stream().toArray(String[]::new);
-			int index = 0;
-			while (promoItems.length > index) {
-				List<String> promoInfo = new ArrayList<String>();
-				promoInfo.addAll(Arrays.asList(promoItems[1], promoItems[2], promoItems[3], promoItems[4], promoItems[5], promoItems[6], promoItems[7]));
-				promoItemMap.put(promoItems[0],promoInfo);
-			}
+			List<String[]> r = reader.readAll(); // nested lists of lists
+			r.forEach(promoItem -> promoItemMap.put(promoItem[0],getPromoInfoAsList(promoItem)));
 
 			return promoItemMap;
 		}
@@ -40,8 +34,15 @@ public class PromoItemCsv implements IExtractCsv {
 		catch (CsvException error) {
 			throw new RuntimeException("Error encountered converting from CSV!", error);
 		}
+
 		
     }
+
+	private List<String> getPromoInfoAsList(String[] promoItem) {
+		List<String> promoInfo = new ArrayList<String>();
+		promoInfo.addAll(Arrays.asList(promoItem[1], promoItem[2], promoItem[3], promoItem[4], promoItem[5], promoItem[6], promoItem[7]));
+		return promoInfo;
+	}
 
 	/**
 	 * 
