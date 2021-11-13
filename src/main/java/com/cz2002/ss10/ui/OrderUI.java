@@ -1,10 +1,9 @@
-package com.cz2002.ss10.operations;
+package com.cz2002.ss10.ui;
 
 import com.cz2002.ss10.objects.food.MenuItem;
 import com.cz2002.ss10.objects.logistics.Order;
 import com.cz2002.ss10.objects.person.Staff;
 import com.cz2002.ss10.operations.RestaurantService;
-import com.cz2002.ss10.UI.MenuUI;
 import java.util.*;
 
 /**

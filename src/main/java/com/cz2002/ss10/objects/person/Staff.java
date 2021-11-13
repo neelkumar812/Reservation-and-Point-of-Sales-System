@@ -19,7 +19,13 @@ public class Staff {
 		this.name = name;
 		this.employeeID = id;
 		this.jobTitle = jobTitle;
-		throw new UnsupportedOperationException();
+		
 	}
+
+	public int getStaffID(){
+		return employeeID;
+	}
+
+
 
 }

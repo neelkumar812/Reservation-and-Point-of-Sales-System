@@ -28,7 +28,6 @@ public class MenuItem extends RestaurantItem {
 	 * @param stock       Menu item's stock.
      */
     public MenuItem(int id, String name, int itemType, String description, double price, int stock) {
-
         super(id, name, price, stock); // Called from restaurant class
 		this.itemType = convertToItemType(itemType);     
         this.description = description;
