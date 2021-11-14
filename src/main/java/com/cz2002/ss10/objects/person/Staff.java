@@ -1,4 +1,4 @@
-package com.cz2002.ss10.objects.person;
+package com.cz2002.ss10.objects.person;	
 
 /**
  * Class Staff

@@ -4,9 +4,12 @@ import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import com.cz2002.ss10.RestaurantApp;
+import com.cz2002.ss10.operations.RestaurantService;
 
 public class Order {
 
+	
 	private Staff staff;
 	private String membershipType;
 	private int tableNumber;
@@ -16,13 +19,16 @@ public class Order {
 	private Boolean isPaid;
 	private LocalDateTime paidAt;
 	private double subtotal;
+	
 
 	/**
-	 * 
-	 * @param orderId
-	 */
-	public Order(Staff staff, String membershipType, int tableNumber, int orderId,
-			ArrayList<RestaurantItem> orderItems) {
+     * @param staff
+     * @param membershipType
+     * @param tableNumber
+     * @param orderId
+     * @param orderItems
+     */
+	public Order(Staff staff, String membershipType, int tableNumber, int orderId, ArrayList<RestaurantItem> orderItems) {
 		this.staff = staff;
 		this.membershipType = membershipType;
 		this.tableNumber = tableNumber;
@@ -35,17 +41,15 @@ public class Order {
 	}
 
 	public void markAsPaid() {
-		//TODO - mark isPaid as Paid
 		isPaid = true;
 		paidAt = LocalDateTime.now();
-		this.getTable().freeState(tableNumber); // should be handled one level higher in settlePayment
+		//How do I make tables(tableNumber).setOccupuncy(false);
+		RestaurantApp.tables.get(tableNumber-1).setOccupancy(false);
 		System.out.println("Order paid and table is now available");
 	}
-
 	public Staff getStaff() {
 		return staff;
 	}
-
 	public ArrayList<RestaurantItem> getOrderItems() {
 		return this.orderItems;
 	}
@@ -91,12 +95,7 @@ public class Order {
 		this.subtotal = subtotal;
 		return subtotal;
 	}
-
-	public void printOrderInvoice() {
-		//TODO - implement Order.printOrderInvoice
-		throw new UnsupportedOperationException();
-	}
-
+	
 	/**
 	 * 
 	 * @param item
@@ -124,6 +123,7 @@ public class Order {
 		this.isPaid = isPaid;
 	}
 
+	//What is this function achieving??
 	public void getOrder() {
 		throw new UnsupportedOperationException();
 		this.orderItems.forEach((n) -> {

@@ -4,46 +4,48 @@ import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
+
 import java.util.*;
 import java.time.*;
 import com.cz2002.ss10.RestaurantApp;
 
 public class RestaurantService {
 
+    public static final int TABLESEATCAP =25;
 
     Scanner sc = new Scanner(System.in);
-    
-    private static final int SEATCAP = 25;
-    private Table[] tableList = new Table[SEATCAP];
-    //Constructor to initialize all tables in increasing order of seating capacity.
-    public RestaurantService(){
-        for(int i = 0;i<SEATCAP; i++){
-            if(i<5) tableList[i] = new Table(2, i+1, false);
-            else if(i<10 && i>4) tableList[i] = new Table(4, i+1, false);
-            else if(i<15 && i>9) tableList[i] = new Table(6, i+1, false);
-            else if(i<20 && i>14) tableList[i] = new Table(8, i+1, false);
-            else if(i>19) tableList[i] = new Table(10, i+1, false);
-        }
-    }
-    public ArrayList<Table> getAvailableTables() {
 
-        ArrayList<Table> temp = new ArrayList<Table>();
-        for(int i = 0; i<SEATCAP;i++){
-            if(tableList[i].getOccupancy() == false) temp.add(tableList[i]);
-        }
-        return temp;
-        throw new UnsupportedOperationException();
-    }
+    //Constructor
+    public RestaurantService(){}
     /**
-     * 
+     * @param staff
+     * @param membershipType
      * @param tableNumber
      * @param orderId
+     * @param orderItems
      */
 
-    public void settlePayment(int tableNumber, int orderId) {
-        // TODO - implement RestaurantService.settlePayment
+    public static void createNewOrder(Staff staff, String membershipType, int tableNumber, int orderID, ArrayList<MenuItem> orderItems)
+     {
+        Order temp = new Order(staff, membershipType, tableNumber, orderID, orderItems);
+        RestaurantApp.orders.add(temp);
         throw new UnsupportedOperationException();
     }
+
+    //SettlePayments essentially does all the calculation stuff, and calls PrintOrderInvoice in the end
+    public void settlePayment(int tableNumber, int orderId) {
+        // TODO - implement RestaurantService.settlePayment
+        
+
+
+        throw new UnsupportedOperationException();
+    }
+
+    //Just prints the orderInvoice in a receipt format
+    public void printOrderInvoice() {
+		
+        System.out.println( "============================");
+		throw new UnsupportedOperationException();
 
     /**
      * 
@@ -52,12 +54,7 @@ public class RestaurantService {
      * @param tableNumber
      * @param orderItems
      */
-    public static void createNewOrder(Staff staff, String membershipType, int tableNumber, ArrayList<MenuItem> orderItems) {
-        Order temp = new Order(staff, membershipType, tableNumber, orderId, orderItems);
-        orders.add(temp);
-        throw new UnsupportedOperationException();
-    }
-
+    
     /**
      * 
      * @param customerName
@@ -103,5 +100,13 @@ public class RestaurantService {
             // handle error
         }
     }
+
+
+
+
+
+
+
+    
 
 }

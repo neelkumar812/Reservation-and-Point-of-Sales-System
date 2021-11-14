@@ -5,6 +5,7 @@ import com.cz2002.ss10.objects.logistics.Order;
 import com.cz2002.ss10.objects.person.Staff;
 import com.cz2002.ss10.operations.RestaurantService;
 import java.util.*;
+import com.cz2002.ss10.RestaurantApp;
 
 /**
  * OrderUI Class
@@ -16,26 +17,18 @@ import java.util.*;
 
 public class OrderUI{
 
-    //private static final int SEATCAP = 25;
-    //private Table[] tableList = new Table[SEATCAP];
-    Scanner sc = new Scanner(System.in);
-
-    private int stuff;
-
     //constructor
-    public OrderUI(){
+    public OrderUI(){}
+    
+    public static void createNewOrder(){
 
-    }
-    public void createNewOrder(){
-
+        Scanner sc = new Scanner(System.in);
         int flag = 0;
-
         String isMember;
         int tempTableNumber;
         Staff tempStaff;
+        int tempOrderId;
         ArrayList<MenuItem> tempOrderItems;
-
-
 
         System.out.println("Welcome to the order creation page!");
         
@@ -52,14 +45,18 @@ public class OrderUI{
             flag = 1;
             System.out.println("Please enter either 'yes' or 'no' only");
         }
+
+        //Ask for OrderID
+        System.out.println("What is the order ID? ");
+        tempOrderId = sc.nextInt();
        
         //Ask table number
         System.out.println("Please enter table number");
         tempTableNumber = sc.nextInt();
-        if(tempTableNumber < 25 && this.[tempTableNumber-1].getOccupancy == false){
+        if(tempTableNumber < 25 && RestaurantApp.tables.get(tempTableNumber-1).getOccupancy() == false){
             flag = 0;            
         }
-        else if(tempTableNumber > 0 && this.[tempTableNumber-1].getOccupancy == false){
+        else if(tempTableNumber > 0 && RestaurantApp.tables.get(tempTableNumber-1).getOccupancy() == false){
             flag = 0;
          }
         else{
@@ -67,7 +64,7 @@ public class OrderUI{
             System.out.println("Please enter a table from the available list");
         }
 
-        //Ask Staff Details 
+        //Ask Staff Details and setting staff details
         System.out.println(" Please enter Staff Details");
         System.out.println("============================");
         System.out.println("         Staff name? ");
@@ -85,7 +82,7 @@ public class OrderUI{
          * @snesboola can help out with this part, basically this section asks the staff to input everything the user ordered. 
          * I think if you can also reference to another class which takes user input for orderitems?
          */
-        RestaurantService.createNewOrder(tempStaff, isMember, tempTableNumber, tempOrderItems);
+        RestaurantService.createNewOrder(tempStaff, isMember, tempTableNumber, tempOrderId, tempOrderItems);
         } 
     }
 

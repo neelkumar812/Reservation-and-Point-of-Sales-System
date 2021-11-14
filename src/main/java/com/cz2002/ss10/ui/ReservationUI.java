@@ -350,8 +350,6 @@ public class ReservationUI{
         System.out.println("There are " + (MAX_TABLES - pmCount) + " reservations slots free for the PM session.");
         return pmCount < MAX_TABLES;
     }
-
-
 }
 
 
