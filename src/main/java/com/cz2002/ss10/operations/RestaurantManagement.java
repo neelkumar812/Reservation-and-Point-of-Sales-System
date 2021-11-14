@@ -22,7 +22,7 @@ public class RestaurantManagement {
 	 * @param employeeID
 	 * @param jobTitle
 	 */
-	public void addStaff(String name, char gender, int employeeID, String jobTitle) {
+	public static void addStaff(String name, char gender, int employeeID, String jobTitle) {
 		RestaurantApp.staffs.add(new Staff(name, gender, employeeID, jobTitle));
 	}
 
@@ -31,7 +31,7 @@ public class RestaurantManagement {
 	 * 
 	 * @param filePath
 	 */
-	public void addStaff(String filePath) {
+	public static void addStaff(String filePath) {
 		try {
 			StaffCsv staffCsvHelper = new StaffCsv();
 			Map<String, List<String>> staffMap = staffCsvHelper.extractInputFromCSV(filePath);
@@ -45,7 +45,7 @@ public class RestaurantManagement {
 	 * 
 	 * @param orders
 	 */
-	public void generateRevenueReport(ArrayList<Order> orders, ReportDuration reportPeriod, String filePath) {
+	public static void generateRevenueReport(ArrayList<Order> orders, ReportDuration reportPeriod, String filePath) {
 		try {
 			RevenueReportCsv revReportHelper = new RevenueReportCsv();
 			revReportHelper.exportOutputToCSV(revReportHelper.formatReportToString(orders, reportPeriod), filePath);
@@ -54,12 +54,16 @@ public class RestaurantManagement {
 		}
 	}
 
+	public static void generateRevenueReport(ArrayList<Order> orders, ReportDuration reportPeriod){
+		// TODO copy logic from csv but don't make it CSV
+	}
+
 	/**
 	 * Iterate through staff list and return true if removed
 	 * 
 	 * @param employeeID
 	 */
-	public boolean removeStaff(int employeeID) {
+	public static boolean removeStaff(int employeeID) {
 		// find index in staff list
 
 		// remove staff by index
