@@ -4,8 +4,8 @@ import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
+import com.cz2002.ss10.logistics.Reservation;
 import java.util.*;
-
 import java.time.*;
 
 
@@ -103,7 +103,7 @@ public class RestaurantService {
 		
         System.out.println("********************************************************************");
         System.out.println("                Thank you for dining with us today!");
-        System.out.println("Date:          " + LocalDate.now() + "Time:             " + LocalTime.now());
+        System.out.println("Date:" + LocalDate.now() + "                 Time:" + LocalTime.now());
         System.out.println("--------------------------------------------------------------------");
         //Print all the items ordered along with their prices 
         System.out.println("********************************************************************");
@@ -125,8 +125,14 @@ public class RestaurantService {
      * @param customerName
      * @param reservationId
      */
-    public void cancelReservation(String customerName, int reservationId) {
+    public void cancelReservation(int telNo) {
         // TODO - implement RestaurantService.cancelReservation
+         for(int i = 0;i<=RestaurantApp.reservations.size();i++){
+            if(RestaurantApp.reservations.get(i).getCustomerContact()== telNo){
+                RestaurantApp.reservations.get(i).cancelReservation();
+                break;
+            }
+        }
         
     }
 
@@ -138,12 +144,40 @@ public class RestaurantService {
      * @param reservationDate
      * @param reservationTime
      */
-    public void createNewReservation(String customerName, int customerContact, int dinerSize, LocalDate reservationDate,
-            LocalTime reservationTime) {
+    public static void createNewReservation(String customerName, int customerContact, int dinerSize, int tableNumber, int reservationID) {
         // TODO - implement RestaurantService.createNewReservation
+        
+        System.out.println("Reservation ssuccessfully created");
         
     }
 
+    /**
+     * 
+     * @param customerName
+     * @param reservationId
+     */
+    public void cancelReservation(String customerName, int reservationId) {
+        // TODO - implement RestaurantService
+        
+    }
+
+    /**
+     * 
+     * @param reservationId
+     */
+    public static boolean checkReservation(int telNo) {
+        // TODO - implement RestaurantService.checkReservation
+        boolean existResv = false;
+
+        for(int i = 0;i<=RestaurantApp.reservations.size();i++){
+            if(RestaurantApp.reservations.get(i).getCustomerContact()== telNo){
+                existResv= true;
+                System.out.println("Reservation for "+ RestaurantApp.reservations.get(i).getCustomerName + " for the session of " + RestaurantApp.reservations.get(i).getResvSession() + " at " + RestaurantApp.reservations.get(i).getResvTime);
+            }
+        }
+
+        return existResv;
+    }
     public class ReservationNotFoundException extends Exception {
         public ReservationNotFoundException() {
         }
@@ -153,18 +187,7 @@ public class RestaurantService {
         }
     }
 
-    /**
-     * 
-     * @param reservationId
-     */
-    public static void checkReservation(int reservationId) {
-        // TODO - implement RestaurantService.checkReservation
-        try {
-            throw new ReservationNotFoundException("Reservation of id: " + reservationId + " not found!");
-        } catch (ReservationNotFoundException err) {
-            // handle error
-        }
-    }
+    
 
 
 

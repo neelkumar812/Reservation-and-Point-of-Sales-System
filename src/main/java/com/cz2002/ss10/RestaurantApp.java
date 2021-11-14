@@ -239,7 +239,7 @@ public class RestaurantApp {
 					}
 					break;
 				case 5: //Create new reservation
-					//TODO-
+					ReservationUI.createNewReservation();
 					break;
 				case 6: //Cancel Reservation
 					//TODO-
