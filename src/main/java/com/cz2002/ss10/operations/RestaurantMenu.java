@@ -59,7 +59,7 @@ public class RestaurantMenu {
                     menuItemObj.setMenuItemType(itemType);
                     menuItemObj.setDescription(description);
                     menuItemObj.setPrice(price);
-                    System.out.println("Menu item successfuly edited!");
+                    System.out.println("Menu item has been Edited");
                     return;
             }
         }
@@ -76,7 +76,7 @@ public class RestaurantMenu {
         for (int i = 0; i < RestaurantApp.menuItems.size(); i++) {
             MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
             if (itemID == menuItemObj.getId()) { 
-                    for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) { //iterate through promotionItems Arrray
+                    for (int j = 0; j < RestaurantApp.promotionItems.size(); j++) { //iterate through promotionItems Arrray
                         PromoItem promoItemObj = RestaurantApp.promotionItems.get(j);
                         if (itemID == promoItemObj.getPromoAppetiser() || itemID == promoItemObj.getPromoMain() || itemID == promoItemObj.getPromoDessert() || itemID == promoItemObj.getPromoDrink()) {
                             RestaurantApp.promotionItems.remove(j);
@@ -94,9 +94,8 @@ public class RestaurantMenu {
                     return;
 			}
 		}
-		}
-
 	}
+}
 
 	/**
 	 * 
