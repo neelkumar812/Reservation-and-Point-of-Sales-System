@@ -9,6 +9,8 @@ import com.opencsv.exceptions.CsvException;
 import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.LocalDate;
 import java.io.FileReader;
 
 public class ReservationCsv implements IExtractCsv {
@@ -48,16 +50,8 @@ public class ReservationCsv implements IExtractCsv {
 			List<String> reservationInfo = entry.getValue();
 
 			// add Reservation object to Reservation ArrayList in RestaurantApp
-			RestaurantApp.reservations.add(new Reservation((int)Integer.parseInt(entry.getKey()), reservationInfo.get(0), Double.valueOf(reservationInfo.get(1)), (int)Integer.valueOf(reservationInfo.get(2)), (int)Integer.valueOf(reservationInfo.get(3)), (int)Integer.valueOf(reservationInfo.get(4)), (int)Integer.valueOf(reservationInfo.get(5))));
+			RestaurantApp.reservations.add(new Reservation((int)Integer.parseInt(entry.getKey()), LocalDate.parse(reservationInfo.get(0)), LocalTime.parse(reservationInfo.get(1)), (int)Integer.valueOf(reservationInfo.get(2)), reservationInfo.get(3), (int)Integer.valueOf(reservationInfo.get(4))));
 		}
 	}
-
-	private int reservationId;	//unique no.
-	private LocalDate reservationDate;
-	private LocalTime reservationTime;
-	private int customerContact;
-	private int tableNumber;
-	private String customerName;
-	private int dinerSize;
 
 }
