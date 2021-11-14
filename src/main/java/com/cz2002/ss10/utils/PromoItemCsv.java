@@ -59,13 +59,4 @@ public class PromoItemCsv implements IExtractCsv {
 		
 	}
 
-	/**
-	 * 
-	 * @param promoList
-	 */
-	public String[] formatPromoToString(ArrayList<PromoItem> promoList) {
-		// TODO - implement PromoItemCsv.formatPromoToString
-		throw new UnsupportedOperationException();
-	}
-
 }

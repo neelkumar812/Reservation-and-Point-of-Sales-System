@@ -5,8 +5,15 @@ import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.operations.RestaurantService;
 import com.cz2002.ss10.ui.OrderUI;
+import com.cz2002.ss10.ui.PromotionMenuUI;
+import com.cz2002.ss10.ui.FoodMenuUI;
+import com.cz2002.ss10.ui.PromotionMenuUI;
+
 
 import java.util.ArrayList;
+
+import javax.swing.plaf.MenuItemUI;
+
 import java.time.LocalTime;  
 import java.util.*;
 
@@ -30,6 +37,11 @@ public class RestaurantApp {
 	static public ArrayList<MenuItem> menuItems;
 
 	/**
+     * Scanner init
+   */	
+	Scanner sc = new Scanner(System.in);
+
+	/**
      * The list of promoitems loaded into the program
      */
 	static public ArrayList<PromoItem> promotionItems;
@@ -38,7 +50,7 @@ public class RestaurantApp {
 	static public LocalTime openingTime;
 	static public LocalTime closingTime;
 	static public ArrayList<Order> orders;
-	Scanner sc = new Scanner(System.in);
+
 
 	public void setPromotionItems(ArrayList<PromoItem> promotionItems) {
 		this.promotionItems = promotionItems;
@@ -71,7 +83,6 @@ public class RestaurantApp {
 		System.out.println("Initializing all tables as empty to begin with");
         initializeTables();
         System.out.println(TABLESEATCAP + " tables loaded");
-		Scanner sc = new Scanner(System.in);
 		int choice;
 
 		do{
@@ -80,9 +91,9 @@ public class RestaurantApp {
 			System.out.println("                  1. Handle Menu                     ");
 			System.out.println("                  2. Handle Management               ");
 			System.out.println("                  3. Handle Service                  ");
-			System.out.println("                  0. Exit Application                   ");
+			System.out.println("                  0. Exit Application                ");
 			System.out.println("=====================================================");
-
+			Scanner sc = new Scanner(System.in);
 			choice = sc.nextInt();
 
 			switch(choice){
@@ -107,10 +118,50 @@ public class RestaurantApp {
 	 * 
 	 * @param operation
 	 */
-	public static void handleMenu(int operation) {
-		// TODO - implement RestaurantApp.handleMenu
-		throw new UnsupportedOperationException();
+	public static int handleMenu(int operation) {
+
+		int choice;
+		do {
+			System.out.println("==============================================================");
+			System.out.println("  Welcome to the Menu Handler. Please select an option below: ");
+			System.out.println("                  1. Print menu                               ");
+			System.out.println("                  2. Create menu item                         ");
+			System.out.println("                  3. Edit existing menu item                  ");
+			System.out.println("                  4. Delete menu item                         ");
+			System.out.println("                  5. Handle Promotions                        ");
+			System.out.println("                  5. Exit to main menu                        ");
+			System.out.println("                  0.Exit App                                  ");
+			System.out.println("==============================================================");
+			
+			Scanner sc = new Scanner(System.in);
+			choice = sc.nextInt();
+
+			switch (choice) {
+				case 1: 
+					FoodMenuUI.printMenuUI();
+					break;
+				case 2: 
+					FoodMenuUI.addNewMenuItemUI();
+					break;
+				case 3: 
+				    FoodMenuUI.editMenuItemUI();
+					break;
+				case 4: 
+				    FoodMenuUI.deleteMenuItemUI();
+					break;
+				case 5:
+					PromotionMenuUI.promotionMenuHandler();
+				case 6:
+					return -1;
+				case 0:
+					return 1;
+				default:
+				   System.out.println("Invalid Choice.");
+			}
+		return 0;
+		} while (choice < 0 || choice > 6);
 	}
+
 	/**
 	 * 
 	 * @param operation
@@ -188,7 +239,6 @@ public class RestaurantApp {
 
 		}while(selection != 8 );
 		
-		throw new UnsupportedOperationException();
 	}
 
 	public static ArrayList<Table> getAvailableTables()
