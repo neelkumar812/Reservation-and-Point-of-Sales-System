@@ -58,14 +58,4 @@ public class MenuItemCsv implements IExtractCsv {
 		}
 		
 	}
-
-	/**
-	 * 
-	 * @param menuList
-	 */
-	public String[] formatMenuToString(ArrayList<MenuItem> menuList) {
-		// TODO - implement MenuItemCsv.formatMenuToString
-		throw new UnsupportedOperationException();
-	}
-
 }

@@ -77,16 +77,24 @@ public class StaffCsv implements IExtractCsv, IExportCsv {
 	 * @param staffList
 	 */
 	public String formatStaffToString(ArrayList<Staff> staffList) {
-		String outputAsStrings = staffList.stream().map(staff -> toRows(staff))
+		String outputAsStrings = staffList.stream().map(staff -> toRows(getStaffAsArray(staff)))
 				.collect(Collectors.joining(System.getProperty("line.separator"))); // OS dependent line separator
 
 		return outputAsStrings;
 	}
 
-	private String toRows(Staff staff) {
+	private ArrayList<String> getStaffAsArray(Staff staff){
+		ArrayList<String> staffInfo = new ArrayList<String>();
+		staffInfo.add(staff.getStaffName());
+		staffInfo.add(((Integer)staff.getStaffID()).toString());
+		staffInfo.add(Character.toString(staff.getGender()));
+		staffInfo.add(staff.getJobTitle());
+		return staffInfo;
+	}
+
+	private String toRows(ArrayList<String> staff) {
 		return Stream
-				.of(staff.getStaffName(), ((Integer) staff.getStaffID()).toString(), staff.getGender(),
-						staff.getJobTitle())
+				.of(staff.get(0), staff.get(1), staff.get(2), staff.get(3))
 				.map(value -> value.replaceAll("\"", "\"\""))
 				.map(value -> Stream.of("\"", ",").anyMatch(value::contains) ? "\"" + value + "\"" : value)
 				.collect(Collectors.joining(","));
