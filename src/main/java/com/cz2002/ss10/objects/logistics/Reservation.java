@@ -66,6 +66,14 @@ public class Reservation {
         return this.customerContact;
     }
 
+	public void setCustomerName(String custName){
+        this.customerName= custName;
+    }
+
+	public String getCustomerName(){
+        return this.customerName;
+    }
+
 	public void setTableNumber(int tableNo){
         this.tableNumber= tableNo;
     }

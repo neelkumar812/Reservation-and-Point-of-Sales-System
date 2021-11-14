@@ -1,6 +1,8 @@
 package com.cz2002.ss10.ui;
 
+import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.MenuItem;
+import com.cz2002.ss10.objects.food.PromoItem;
 import com.cz2002.ss10.objects.logistics.Order;
 import com.cz2002.ss10.objects.person.Staff;
 import com.cz2002.ss10.operations.RestaurantService;
@@ -80,23 +82,13 @@ public class OrderUI{
         //Ask the items ordered
         /**
          * @snesboola can help out with this part, basically this section asks the staff to input everything the user ordered. 
-         * I think if you can also reference to another class which takes user input for orderitems?
+         * I think if you can also reference to another class which takes user input forOrders?
          */
         RestaurantService.createNewOrder(tempStaff, isMember, tempTableNumber, tempOrderId, tempOrderItems);
         } 
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
+}
 }
 
 

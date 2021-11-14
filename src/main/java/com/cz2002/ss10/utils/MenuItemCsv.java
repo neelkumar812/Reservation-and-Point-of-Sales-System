@@ -23,7 +23,6 @@ public class MenuItemCsv implements IExtractCsv {
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
 			List<String[]> r = reader.readAll(); // nested lists of lists
 			r.forEach(menuItem -> menuItemMap.put(menuItem[0],getMenuInfoAsList(menuItem)));
-
 			return menuItemMap;
 		}
 		catch (FileNotFoundException error) {

@@ -21,6 +21,12 @@ public class Order {
 	private double subtotal;
 	
 
+
+    /**
+     * Enums for type of order item
+     */
+    public enum OrderType {TYPE_MENU, TYPE_PROMO}
+
 	/**
      * @param staff
      * @param membershipType

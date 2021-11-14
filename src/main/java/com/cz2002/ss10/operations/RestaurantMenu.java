@@ -2,7 +2,6 @@ package com.cz2002.ss10.operations;
 
 import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.*;
-
 import java.util.*;
 
 
@@ -21,14 +20,16 @@ public class RestaurantMenu {
 	 * @param printType
 	 */
 	public static void printMenu(MenuItem.MenuItemType printType) {
-		ArrayList<MenuItem> filteredMenu = MenuItem.retrieveMenuItemListFiltered(printType);
-        System.out.printf("%-5s %-50s %-10s %-6s %-9s\n", "ID", "Name", "Type", "Price", "Description");
-        for (MenuItem mi : filteredMenu) {
-            System.out.printf("%-5s %-50s %-10s %-6s %-9s\n", mi.getId(), mi.getName(), mi.getMenuItemType(), mi.getPrice(), mi.getDescription());
+		ArrayList<MenuItem> funneledMenu = MenuItem.funneledMenuItemList(printType);
+        System.out.printf("%-10s %-50s %-10s %-10s %-10s\n", "ID", "Name", "Type", "Price", "Description");
+        for (MenuItem item : funneledMenu) {
+            System.out.printf("%-10s %-50s %-10s %-10s %-10s\n", item.getId(), item.getName(), item.getMenuItemType(), item.getPrice(), item.getDescription());
         }	
 	}
 
 	/**
+	 * 
+	 * Method that adds the item to the array 
 	 * 
 	 * @param price
 	 * @param description
@@ -37,48 +38,30 @@ public class RestaurantMenu {
 	 */
 	public static void addMenuItem(int itemType, String name, String description, double price) {
 
-            //basically gets the last object in the menuItem array
             MenuItem menuItemObj = RestaurantApp.menuItems.get((RestaurantApp.menuItems.size()) - 1);
-
-            //gets the ID value from the last object and +1 to create a new PK
             int id = menuItemObj.getId() + 1;
-
             MenuItem menuItem = new MenuItem(id, name, itemType, description, price);
-            RestaurantApp.menuItems.add(menuItem); //adds the RestaurantItem object to the menu array
-
-			
-
-
-			// IMPORTANT: Implement the save to CSV Function
-
-        System.out.println("Add successful. New menu item has been successfully added.");
-
+            RestaurantApp.menuItems.add(menuItem);
+        System.out.println("Menu Item has been Added");
 	}
 
 
 	/**
 	 * 
+	 * Edits the object in the arraylist
 	 * @param name
 	 */
 	public static void editMenuItem(int itemId, int itemType, String name, String description, double price) {
-
         for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
-
-            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); //when you do this, you actually retrieve the whole object
-
+            MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
             if (itemId == menuItemObj.getId()) {
-
                     menuItemObj.setName(name);
                     menuItemObj.setMenuItemType(itemType);
                     menuItemObj.setDescription(description);
                     menuItemObj.setPrice(price);
-
-		// Important Save the Menu Item CSV Here
                     System.out.println("Menu item successfuly edited!");
                     return;
-
             }
-
         }
 	}
 
@@ -86,56 +69,34 @@ public class RestaurantMenu {
 	 * 
 	 * @param name
 	 */
-	public static void deleteMenuItem(int itemId) {
+	public static void deleteMenuItem(int itemID) {
 
 		//Note to self, if the current item is a part of the promotion, need to handle the deletion over there as well
-
-        String tempPromoName;
-
-        for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
-
+		//If there is a promotion dependent on this item then delete the promotion as well
+        for (int i = 0; i < RestaurantApp.menuItems.size(); i++) {
             MenuItem menuItemObj = RestaurantApp.menuItems.get(i);
-
-            if (itemId == menuItemObj.getId()) { //if we can find the target item
-
-                    //problem here is the promotionItems size becomes smaller, and it prematurely exits the loop.
-
-                    for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) { //
-
+            if (itemID == menuItemObj.getId()) { 
+                    for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) { //iterate through promotionItems Arrray
                         PromoItem promoItemObj = RestaurantApp.promotionItems.get(j);
-
-                        //if found
-                        if (itemId == promoItemObj.getPromoMain() || itemId == promoItemObj.getPromoDessert() || itemId == promoItemObj.getPromoDrink()) {
-
-                            tempPromoName = RestaurantApp.promotionItems.get(j).getName();
+                        if (itemID == promoItemObj.getPromoAppetiser() || itemID == promoItemObj.getPromoMain() || itemID == promoItemObj.getPromoDessert() || itemID == promoItemObj.getPromoDrink()) {
                             RestaurantApp.promotionItems.remove(j);
-
-                            System.out.println("Associated Promotion '" + tempPromoName + "' Deleted.");
+                            System.out.println("The Promotion with this Item has now been deleted");
                         }
-                        //else business as usual
-
                     }
-                    //promoHelper.writeToCsv(RestaurantApp.promotionItems);
 				}
 
-	 // Implement:	MenuItemCSVHelper menuHelper = MenuItemCSVHelper.getInstance();
-
-        for (int m = 0; i < (RestaurantApp.menuItems.size()); m++) {
-
+		// Basically the normal deletion (Deletes the item aswell, even if it was in the promotion)
+        for (int m = 0; m <RestaurantApp.menuItems.size(); m++) {
             MenuItem menuItemObj1 = RestaurantApp.menuItems.get(m);
-
-            if (itemId == menuItemObj1.getId()) { //if we can find the target item
-
-                    RestaurantApp.menuItems.remove(m); //delete using i as for loop index
-                    //menuHelper.writeToCsv(RestaurantApp.menuItems); // calls IO method to save the new array into the CSV file
-                    System.out.println("Delete Successful. Target menu item deleted!");
+            if (itemID == menuItemObj1.getId()) { 
+                    RestaurantApp.menuItems.remove(m); 
+                    System.out.println("Item Deleted");
                     return;
 			}
 		}
 		}
 
 	}
-
 
 	/**
 	 * 
@@ -145,26 +106,27 @@ public class RestaurantMenu {
 	public static void printpromotionItems() {
 
 		System.out.println("All promotionItems");
-		System.out.printf("%-5s %-10s %-10s %-10s\n", "ID", "Name", "Price",  "Description");
+		System.out.printf("%-10s %-10s %-10s %-10s\n", "ID", "Name", "Price",  "Description");
  
 		 for (int i = 0; i < RestaurantApp.promotionItems.size(); i++) {
-			PromoItem pi = RestaurantApp.promotionItems.get(i);
-			 MenuItem appetiserItem = MenuItem.retrieveMenuItem(pi.getPromoAppetiser());
-			 MenuItem mainItem = MenuItem.retrieveMenuItem(pi.getPromoMain());
-			 MenuItem dessertItem = MenuItem.retrieveMenuItem(pi.getPromoDessert());
-			 MenuItem drinkItem = MenuItem.retrieveMenuItem(pi.getPromoDrink());
+			PromoItem promo = RestaurantApp.promotionItems.get(i);
+			 MenuItem appetiserItem = MenuItem.retrieveMenuItem(promo.getPromoAppetiser());
+			 MenuItem mainItem = MenuItem.retrieveMenuItem(promo.getPromoMain());
+			 MenuItem dessertItem = MenuItem.retrieveMenuItem(promo.getPromoDessert());
+			 MenuItem drinkItem = MenuItem.retrieveMenuItem(promo.getPromoDrink());
  
-			 String tempDescription = ("Served with the following items: ");
-			 String tempAppetiser = ("[" + pi.getPromoAppetiser() + "]");
-			 String tempMain = ("[" + pi.getPromoMain() + "]");
-			 String tempDessert = ("[" + pi.getPromoDessert() + "]");
-			 String tempDrink = ("[" + pi.getPromoDrink() + "]");
+			 String tempDescription = ("In this promotion we have: ");
+			 String tempAppetiser = ("||" + promo.getPromoAppetiser() + "||");
+			 String tempMain = ("||" + promo.getPromoMain() + "||");
+			 String tempDessert = ("||" + promo.getPromoDessert() + "||");
+			 String tempDrink = ("||" + promo.getPromoDrink() + "||");
  
-			 System.out.printf("%-5s %-10s %-10s %-10s\n", pi.getId(), pi.getName(), pi.getPrice(), tempDescription);
-			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Appetiser: ", tempAppetiser, appetiserItem.getName());
-			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Main: ", tempMain, mainItem.getName());
-			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n", "", "", "", "Dessert: ", tempDessert, dessertItem.getName());
-			 System.out.printf("%-5s %-10s %-10s %-10s %-5s %-5s\n\n", "", "", "", "Drink: ", tempDrink, drinkItem.getName());
+			 // change the formatting to make it look better while testing
+			 System.out.printf("%-10s %-10s %-10s %-10s\n", promo.getId(), promo.getName(), promo.getPrice(), tempDescription);
+			 System.out.printf("%-10s %-10s %-10s\n", "Appetiser: ", tempAppetiser, appetiserItem.getName());
+			 System.out.printf("%-10s %-10s %-10s\n",  "Main: ", tempMain, mainItem.getName());
+			 System.out.printf("%-10s %-10s %-10s\n",  "Dessert: ", tempDessert, dessertItem.getName());
+			 System.out.printf("%-10s %-10s %-10s\n",  "Drink: ", tempDrink, drinkItem.getName());
 		 }
 
 	}
@@ -179,18 +141,13 @@ public class RestaurantMenu {
 	 * @param PromoDrinks
 	 */
 	public static void createPromoItem(String PromoName, Double PromoPrice, int PromoAppetiser, int PromoMain, int PromoDessert, int PromoDrink) {
-
 		PromoItem promotionObj = RestaurantApp.promotionItems.get((RestaurantApp.promotionItems.size())-1);
 		int PromoID = promotionObj.getId()+1;
-
 		PromoItem promotion = new PromoItem(PromoID, PromoName, PromoPrice, PromoAppetiser, PromoMain, PromoDessert, PromoDrink);
 		RestaurantApp.promotionItems.add(promotion);
-
-		// promotionHelper.writeToCsv(RestaurantApp.promotionItems);
+		System.out.println("Promotion Has Been Created");
 
 	}
-
-
 
 	/**
 	 * 
@@ -199,28 +156,21 @@ public class RestaurantMenu {
 	public static void editPromoItem(String PromoName, Double PromoPrice, int PromoAppetiser, int PromoMain, int PromoDessert, int PromoDrink) {
 
 		for (int i=0; i<(RestaurantApp.promotionItems.size()); i++) {
-
 			int editPromoID = 0;
-
             PromoItem promoObj = RestaurantApp.promotionItems.get(i);
             if (editPromoID == promoObj.getId()) {
-
+			// Note to self: Arraylist returns a reference to the object, so any edits will be reflected.
                     PromoItem promo = PromoItem.retrievePromotion(editPromoID);
-
                     promo.setName(PromoName);
                     promo.setPrice(PromoPrice);
-					promo.setPromoMain(PromoAppetiser);
+					promo.setPromoAppetiser(PromoAppetiser);
                     promo.setPromoMain(PromoMain);
                     promo.setPromoDessert(PromoDessert);
                     promo.setPromoDrink(PromoDrink);
-
-                    //promoHelper.writeToCsv(RestaurantApp.promotionItems); // calls IO method to save the array into the CSV file
-                    System.out.println("Edit successful. Target promotion successfully edited!");
+                    System.out.println("Promotion Has Been Edited");
                     return;
 				}
-
 			}
-
 	}
 
 	/**
@@ -228,16 +178,13 @@ public class RestaurantMenu {
 	 * @param id
 	 */
 	public static void deletePromoItem(int id) {
-
-		for (int i=0; i<(RestaurantApp.promotionItems.size()); i++) {
+		for (int i=0; i<RestaurantApp.promotionItems.size(); i++) {
             PromoItem promoObj = RestaurantApp.promotionItems.get(i);
             if (id == promoObj.getId()) {
-                    RestaurantApp.promotionItems.remove(i); //delete using i as for loop index
-                    //promoHelper.writeToCsv(RestaurantApp.promotionItems); // calls IO method to save the new array into the CSV file
-                    System.out.println("Target promotion has been successfully removed!");
+                    RestaurantApp.promotionItems.remove(i); 
+                    System.out.println("Promotion Has Been Deleted.");
                     return;
 			}
 		}
-
 	}
 }
