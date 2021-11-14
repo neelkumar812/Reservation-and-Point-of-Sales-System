@@ -15,6 +15,8 @@ public class RestaurantService {
 
     Scanner sc = new Scanner(System.in);
 
+    public static ArrayList<RestaurantItem> tempOrderItems;
+
     //Constructor
     public RestaurantService(){}
     /**
@@ -30,6 +32,31 @@ public class RestaurantService {
         Order temp = new Order(staff, membershipType, tableNumber, orderID, orderItems);
         RestaurantApp.orders.add(temp);
         
+    }
+
+    /**
+     * @param itemID
+     * @param quantity
+     * 
+     * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
+     */
+
+    
+    public static void addItemToOrder(int itemID, int quantity){
+
+         for(int i = 0; i < quantity; i++){
+
+            for (int j = 0; j < (RestaurantApp.menuItems.size()); j++) {
+                MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
+                if (itemID == menuItemObj.getId()) {
+                    RestaurantService.tempOrderItems.add(menuItemObj);
+                        System.out.println("Menu item has been added to Order");
+                        return;
+                }
+            }
+
+        }
+
     }
 
     //SettlePayments essentially does all the calculation stuff, and calls PrintOrderInvoice in the end

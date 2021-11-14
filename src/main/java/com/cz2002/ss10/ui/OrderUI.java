@@ -6,6 +6,7 @@ import com.cz2002.ss10.objects.food.PromoItem;
 import com.cz2002.ss10.objects.food.RestaurantItem;
 import com.cz2002.ss10.objects.logistics.Order;
 import com.cz2002.ss10.objects.person.Staff;
+import com.cz2002.ss10.operations.RestaurantMenu;
 import com.cz2002.ss10.operations.RestaurantService;
 
 import org.w3c.dom.css.Counter;
@@ -87,6 +88,10 @@ public class OrderUI
         counter++;
 
         //Ask the items ordered
+        // Ask what Users want to order: Promotion Menu or Normal Menu?
+        // Print Each Specific Menu 
+        // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
+
         /**
          * @snesboola can help out with this part, basically this section asks the staff to input everything the user ordered. 
          * I think if you can also reference to another class which takes user input forOrders?
@@ -94,8 +99,82 @@ public class OrderUI
         RestaurantService.createNewOrder(RestaurantApp.staffs.get(counter), isMember, tempTableNumber, tempOrderId, tempOrderItems);
         
 
-        // 
+        // Ask what Users want to order: Promotion Menu or Normal Menu?
+        // Print Each Specific Menu 
+        // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
         
+
+        
+    }
+
+    public static void getOrderItem(){
+
+        //Ask the items ordered
+        // Ask what Users want to order: Promotion Menu or Normal Menu?
+        // Print Each Specific Menu 
+        // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
+        int choice;
+        Scanner sc = new Scanner(System.in);
+
+        do{
+        System.out.println(" Which Menu would you like to order from? ");
+        System.out.println("==========================================");
+        System.out.println("            1. Promotion Menu             ");
+        System.out.println("            2. Ala-Carte Menu             ");
+        System.out.println("==========================================");
+        System.out.println("     Enter the number of your choice:     ");
+        choice = sc.nextInt();
+        }while(choice<1 || choice > 2);
+
+        switch(choice){
+
+        case(1): 
+        RestaurantMenu.printMenu(MenuItem.MenuItemType.ALL);
+        boolean menuItemExists = false;
+        while (!menuItemExists) {
+            System.out.println("Enter the ID of Menu item to add: \n");
+            int orderItemID = sc.nextInt(); 
+            if (MenuItem.retrieveMenuItem(orderItemID) == null) 
+            System.out.println("Enter a valid menu item ID.");
+            else {
+                menuItemExists = true;
+                System.out.println("Enter quantity of item: \n");
+                int itemQuantity = sc.nextInt();
+                RestaurantService.addItemToOrder(orderItemID, itemQuantity);
+            }
+        }
+            break;
+
+            case(2):
+            RestaurantMenu.printpromotionItems();
+            boolean promoItemExists = false;
+            while (!promoItemExists) {
+                System.out.println("Enter the ID of Promo item to add: \n");
+                int orderItemID = sc.nextInt(); 
+                if (PromoItem.retrievePromotion(orderItemID) == null) 
+                System.out.println("Enter a valid promo item ID.");
+                else {
+                    promoItemExists = true;
+                    System.out.println("Enter quantity of item: \n");
+                    int promoQuantity = sc.nextInt();
+                    RestaurantService.addItemToOrder(orderItemID, promoQuantity);
+                }
+            }
+            break;
+
+            default: System.out.println("Invalid Choice");
+        };
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

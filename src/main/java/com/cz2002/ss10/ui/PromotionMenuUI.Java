@@ -14,17 +14,12 @@ import com.cz2002.ss10.operations.RestaurantMenu;
 public class PromotionMenuUI {
 
     /**
-     * Scanner init
-     */
-    Scanner sc = new Scanner(System.in);
-
-    /**
      * Main menu for staff to use 
      * @return Exit Code. Return 1 to exit the program and -1 to exit to main menu
      */
 
     public static int promotionMenuHandler() {
-
+        Scanner sc = new Scanner(System.in);
         int choice = 0;
         do {
             System.out.println("Which Action would you like to perform?");
@@ -37,17 +32,17 @@ public class PromotionMenuUI {
             choice = sc.nextInt();
             switch (choice) {
                 case 1: 
-                    this.printPromotionUI();
+                PromotionMenuUI.printPromotionUI();
                     break;
                 case 2: 
-                    this.addNewPromotionUI();
+                PromotionMenuUI.addNewPromotionUI();
                     break;
     
                 case 3: 
-                    this.editPromotionUI();
+                PromotionMenuUI.editPromotionUI();
                     break;
                 case 4: 
-                    this.deletePromotionUI();
+                PromotionMenuUI.deletePromotionUI();
                     break;
                 case 5:
                     return -1;
@@ -65,7 +60,7 @@ public class PromotionMenuUI {
      * Calls the print promotion items method 
      * 
      */
-    private void printPromotionUI() {
+    private static void printPromotionUI() {
         RestaurantMenu.printpromotionItems();
     }
 
@@ -82,7 +77,8 @@ public class PromotionMenuUI {
      // If ID valid assign to variable
      // Else prompt again 
 
-     private void addNewPromotionUI(){
+     private static void addNewPromotionUI(){
+        Scanner sc = new Scanner(System.in);
         String newName;
         double newPrice;
         int newAppetiser = 1;
@@ -167,8 +163,8 @@ public class PromotionMenuUI {
      * 
      */
 
-    private void editPromotionUI(){
-
+    private static void editPromotionUI(){
+        Scanner sc = new Scanner(System.in);
         String editPromoName;
         double editPromoPrice;
         int editPromoAppetiser = 1;
@@ -181,7 +177,6 @@ public class PromotionMenuUI {
         boolean drinkFound = false;
 
 
-        //have to create 3 temporary arrays here to filter out.
         ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.APPETISERS);
         ArrayList<MenuItem> filteredMainMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.MAIN);   
         ArrayList<MenuItem> filteredDessertMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DESSERT);
@@ -256,7 +251,9 @@ public class PromotionMenuUI {
      * Collect user inputs for deleting promotion
      * 
      */
-    private void deletePromotionUI(){
+    
+    private static void deletePromotionUI(){
+        Scanner sc = new Scanner(System.in);
         int targetID = 1;
         boolean promoFound = false;
         RestaurantMenu.printpromotionItems();
