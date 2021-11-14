@@ -72,7 +72,7 @@ public class OrderUI{
         System.out.println("         Staff name? ");
         tempStaff.setName(sc.next());
         System.out.println("        Staff gender? ");
-        tempStaff.setGender(sc.next());
+        tempStaff.setGender(sc.next().charAt(0));
         System.out.println("      Staff employeeID? ");
         tempStaff.setStaffID(sc.nextInt());
         System.out.println("       Staff job title? ");
