@@ -3,6 +3,7 @@ package com.cz2002.ss10;
 import com.cz2002.ss10.objects.food.*;
 import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
+import com.cz2002.ss10.operations.RestaurantService;
 import com.cz2002.ss10.ui.OrderUI;
 
 import java.util.ArrayList;
@@ -147,8 +148,15 @@ public class RestaurantApp {
 					getAvailableTables();
 					break;
 				case 2: //Settle Payments
-					//TODO-implement settle payments
+					int askTableNo;
+					int askOrderId;
+					System.out.println("Enter the orderId for settling payment");
+					askOrderId = sc.nextInt();
+					System.out.println("Enter the table number for settling payment");
+					askTableNo = sc.nextInt();
+					RestaurantService.settlePayment(askTableNo, askOrderId);
 					break;
+					
 				case 3: //create new order 
 					OrderUI.createNewOrder();
 					break;

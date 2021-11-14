@@ -11,7 +11,7 @@ public class Order {
 
 	
 	private Staff staff;
-	private String membershipType;
+	private Boolean isMember;
 	private int tableNumber;
 	private LocalDateTime createdAt;
 	private int orderId;
@@ -29,14 +29,14 @@ public class Order {
 
 	/**
      * @param staff
-     * @param membershipType
+     * @param isMember
      * @param tableNumber
      * @param orderId
      * @param orderItems
      */
-	public Order(Staff staff, String membershipType, int tableNumber, int orderId, ArrayList<RestaurantItem> orderItems) {
+	public Order(Staff staff, Boolean isMember, int tableNumber, int orderId, ArrayList<RestaurantItem> orderItems) {
 		this.staff = staff;
-		this.membershipType = membershipType;
+		this.isMember = isMember;
 		this.tableNumber = tableNumber;
 		this.createdAt = LocalDateTime.now();
 		this.orderId = orderId;
@@ -49,9 +49,7 @@ public class Order {
 	public void markAsPaid() {
 		isPaid = true;
 		paidAt = LocalDateTime.now();
-		//How do I make tables(tableNumber).setOccupuncy(false);
-		RestaurantApp.tables.get(tableNumber-1).setOccupancy(false);
-		System.out.println("Order paid and table is now available");
+		
 	}
 	public Staff getStaff() {
 		return staff;
@@ -64,8 +62,8 @@ public class Order {
 		return orderId;
 	}
 
-	public String getMembershipType() {
-		return membershipType;
+	public Boolean getMembershipType() {
+		return isMember;
 	}
 
 	public double getSubtotal() {
@@ -95,10 +93,11 @@ public class Order {
 	public double calculateSubtotal() {
 		//
 		double subtotal = 0;
+		double temp, curTotal, gst, finalTotal, serviceChrg, current = 0;
 		this.orderItems.forEach((n) -> {
 			subtotal += n.getPrice();
 		});
-		this.subtotal = subtotal;
+		this.subtotal = finalTotal;
 		return subtotal;
 	}
 	
@@ -142,7 +141,7 @@ public class Order {
 	 * this.orderId + ""; StringBuilder buil = new StringBuilder(); for (OrderItem n
 	 * : this.orderItems) { buil.append(n.toCompiledString()).append(","); } data[1]
 	 * = buil.toString().replaceAll(", $", ""); data[2] = this.staff + ""; data[3] =
-	 * this.membershipType + ""; data[4] = this.tableNumber + ""; data[5] =
+	 * this.isMember + ""; data[4] = this.tableNumber + ""; data[5] =
 	 * this.createdAt + ""; data[6] = this.orderItems + ""; data[7] = this.isPaid+
 	 * ""; return data; }
 	 */
