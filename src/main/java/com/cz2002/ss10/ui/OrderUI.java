@@ -78,7 +78,7 @@ public class OrderUI
         System.out.println("         Staff name? ");
         RestaurantApp.staffs.get(counter).setName(sc.next());
         System.out.println("        Staff gender? ");
-        RestaurantApp.staffs.get(counter).setGender(sc.next());
+        RestaurantApp.staffs.get(counter).setGender(sc.next().charAt(0));
         System.out.println("      Staff employeeID? ");
         RestaurantApp.staffs.get(counter).setStaffID(sc.nextInt());
         System.out.println("       Staff job title? ");

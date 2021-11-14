@@ -9,7 +9,7 @@ package com.cz2002.ss10.objects.person;
 public class Staff {
 
 	private String name;
-	private String gender;
+	private char gender;
 	private String jobTitle;
 	private int employeeID;
 	
@@ -21,7 +21,7 @@ public class Staff {
 	 * @param id
 	 * @param jobTitle
 	 */
-	public Staff(String name, String gender, int id, String jobTitle) {
+	public Staff(String name, char gender, int id, String jobTitle) {
 		this.gender = gender;
 		this.name = name;
 		this.employeeID = id;
@@ -33,7 +33,7 @@ public class Staff {
 	public String getStaffName(){
 		return this.name;
 	}
-	public String getGender(){
+	public char getGender(){
 		return this.gender;
 	}
 	public String getJobTitle(){
@@ -48,7 +48,7 @@ public class Staff {
 	/**
 	 * @param gender
 	 */
-	public void setGender(String gender){
+	public void setGender(char gender){
 		this.gender = gender;
 	}
 	/**
