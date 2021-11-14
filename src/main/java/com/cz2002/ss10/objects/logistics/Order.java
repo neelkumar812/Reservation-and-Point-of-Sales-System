@@ -15,7 +15,7 @@ public class Order {
 	private int tableNumber;
 	private LocalDateTime createdAt;
 	private int orderId;
-	private ArrayList<RestaurantItem> orderItems;
+	private ArrayList<orderItem> orderItems;
 	private Boolean isPaid;
 	private LocalDateTime paidAt;
 	private double subtotal;
@@ -56,8 +56,8 @@ public class Order {
 	public Staff getStaff() {
 		return staff;
 	}
-	public ArrayList<RestaurantItem> getOrderItems() {
-		return this.orderItems;
+	public ArrayList<orderItem> getOrderItems() {
+		return orderItems;
 	}
 
 	public int getOrderId() {
@@ -80,9 +80,6 @@ public class Order {
 		return createdAt;
 	}
 
-	public int orderId() {
-		return orderId;
-	}
 
 	public Boolean getIsPaid() {
 		return isPaid;

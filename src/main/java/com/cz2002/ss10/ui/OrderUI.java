@@ -19,12 +19,50 @@ import com.cz2002.ss10.RestaurantApp;
 
 public class OrderUI{
 
-    //constructor
-    public OrderUI(){}
-    
-    public static void createNewOrder(){
+    /**
+     * Scanner Init
+     */
+    Scanner sc = new Scanner(System.in);
 
-        Scanner sc = new Scanner(System.in);
+    /**
+    * Main Menu Screen For staff to contol orderUI functionality 
+    */
+        
+    public int menuScreen() {
+
+        int choice;
+        do {
+            System.out.println("Which Action would you like to perform?");
+            System.out.println("1. Create new order");
+            System.out.println("2. View orders");
+            System.out.println("3. Edit order");
+            System.out.println("4. Back to main menu");
+            System.out.println("0. Exit App");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    createNewOrderUI();
+                    break;
+                case 2:
+                    viewOrder();
+                    break;
+                case 3:
+                    editOrder();
+                    break;
+                case 4:
+                    return -1;
+                case 0:
+                    return 1;
+                default:
+                System.out.println("Please pick a valid option");
+            }
+            return 0;
+        } while (choice < 0 || choice > 5);
+    }
+
+ 
+    public void createNewOrderUI(){
         int flag = 0;
         String isMember;
         int tempTableNumber;
@@ -84,11 +122,26 @@ public class OrderUI{
          * @snesboola can help out with this part, basically this section asks the staff to input everything the user ordered. 
          * I think if you can also reference to another class which takes user input forOrders?
          */
-        RestaurantService.createNewOrder(tempStaff, isMember, tempTableNumber, tempOrderId, tempOrderItems);
-        } 
 
-    }
-}
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        RestaurantService.createNewOrder(tempStaff, isMember, tempTableNumber, tempOrderId, tempOrderItems);
+
+        
+    } 
 }
 
 

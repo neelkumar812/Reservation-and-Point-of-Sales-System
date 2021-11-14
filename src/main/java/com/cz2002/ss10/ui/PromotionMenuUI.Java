@@ -23,7 +23,7 @@ public class PromotionMenuUI {
      * @return Exit Code. Return 1 to exit the program and -1 to exit to main menu
      */
 
-    protected int menuScreen() {
+    public static int promotionMenuHandler() {
 
         int choice = 0;
         do {
@@ -115,7 +115,7 @@ public class PromotionMenuUI {
         while (!appetiserFound) {
             System.out.println("Enter new promotion's appetiser ID: ");
             newAppetiser = sc.nextInt();
-            mainFound = MenuItem.menuTypeChecker(filteredAppetisersMenu, newAppetiser);
+            mainFound = MenuItem.typeCheck(filteredAppetisersMenu, newAppetiser);
             if (!appetiserFound) System.out.println("Enter a valid main ID.");
         }
 
@@ -128,7 +128,7 @@ public class PromotionMenuUI {
         while (!mainFound) {
             System.out.println("Enter new promotion's main ID: ");
             newMain = sc.nextInt();
-            mainFound = MenuItem.menuTypeChecker(filteredMainMenu, newMain);
+            mainFound = MenuItem.typeCheck(filteredMainMenu, newMain);
             if (!mainFound) System.out.println("Enter a valid main ID.");
         }
 
@@ -141,11 +141,10 @@ public class PromotionMenuUI {
         while (!dessertFound) {
             System.out.println("Enter new promotion's dessert ID: ");
             newDessert = sc.nextInt();
-            dessertFound = MenuItem.menuTypeChecker(filteredDessertMenu, newDessert);
+            dessertFound = MenuItem.typeCheck(filteredDessertMenu, newDessert);
             if (!dessertFound) System.out.println("Enter a valid dessert ID.");
         }
 
-        //Code to print filtered menu of drinks
         System.out.println("All Drink Items");
         System.out.printf("%-10s %-50s %-10s %-10s %-10s\n", "ID", "Name", "Type", "Price", "Description");
         for (MenuItem item : filteredDrinkMenu) {
@@ -155,7 +154,7 @@ public class PromotionMenuUI {
         while (!drinkFound) {
             System.out.println("Enter new promotion's drink ID: ");
             newDrink = sc.nextInt();
-            drinkFound = MenuItem.menuTypeChecker(filteredDrinkMenu, newDrink);
+            drinkFound = MenuItem.typeCheck(filteredDrinkMenu, newDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
         RestaurantMenu.createPromoItem(newName, newPrice, newAppetiser, newMain, newDessert, newDrink);
@@ -172,10 +171,10 @@ public class PromotionMenuUI {
 
         String editPromoName;
         double editPromoPrice;
-        int editPromoAppetiser = 0;
-        int editPromoMain = 1;
-        int editPromoDessert = 2;
+        int editPromoAppetiser = 1;
+        int editPromoMain = 2;
         int editPromoDrink = 3;
+        int editPromoDessert = 4;
         boolean appetiserFound = false; 
         boolean mainFound = false;
         boolean dessertFound = false;
@@ -205,7 +204,7 @@ public class PromotionMenuUI {
         while (!appetiserFound) {
             System.out.println("Enter updated Appetiser ID for the promotion: ");
             editPromoMain = sc.nextInt();
-            mainFound = MenuItem.menuTypeChecker(filteredAppetisersMenu, editPromoMain);
+            mainFound = MenuItem.typeCheck(filteredAppetisersMenu, editPromoMain);
             if (!appetiserFound) System.out.println("Enter a valid main ID.");
         }
 
@@ -220,7 +219,7 @@ public class PromotionMenuUI {
         while (!mainFound) {
             System.out.println("Enter Updated main ID for the Promotion: ");
             editPromoMain = sc.nextInt();
-            mainFound = MenuItem.menuTypeChecker(filteredMainMenu, editPromoMain);
+            mainFound = MenuItem.typeCheck(filteredMainMenu, editPromoMain);
             if (!mainFound) System.out.println("Enter a valid main ID.");
         }
 
@@ -233,7 +232,7 @@ public class PromotionMenuUI {
         while (!dessertFound) {
             System.out.println("Enter Updated dessert ID for the Promotion: ");
             editPromoDessert = sc.nextInt();
-            dessertFound = MenuItem.menuTypeChecker(filteredDessertMenu, editPromoDessert);
+            dessertFound = MenuItem.typeCheck(filteredDessertMenu, editPromoDessert);
             if (!dessertFound) System.out.println("Enter a valid dessert ID.");
         }
 
@@ -247,7 +246,7 @@ public class PromotionMenuUI {
         while (!drinkFound) {
             System.out.println("Enter Updated drink ID for the promotion: ");
             editPromoDrink = sc.nextInt();
-            drinkFound = MenuItem.menuTypeChecker(filteredDrinkMenu, editPromoDrink);
+            drinkFound = MenuItem.typeCheck(filteredDrinkMenu, editPromoDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
         RestaurantMenu.editPromoItem(editPromoName, editPromoPrice, editPromoAppetiser, editPromoMain, editPromoDessert, editPromoDrink);

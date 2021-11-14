@@ -129,7 +129,7 @@ public class MenuItem extends RestaurantItem {
      * @param menuArrayList    Make an arraylist with only items of desired type
      * @param desiredItemType type of the menu item added to the promotion
      */
-    public static boolean menuTypeChecker(ArrayList<MenuItem> menuArrayList, int desiredItemType) {
+    public static boolean typeCheck(ArrayList<MenuItem> menuArrayList, int desiredItemType) {
         for (MenuItem itemObj : menuArrayList) { 
             if (desiredItemType == itemObj.getId()) { 
                 return true;
