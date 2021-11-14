@@ -157,7 +157,7 @@ public class OrderUI
                     promoItemExists = true;
                     System.out.println("Enter quantity of item: \n");
                     int promoQuantity = sc.nextInt();
-                    RestaurantService.addItemToOrder(orderItemID, promoQuantity);
+                    RestaurantService.addPromoItemToOrder(orderItemID, promoQuantity);
                 }
             }
             break;

@@ -59,6 +59,31 @@ public class RestaurantService {
 
     }
 
+        /**
+     * @param itemID
+     * @param quantity
+     * 
+     * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
+     */
+
+    
+    public static void addPromoItemToOrder(int itemID, int quantity){
+
+        for(int i = 0; i < quantity; i++){
+
+           for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) {
+            PromoItem promoItemObj = RestaurantApp.promotionItems.get(i); 
+               if (itemID == promoItemObj.getId()) {
+                   RestaurantService.tempOrderItems.add(promoItemObj);
+                       System.out.println("Promotion item has been added to Order");
+                       return;
+               }
+           }
+
+       }
+
+   }
+
     //SettlePayments essentially does all the calculation stuff, and calls PrintOrderInvoice in the end
     public static void settlePayment(int tableNumber, int orderId) 
     {
