@@ -6,8 +6,6 @@ import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
 import java.util.*;
 
-import javax.swing.plaf.synth.SynthDesktopIconUI;
-
 import java.time.*;
 
 
@@ -31,7 +29,7 @@ public class RestaurantService {
      {
         Order temp = new Order(staff, membershipType, tableNumber, orderID, orderItems);
         RestaurantApp.orders.add(temp);
-        throw new UnsupportedOperationException();
+        
     }
 
     //SettlePayments essentially does all the calculation stuff, and calls PrintOrderInvoice in the end
@@ -70,7 +68,7 @@ public class RestaurantService {
             
         }
         printOrderInvoice(current, serviceChrg, gst, finalTotal);
-        throw new UnsupportedOperationException();
+        
     }
 
     //Just prints the orderInvoice in a receipt format
@@ -88,19 +86,13 @@ public class RestaurantService {
         System.out.println("GST           :                                    $" + GST);
         System.out.println("-----------------------------------------------------------");
         System.out.println("Final Total:                                       $" + finalTotal);
-        System.out.println("                Payment made via credit/debit card.                 ");
+        System.out.println("                Payment made via credit/debit card :) .                 ");
         
-		throw new UnsupportedOperationException();
+		
     }
 
     /**
-     * 
-     * @param staff
-     * @param membershipType
-     * @param tableNumber
-     * @param orderItems
-     */
-    
+     
     /**
      * 
      * @param customerName
@@ -108,7 +100,7 @@ public class RestaurantService {
      */
     public void cancelReservation(String customerName, int reservationId) {
         // TODO - implement RestaurantService.cancelReservation
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -122,7 +114,7 @@ public class RestaurantService {
     public void createNewReservation(String customerName, int customerContact, int dinerSize, LocalDate reservationDate,
             LocalTime reservationTime) {
         // TODO - implement RestaurantService.createNewReservation
-        throw new UnsupportedOperationException();
+        
     }
 
     public class ReservationNotFoundException extends Exception {
