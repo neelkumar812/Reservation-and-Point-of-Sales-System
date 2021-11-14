@@ -5,7 +5,6 @@ import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
 import java.util.*;
-
 import java.time.*;
 
 
@@ -76,7 +75,7 @@ public class RestaurantService {
 		
         System.out.println("********************************************************************");
         System.out.println("                Thank you for dining with us today!");
-        System.out.println("Date:          " + LocalDate.now() + "Time:             " + LocalTime.now());
+        System.out.println("Date:" + LocalDate.now() + "                 Time:" + LocalTime.now());
         System.out.println("--------------------------------------------------------------------");
         //Print all the items ordered along with their prices 
         System.out.println("********************************************************************");
@@ -93,15 +92,7 @@ public class RestaurantService {
 
     /**
      
-    /**
-     * 
-     * @param customerName
-     * @param reservationId
-     */
-    public void cancelReservation(String customerName, int reservationId) {
-        // TODO - implement RestaurantService.cancelReservation
-        
-    }
+    
 
     /**
      * 
@@ -111,19 +102,19 @@ public class RestaurantService {
      * @param reservationDate
      * @param reservationTime
      */
-    public void createNewReservation(String customerName, int customerContact, int dinerSize, LocalDate reservationDate,
-            LocalTime reservationTime) {
+    public static void createNewReservation(String customerName, int customerContact, int dinerSize, int tableNumber, int reservationID) {
         // TODO - implement RestaurantService.createNewReservation
         
     }
 
-    public class ReservationNotFoundException extends Exception {
-        public ReservationNotFoundException() {
-        }
-
-        public ReservationNotFoundException(String message) {
-            super(message);
-        }
+    /**
+     * 
+     * @param customerName
+     * @param reservationId
+     */
+    public void cancelReservation(String customerName, int reservationId) {
+        // TODO - implement RestaurantService
+        
     }
 
     /**
@@ -138,6 +129,16 @@ public class RestaurantService {
             // handle error
         }
     }
+    public class ReservationNotFoundException extends Exception {
+        public ReservationNotFoundException() {
+        }
+
+        public ReservationNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    
 
 
 
