@@ -46,9 +46,9 @@ public class ReservationUI{
      * Method to create new reservation booking
      */
     public void createNewReservation(){
-        Reservation newResv;
+        
         String newCustName,strUserDate,strUserTime;
-        int dinerSize =0,tableNo = 0, telNo = 0,temp =-1,time =-1;
+        int dinerSize =0,tableNo = 0, telNo = 0,temp =-1,time =-1,resvID=0;
         LocalDate resvDate = LocalDate.now();
         LocalDate limitDate = LocalDate.plusMonths(1);
         LocalTime resvTime = LocalTime.now();
@@ -77,48 +77,43 @@ public class ReservationUI{
             LocalDate userDate= LocalDate.parse(strUserDate,formatDate);
         }
 
-        //get session and time
-        while(temp=-1){
-            System.out.println( "The restaurant operating hours are 1100-1500 for the AM Session and 1700-2200 for the PM Session"+"Please enter session that you would like to make your booking:"+"/nAM = 1" +  "/nPM = 2");
-            temp = sc.nextInt();
-            if (temp==1)
-                Reservation.ReservationSession sess = Reservation.ReservationSession.AM;
-                System.out.println("Please enter the hour that you would like to make your booking(AM Session: 1100-1500) < E.g if 1100,enter 11 > ");
-                time =sc.nextInt();
-                while(time<11 || time > 15){
-                    System.out.println("Please input the first 2 digits of the time you want to book < E.g if 1100,enter 11 > :");
-                    time =sc.nextInt();
-                    }
-                resvTime = LocalTime.of(time,00)
+        //get time
+        
+        System.out.println( "The restaurant operating hours are from "+ RestaurantApp.openingTime + " to " + RestaurantApp.closingTime + "Please enter the HOUR that you would like to make your booking <E.g if 1100,enter 11>");
+        time =sc.nextInt();
 
-            else if(temp =2)
-                Reservation.ReservationSession sess = Reservation.ReservationSession.PM;
-                System.out.println("Please enter the hour that you would like to make your booking(PM Session: 1700-2200) < E.g if 1100,enter 11 > ");
-                time =sc.nextInt();
-                while(time<11 || time > 15){
-                        System.out.println("Please input the first 2 digits of the time you want to book < E.g if 1100,enter 11 > :");
-                        time =sc.nextInt();
-                    }
-                resvTime = LocalTime.of(time,00)
-
-            else
-                 System.out.println("Please enter a valid selection(1/2)")
+        while(time< || time > 15){
+            System.out.println("Please input the first 2 digits of the time you want to book that is within the opereating hours < E.g if 1100,enter 11 > :");
+            time =sc.nextInt();
         }
-
-        //get dinerSize
-        System.out.println("Please enter the number of pax that will be dining:"+"***Please note that we only have table seatings available for pax up to 4")
-        dinerSize=sc.nextInt();
-        while(dinerSize <=0||dinerSize>4){
-            System.out.println("Error: Please input a number from 1 to 4 for the number of pax that will be dining: ")
-            dinerSize=sc.nextInt();
-
-        }
+            
+        resvTime = LocalTime.of(time,00)
         
 
-        newResv = new Reservation(LocalDate resDate, LocalTime resTime,char session, int contactNumber, String name, int dinerSize);
+        //get dinerSize
+        System.out.println("Please enter the number of pax that will be dining: "+"/n***Please note that we only have table seatings available for pax up to 5")
+        dinerSize=sc.nextInt();
+        while(dinerSize <=0||dinerSize>5){
+            System.out.println("Error: Please input a number from 1 to 5 for the number of pax that will be dining: ")
+            dinerSize=sc.nextInt();
+        }
 
-        System.out.println("Booking Completed, please note that the telephone number you gave will be the reference for your booking")
+        //get reservationID
+        System.out.println("Please enter the reservationID: ")
+        resvIDe=sc.nextInt();
+
+        RestaurantService.createNewReservation(resvID,userDate,  resvTime,  telNo,  custName, dinerSize);
+
+
     }
+
+
+
+        
+        
+
+        
+    
 
 
     /**
@@ -130,17 +125,9 @@ public class ReservationUI{
         System.out.println("Checking of reservation booking............................................");
         System.out.print("Enter your telephone number linked to reservation(s): ");
         int telNo = sc.nextInt();
-        boolean existResv = false;
-
-        for(int i = 0;i<=RestaurantApp.reservations.size();i++){
-            if(RestaurantApp.reservations.get(i).getCustomerContact()== telNo){
-                existResv= true;
-                System.out.println("Reservation for "+ RestaurantApp.reservations.get(i).getCustomerName + " for the session of " + RestaurantApp.reservations.get(i).getResvSession() + " at " + RestaurantApp.reservations.get(i).getResvTime);
-            }
-        }
-
-        if(existResv==false){
-            System.out.println("No reservation made under the telephone number of "+ telNo);
+        
+        if(RestaurantService.checkReservation(telNo)==false){
+          System.out.println("Sorry, there is no reservation with the booking with the telephone Number "+ telNo);  
         }
     }
 
@@ -152,16 +139,11 @@ public class ReservationUI{
         int telNo = sc.nextInt();
         boolean existResv = false;
 
-        for(int i = 0;i<=RestaurantApp.reservations.size();i++){
-            if(RestaurantApp.reservations.get(i).getCustomerContact()== telNo){
-                existResv= true;
-                RestaurantApp.reservations.get(i).cancelReservation();
-            }
+        if(RestaurantService.checkReservation(telNo)==true){
+            RestaurantService.removeReservation(telNo);
         }
-
-        if(existResv==false){
-            System.out.println("No reservation made under the telephone number of "+ telNo +"....No cancellation of Reservation");
-            
+        else{
+            System.out.println("Sorry, there is no reservation with the booking with the telephone Number "+ telNo);
         }
     }
 
