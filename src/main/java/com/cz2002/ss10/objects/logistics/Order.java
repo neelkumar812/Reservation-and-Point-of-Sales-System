@@ -15,17 +15,11 @@ public class Order {
 	private int tableNumber;
 	private LocalDateTime createdAt;
 	private int orderId;
-	private ArrayList<orderItem> orderItems;
+	private ArrayList<RestaurantItem> orderItems;
 	private Boolean isPaid;
 	private LocalDateTime paidAt;
 	private double subtotal;
 	
-
-
-    /**
-     * Enums for type of order item
-     */
-    public enum OrderType {TYPE_MENU, TYPE_PROMO}
 
 	/**
      * @param staff
@@ -43,6 +37,7 @@ public class Order {
 		this.orderItems = orderItems;
 		this.isPaid = false; // yet to be paid
 		paidAt = null; // yet to be paid
+		this.subtotal=0.00;
 
 	}
 
@@ -54,7 +49,7 @@ public class Order {
 	public Staff getStaff() {
 		return staff;
 	}
-	public ArrayList<orderItem> getOrderItems() {
+	public ArrayList<RestaurantItem> getOrderItems() {
 		return orderItems;
 	}
 
@@ -88,14 +83,12 @@ public class Order {
 	}
 
 	public double calculateSubtotal() {
-		//
-		double subtotal = 0;
-		double temp, curTotal, gst, finalTotal, serviceChrg, current = 0;
-		this.orderItems.forEach((n) -> {
-			subtotal += n.getPrice();
-		});
-		this.subtotal = finalTotal;
-		return subtotal;
+		//TODO Add GST and Discount
+		Iterator<RestaurantItem> iterator = this.orderItems.iterator();
+		while (iterator.hasNext()){	
+				this.subtotal += iterator.next().getPrice();
+		}
+		return this.subtotal;
 	}
 	
 	/**
@@ -103,44 +96,26 @@ public class Order {
 	 * @param item
 	 */
 	public void addItem(MenuItem item) {
-		throw new UnsupportedOperationException();
 		orderItems.add(item);
-		System.out.println("Item has been added");
 	}
 
 	/**
 	 * 
 	 * @param item
 	 */
-	public void removeItem(MenuItem item) {
-		// TODO - implement Order.removeItem
-		this.orderItems.forEach((n) -> {
-			if (orderItems.get(n) == item)
-				orderItems.remove(n);
-			break;
-		});
+	public void removeItem(String itemName) {
+		int index = 0,counter = 0; // avoid deleting duplicate order items
+		Iterator<RestaurantItem> iterator = this.orderItems.iterator();
+		while (iterator.hasNext() && counter == 0){
+			if(iterator.next().getName() == itemName){
+				this.orderItems.remove(index);
+			}
+			index++;
+		}
 	}
 
 	public void updatePaymentStatus(Boolean isPaid) {
 		this.isPaid = isPaid;
 	}
-
-	//What is this function achieving??
-	public void getOrder() {
-		throw new UnsupportedOperationException();
-		this.orderItems.forEach((n) -> {
-			subtotal += n.getPrice();
-		});
-
-	}
-	/*
-	 * public String[] forCsv() { String[] data = new String[8]; data[0] =
-	 * this.orderId + ""; StringBuilder buil = new StringBuilder(); for (OrderItem n
-	 * : this.orderItems) { buil.append(n.toCompiledString()).append(","); } data[1]
-	 * = buil.toString().replaceAll(", $", ""); data[2] = this.staff + ""; data[3] =
-	 * this.isMember + ""; data[4] = this.tableNumber + ""; data[5] =
-	 * this.createdAt + ""; data[6] = this.orderItems + ""; data[7] = this.isPaid+
-	 * ""; return data; }
-	 */
 
 }
