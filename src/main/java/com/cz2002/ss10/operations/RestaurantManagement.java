@@ -13,8 +13,6 @@ import java.lang.Integer;
 import java.time.LocalDate;
 import java.util.stream.*;
 import java.util.*;
-import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 
 public class RestaurantManagement {
@@ -124,10 +122,9 @@ public class RestaurantManagement {
 
 
 		System.out.println("Period:" + reportPeriod.toString());
-		System.out.println("Date: " + LocalDate.valueOf(date));
+		System.out.println("Date: " + date.toString());
 		System.out.println("Item           ||       Item Type     ||     Quantity Sold     ||    Price    ");
 		for (Map.Entry<String, ArrayList<String>> entry : itemStringMap.entrySet()) {
-			String key = entry.getKey();
 			ArrayList<String> itemInfo= entry.getValue();
 			System.out.printf("%s %s %s %s %s\n",itemInfo.get(0), itemInfo.get(1),itemInfo.get(2),itemInfo.get(3),itemInfo.get(4));
 		}
