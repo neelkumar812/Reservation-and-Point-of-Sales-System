@@ -82,7 +82,6 @@ public class Order {
 	}
 
 	public double calculateSubtotal() {
-		//TODO Add GST and Discount
 		Iterator<RestaurantItem> iterator = this.orderItems.iterator();
 		while (iterator.hasNext()){	
 				this.subtotal += iterator.next().getPrice();

@@ -36,7 +36,7 @@ public class ReservationCsv implements IExtractCsv {
 
 	private List<String> getReservationInfoAsList(String[] reservationItem) {
 		List<String> reservationInfo = new ArrayList<String>();
-		reservationInfo.addAll(Arrays.asList(reservationItem[1], reservationItem[2], reservationItem[3], reservationItem[4], reservationItem[5]));
+		reservationInfo.addAll(Arrays.asList(reservationItem[1], reservationItem[2], reservationItem[3], reservationItem[4], reservationItem[5], reservationItem[6]));
 		return reservationInfo;
 	}
 
@@ -50,7 +50,7 @@ public class ReservationCsv implements IExtractCsv {
 			List<String> reservationInfo = entry.getValue();
 
 			// add Reservation object to Reservation ArrayList in RestaurantApp
-			RestaurantApp.reservations.add(new Reservation((int)Integer.parseInt(entry.getKey()), LocalDate.parse(reservationInfo.get(0)), LocalTime.parse(reservationInfo.get(1)), (int)Integer.valueOf(reservationInfo.get(2)), reservationInfo.get(3), (int)Integer.valueOf(reservationInfo.get(4))));
+			RestaurantApp.reservations.add(new Reservation((int)Integer.parseInt(entry.getKey()), LocalDate.parse(reservationInfo.get(0)), LocalTime.parse(reservationInfo.get(1)), (int)Integer.valueOf(reservationInfo.get(2)), reservationInfo.get(3), (int)Integer.valueOf(reservationInfo.get(4)), (int)Integer.valueOf(reservationInfo.get(5))));
 		}
 	}
 
