@@ -265,7 +265,7 @@ public class PromotionMenuUI {
 
     /**
      * Collect user inputs for deleting promotion
-     * 
+     * okay
      */
     
     private static void deletePromotionUI(){

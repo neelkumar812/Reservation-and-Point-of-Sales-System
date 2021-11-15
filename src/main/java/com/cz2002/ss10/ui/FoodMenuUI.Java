@@ -12,7 +12,7 @@ import com.cz2002.ss10.operations.RestaurantMenu;
  */
 
 public class FoodMenuUI{
-
+//comment
     /**
      * Scanner Init
      */
