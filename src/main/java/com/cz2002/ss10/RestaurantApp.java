@@ -77,6 +77,12 @@ public class RestaurantApp {
 
 	public static void initializeAllObjects(){
 		RestaurantApp.menuItems = new ArrayList<MenuItem>();
+		RestaurantApp.promotionItems= new ArrayList<PromoItem>();
+		RestaurantApp.reservations = new ArrayList<Reservation>();
+		RestaurantApp.staffs = new ArrayList<Staff>();
+		RestaurantApp.openingTime = LocalTime.parse("08:00:00");
+		RestaurantApp.closingTime = LocalTime.parse("22:30:00");
+		RestaurantApp.orders = new ArrayList<Order>();
 		RestaurantApp.menuItems.add(new MenuItem(1, "Pasta", 1, "Bolognese Sauce", 12.00));
 		RestaurantApp.menuItems.add(new MenuItem(2, "Fish and Chips", 1, "Cod and Fries with Tartar Sauce", 18.00));
 		RestaurantApp.menuItems.add(new MenuItem(3, "Baked Rice with Cheese",1, "Baked Rice with Cheese", 5.00));
