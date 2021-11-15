@@ -22,13 +22,15 @@ public class Reservation {
 	 * @param name
 	 * @param dinerSize
 	 */
-	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
-		this.reservationId=resId;
-		this.reservationDate=resDate;
-		this.reservationTime=resTime;
-		this.customerContact=contactNumber;
-		this.customerName=name;
+	public Reservation(String customerName, int customerContact, int dinerSize, int tableNumber, int reservationId) {
+		this.customerName = customerName;
+		this.customerContact = customerContact;
 		this.dinerSize = dinerSize;
+		this.tableNumber = tableNumber;
+		this.reservationId = reservationId;
+		this.reservationDate = LocalDate.now();
+		this.reservationTime = LocalTime.now();
+
 	}
 
 	public void setReservationId(int resId){
@@ -79,8 +81,8 @@ public class Reservation {
         return this.tableNumber;
     }
 
-	public void setDinerSize(int size){
-        this.dinerSize = size;
+	public void setDinerSize(int tableSize){
+        this.dinerSize = tableSize;
     }
 
 	public int getDinerSize(){

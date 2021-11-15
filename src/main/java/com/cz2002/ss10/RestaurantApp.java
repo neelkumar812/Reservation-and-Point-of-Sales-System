@@ -8,6 +8,7 @@ import com.cz2002.ss10.operations.RestaurantManagement;
 import com.cz2002.ss10.ui.OrderUI;
 import com.cz2002.ss10.ui.FoodMenuUI;
 import com.cz2002.ss10.ui.PromotionMenuUI;
+import com.cz2002.ss10.ui.ReservationUI;
 import com.cz2002.ss10.ui.RevenueReportUI;
 import com.cz2002.ss10.ui.StaffUI;
 import com.cz2002.ss10.utils.RevenueReportCsv.ReportDuration;
@@ -284,10 +285,18 @@ public class RestaurantApp {
 					ReservationUI.createNewReservation();
 					break;
 				case 6: //Cancel Reservation
-					//TODO-
+					
+					System.out.println("Please enter Customer Name: ");
+					String tempCustName = sc.next();
+					System.out.println("Please enter Reservation ID for cancellation: ");
+					int tempResvID = sc.nextInt();
+					RestaurantService.cancelReservation(tempCustName, tempResvID);
 					break;
 				case 7: //Check Reservation
-					//TODO-
+					
+					System.out.println("Please enter Reservation ID for checking: ");
+					int checkResvID = sc.nextInt();
+					RestaurantService.checkReservation(checkResvID);
 					break;
 				case 8: // Return to main menu 
 					break;
@@ -300,7 +309,6 @@ public class RestaurantApp {
 
 		sc.close();
 	}
-
 	public static ArrayList<Table> getAvailableTables() {
 		ArrayList<Table> temp = new ArrayList<Table>();
 		for (int i = 0; i < TABLESEATCAP; i++) {
