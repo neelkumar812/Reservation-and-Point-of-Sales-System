@@ -15,6 +15,7 @@ import com.cz2002.ss10.utils.RevenueReportCsv.ReportDuration;
 
 import java.util.ArrayList;
 import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -75,12 +76,31 @@ public class RestaurantApp {
 
 	public static void initializeAllObjects(){
 		RestaurantApp.menuItems = new ArrayList<MenuItem>();
+		RestaurantApp.menuItems.add(new MenuItem(1, "Pasta", 1, "Bolognese Sauce", 12.00));
+		RestaurantApp.menuItems.add(new MenuItem(2, "Fish and Chips", 1, "Cod and Fries with Tartar Sauce", 18.00));
+		RestaurantApp.menuItems.add(new MenuItem(3, "Baked Rice with Cheese",1, "Baked Rice with Cheese", 5.00));
+		RestaurantApp.menuItems.add(new MenuItem(4, "Lemonade",2, "Lemonade", 3.00));
+		RestaurantApp.menuItems.add(new MenuItem(5, "Brownies",3, "Brownies", 3.00));
+		RestaurantApp.menuItems.add(new MenuItem(6, "Tacos",4, "Tacos and Salsa", 13.00));
 		RestaurantApp.promotionItems= new ArrayList<PromoItem>();
+		RestaurantApp.promotionItems.add(new PromoItem(1, "Italian Lunch Set", 35.00, 1, 6, 5, 4));
 		RestaurantApp.reservations = new ArrayList<Reservation>();
+		RestaurantApp.reservations.add(new Reservation(1, LocalDate.parse("2021-12-26"), LocalTime.parse("08:45:00"), 91243245, "Jan", 1, 2));
+		RestaurantApp.reservations.add(new Reservation(2, LocalDate.parse("2021-12-30"), LocalTime.parse("08:45:00"), 91243115, "Mary", 2, 2));
+		RestaurantApp.reservations.add(new Reservation(3, LocalDate.parse("2021-12-26"), LocalTime.parse("08:45:00"), 82312324, "Joseph", 3, 2));
 		RestaurantApp.staffs = new ArrayList<Staff>();
+		RestaurantApp.staffs.add(new Staff("Randy", 'f', 1, "Waiter"));
+		RestaurantApp.staffs.add(new Staff("Alison", 'f', 2, "Waiter"));
+		RestaurantApp.staffs.add(new Staff("Joe", 'm', 3, "Waiter"));
+		RestaurantApp.staffs.add(new Staff("Raul", 'f', 4, "Cook"));
+		RestaurantApp.staffs.add(new Staff("Lisa", 'f', 5, "Manager"));
 		RestaurantApp.openingTime = LocalTime.parse("08:00:00");
 		RestaurantApp.closingTime = LocalTime.parse("22:30:00");
 		RestaurantApp.orders = new ArrayList<Order>();
+		ArrayList<RestaurantItem> tempOrder = new ArrayList<RestaurantItem>();
+		tempOrder.add(RestaurantApp.menuItems.get(0));
+		tempOrder.add(RestaurantApp.menuItems.get(1));
+		RestaurantApp.orders.add(new Order(RestaurantApp.staffs.get(0), false, 1, 1, tempOrder));
 	}
 
 	// Main Menu UI NOT COMPLETE
@@ -281,17 +301,26 @@ public class RestaurantApp {
 			case 2: // Settle Payments
 				int askTableNo;
 				int askOrderId;
-				System.out.println("Enter the orderId for settling payment");
+				if (RestaurantApp.orders == null || RestaurantApp.orders.isEmpty()){
+					System.out.println("No orders to settle!");
+				}
+				else {
+					System.out.println("Enter the orderId for settling payment");
 				askOrderId = sc.nextInt();
 				System.out.println("Enter the table number for settling payment");
 				askTableNo = sc.nextInt();
 				RestaurantService.settlePayment(askTableNo, askOrderId);
+				}
 				break;
 
 			case 3: // create new order
 				OrderUI.createNewOrder();
 				break;
 			case 4: // Check orders
+			    if (RestaurantApp.orders == null || RestaurantApp.orders.isEmpty()){
+					System.out.println("No orders!");
+				}
+				else {
 				System.out.println("Here are all the current orders: ");
 				for (int i = 0; i < orders.size(); i++) {
 					System.out.println("The order ID: " + orders.get(i).getOrderId());
@@ -299,6 +328,7 @@ public class RestaurantApp {
 					System.out.println("The Table number for this order : " + orders.get(i).getTableNumber());
 					System.out.println("Created at : " + orders.get(i).getCreatedAt());
 					System.out.println("Is paid : " + orders.get(i).getIsPaid());
+				}
 				}
 				break;
 			case 5: // Create new reservation
