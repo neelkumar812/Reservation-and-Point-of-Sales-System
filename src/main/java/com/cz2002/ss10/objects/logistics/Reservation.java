@@ -9,7 +9,6 @@ public class Reservation {
 	private LocalTime reservationTime;
 	private int customerContact;
 	private int tableNumber;
-	private String customerName;
 	private int dinerSize;
 	
 	
@@ -22,15 +21,12 @@ public class Reservation {
 	 * @param name
 	 * @param dinerSize
 	 */
-	public Reservation(String customerName, int customerContact, int dinerSize, int tableNumber, int reservationId) {
-		this.customerName = customerName;
-		this.customerContact = customerContact;
+	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
+		reservationId=resId;
+		reservationDate=resDate;
+		reservationTime=resTime;
+		customerContact=contactNumber;
 		this.dinerSize = dinerSize;
-		this.tableNumber = tableNumber;
-		this.reservationId = reservationId;
-		this.reservationDate = LocalDate.now();
-		this.reservationTime = LocalTime.now();
-
 	}
 
 	public void setReservationId(int resId){
@@ -63,14 +59,6 @@ public class Reservation {
 
 	public int getCustomerContact(){
         return this.customerContact;
-    }
-
-	public void setCustomerName(String custName){
-        this.customerName= custName;
-    }
-
-	public String getCustomerName(){
-        return this.customerName;
     }
 
 	public void setTableNumber(int tableNo){
