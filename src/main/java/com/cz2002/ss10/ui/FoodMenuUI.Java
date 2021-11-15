@@ -17,7 +17,7 @@ public class FoodMenuUI{
      * Scanner Init
      */
     //Scanner sc = new Scanner(System.in);
-
+    FoodMenuUI(){};
 
         public static void printMenuUI() {
             int selection;
@@ -59,10 +59,10 @@ public class FoodMenuUI{
                             break;
 
                         case 0:
-                            return;
-                        
+
                         default: 
                         System.out.println("Please Choose a Valid Option.");
+                        sc.close();
                 } 
             } while (selection < 0 || selection > 5); 
             RestaurantMenu.printMenu(type);
@@ -94,6 +94,7 @@ public class FoodMenuUI{
         newItemPrice = sc.nextDouble();
 
         RestaurantMenu.addMenuItem(newItemType, newItemName, newItemDescription, newItemPrice);
+        sc.close();
         }
 
     public static void editMenuItemUI() {
@@ -138,6 +139,7 @@ public class FoodMenuUI{
         System.out.println("Enter Updated price: ");
         updatedItemPrice = sc.nextDouble();
 
+        sc.close();
         RestaurantMenu.editMenuItem(editItemID, updatedItemType, updatedItemName, updatedItemDescription, updatedItemPrice);
 
     }
@@ -155,6 +157,7 @@ public class FoodMenuUI{
             deleteItemID = sc.nextInt(); 
             if (MenuItem.retrieveMenuItem(deleteItemID) == null) System.out.println("Enter a valid ID.");
             else menuItemExists = true;
+            sc.close();
         }
         RestaurantMenu.deleteMenuItem(deleteItemID);
     }

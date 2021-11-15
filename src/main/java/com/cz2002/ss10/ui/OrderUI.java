@@ -39,7 +39,8 @@ public class OrderUI
         Boolean isMember;
         int tempTableNumber;
         int tempOrderId;
-        ArrayList<RestaurantItem> tempOrderItems;
+        ArrayList<RestaurantItem> tempOrderItems = new ArrayList<>();
+        
 
         System.out.println("Welcome to the order creation page!");
         
@@ -187,7 +188,7 @@ public class OrderUI
         // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
         
 
-        
+        sc.close();    
     }
 
 

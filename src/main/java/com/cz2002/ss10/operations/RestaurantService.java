@@ -80,7 +80,15 @@ public class RestaurantService {
         System.out.println("                Thank you for dining with us today!");
         System.out.println("Date:" + LocalDate.now() + "                 Time:" + LocalTime.now());
         System.out.println("--------------------------------------------------------------------");
-        //Print all the items ordered along with their prices 
+        System.out.println("Quanity | Item                                          | Price    |");
+
+        //TODO-
+
+
+
+
+        //TODO-
+
         System.out.println("********************************************************************");
         System.out.println("Subtotal:                                          $" + subtotal);
         System.out.println("-----------------------------------------------------------");
@@ -88,7 +96,7 @@ public class RestaurantService {
         System.out.println("GST           :                                    $" + GST);
         System.out.println("-----------------------------------------------------------");
         System.out.println("Final Total:                                       $" + finalTotal);
-        System.out.println("                Payment made via credit/debit card :) .                 ");
+        System.out.println("                Payment made via credit/debit card :) .             ");
         
     }
     /**

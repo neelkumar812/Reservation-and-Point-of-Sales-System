@@ -17,7 +17,8 @@ public class PromotionMenuUI {
      * Main menu for staff to use 
      * @return Exit Code. Return 1 to exit the program and -1 to exit to main menu
      */
-
+    PromotionMenuUI(){}
+    
     public static int promotionMenuHandler() {
         Scanner sc = new Scanner(System.in);
         int choice = 0;
@@ -51,9 +52,11 @@ public class PromotionMenuUI {
                 default:
                     System.out.println("Invalid choice.");
             }
+            sc.close();
             return 0;
-    
+        
         } while (choice < 0 || choice > 5);
+        
     }
 
     /**
@@ -153,6 +156,7 @@ public class PromotionMenuUI {
             drinkFound = MenuItem.typeCheck(filteredDrinkMenu, newDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
+        sc.close();
         RestaurantMenu.createPromoItem(newName, newPrice, newAppetiser, newMain, newDessert, newDrink);
 
      }
@@ -195,6 +199,7 @@ public class PromotionMenuUI {
         //retrieve menu item with editItemID check.
         if (PromoItem.retrievePromotion(editPromoID) == null){
             System.out.println("Invalid ID. Promotion not found.");
+            sc.close();
             return;
         }
 
@@ -260,6 +265,7 @@ public class PromotionMenuUI {
             drinkFound = MenuItem.typeCheck(filteredDrinkMenu, editPromoDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
+        sc.close();
         RestaurantMenu.editPromoItem(editPromoID, editPromoName, editPromoPrice, editPromoAppetiser, editPromoMain, editPromoDessert, editPromoDrink);
     }
 
@@ -280,6 +286,7 @@ public class PromotionMenuUI {
             else promoFound = true;
         }
         RestaurantMenu.deletePromoItem(targetID);
+        sc.close();
     }
        
 }
