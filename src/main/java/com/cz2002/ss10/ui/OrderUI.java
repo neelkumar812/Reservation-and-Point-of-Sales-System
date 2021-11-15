@@ -44,16 +44,6 @@ public class OrderUI
         //Ask if member
         System.out.println("Is the customer a member? Enter true for yes false for no");
         isMember = sc.nextBoolean();
-        if(isMember == true){
-            flag = 0;
-        }
-        else if (isMember == false){
-            flag = 0;
-        }
-        else{
-            flag = 1;
-            System.out.println("Please enter either 'yes' or 'no' only");
-        }
 
         //Ask for OrderID
         System.out.println("What is the order ID? ");
@@ -70,7 +60,7 @@ public class OrderUI
         }
         else{
             flag = 1;
-            System.out.println("Please enter a table from the available list");
+            if(flag == 1) System.out.println("Please enter a table from the available list");
         }
 
         System.out.println("What is your staff id?");
@@ -148,6 +138,7 @@ public class OrderUI
 
                 }
             }
+            
             break;
             default: System.out.println("Invalid Choice");
             break;
@@ -174,8 +165,7 @@ public class OrderUI
         // Print Each Specific Menu 
         // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
         
-
-        sc.close();    
+   
     }
 
 
