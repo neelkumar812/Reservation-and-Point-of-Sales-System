@@ -8,12 +8,10 @@ public class RestaurantItem {
     private double restaurantItemPrice;
 
     /**
-     * restaurant item object constructor.
-     *
+     * Restaurant item object constructor.
      * @param restaurantItemID    This restaurant item's ID.
      * @param restaurantItemName  This restaurant item's name.
-     * @param restaurantItemPrice This restaurant item's price.
-     * 
+     * @param restaurantItemPrice This restaurant item's price. 
      */
     RestaurantItem(int restaurantItemID, String restaurantItemName, double restaurantItemPrice) {
         this.restaurantItemID = restaurantItemID;
@@ -22,10 +20,7 @@ public class RestaurantItem {
     }
 
      /**
-     * Accessors and Mutators 
-     */
-
-     /**
+      * Accessor for the ID of the Restraunt Item.
      * @return restrauntItemID
      */
     public int getId() {
@@ -33,13 +28,15 @@ public class RestaurantItem {
     }
 
     /**
-     * @param restaurantItemID 
+     * Mutator for the ID of the restraunt Item.
+     * @param restaurantItemID Id assoiciated with the restraunt item.
      */
     public void setId(int restaurantItemID) {
         this.restaurantItemID = restaurantItemID;
     }
 
     /**
+     * Accessor for Item name.
      * @return item name 
      */
     public String getName() {
@@ -47,13 +44,15 @@ public class RestaurantItem {
     }
 
     /**
-     * @param restaurantItemName 
+     * Mutator for Item name.
+     * @param restaurantItemName Name of Item.
      */
     public void setName(String restaurantItemName) {
         this.restaurantItemName = restaurantItemName;
     }
 
     /**
+     * Accessor for Item Price.
      * @return item price
      */
     public double getPrice() {
@@ -61,7 +60,8 @@ public class RestaurantItem {
     }
 
     /**
-     * @param restaurantItemPrice.
+     * Mutator for Item Price
+     * @param restaurantItemPrice. Price of Item.
      */
     public void setPrice(double restaurantItemPrice) {
         this.restaurantItemPrice = restaurantItemPrice;

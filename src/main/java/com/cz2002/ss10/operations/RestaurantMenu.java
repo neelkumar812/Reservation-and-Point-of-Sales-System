@@ -16,8 +16,8 @@ import java.util.*;
 public class RestaurantMenu {
 
 	/**
-	 * 
-	 * @param printType
+	 * Prints out the Items in the MenuList Sorted by Desired Type.
+	 * @param printType Type to be filtered by.
 	 */
 	public static void printMenu(MenuItem.MenuItemType printType) {
 		ArrayList<MenuItem> funneledMenu = MenuItem.funneledMenuItemList(printType);
@@ -28,13 +28,11 @@ public class RestaurantMenu {
 	}
 
 	/**
-	 * 
-	 * Method that adds the item to the array 
-	 * 
-	 * @param price
-	 * @param description
-	 * @param name
-	 * @param itemType
+	 * Adds MenuItem Object to the ArrayList. 
+	 * @param price Price of the Item.
+	 * @param description Description of the Item.
+	 * @param name Name of the Item.
+	 * @param itemType Type of the Item.
 	 */
 	public static void addMenuItem(int itemType, String name, String description, double price) {
 
@@ -47,9 +45,12 @@ public class RestaurantMenu {
 
 
 	/**
-	 * 
-	 * Edits the object in the arraylist
-	 * @param name
+	 * Updates the object corresponding to the desired itemId in the MenuItem ArrayList.
+	 * @param itemId ID of item to be edited.
+	 * @param itemType Type of item.
+	 * @param name Name of item.
+	 * @param description Description of item.
+	 * @param price Price of item.
 	 */
 	public static void editMenuItem(int itemId, int itemType, String name, String description, double price) {
         for (int i = 0; i < (RestaurantApp.menuItems.size()); i++) {
@@ -66,8 +67,8 @@ public class RestaurantMenu {
 	}
 
 	/**
-	 * 
-	 * @param name
+	 * Removes the object from the MenuItem ArrayList. Removes Promotion if it contains item object to be delete.
+	 * @param itemID 
 	 */
 	public static void deleteMenuItem(int itemID) {
 
@@ -98,8 +99,7 @@ public class RestaurantMenu {
 }
 
 	/**
-	 * 
-	 * @param id
+	 * Prints out All the Current Promotion Items.
 	 */
 
 	public static void printpromotionItems() {
@@ -131,7 +131,7 @@ public class RestaurantMenu {
 	}
 
 	/**
-	 * 
+	 * Creates a Promotion Item object and adds it to the promotionItems Arraylist.
 	 * @param PromoName 
 	 * @param PromoPrice 
 	 * @param PromoAppetiser
@@ -149,7 +149,7 @@ public class RestaurantMenu {
 	}
 
 	/**
-	 * 
+	 * Updates Existing Promotion Object in the ArrayList.
 	 * @param
 	 */
 	public static void editPromoItem(String PromoName, Double PromoPrice, int PromoAppetiser, int PromoMain, int PromoDessert, int PromoDrink) {

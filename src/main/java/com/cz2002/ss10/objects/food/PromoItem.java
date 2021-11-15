@@ -22,7 +22,6 @@ import com.cz2002.ss10.RestaurantApp;
 
 	/**
      * PromoItem Object Constructor
-     *
      * @param promoID         
      * @param promoName       
      * @param promoPrice      
@@ -41,7 +40,8 @@ import com.cz2002.ss10.RestaurantApp;
     }
 
     /**
-	 * Accessors and Mutators
+	 * Accessors
+     * @return PromoItems 
 	 */
 
 	public ArrayList<MenuItem> getPromoItems() {
@@ -49,6 +49,7 @@ import com.cz2002.ss10.RestaurantApp;
 	}
 
 	/**
+     * 
 	 * @param PromoItems
 	 */
 	public void setPromoItems(ArrayList<MenuItem> PromoItems) {
@@ -56,7 +57,7 @@ import com.cz2002.ss10.RestaurantApp;
 	}
 
 	/**
-     *
+     * Accessor for the Main in the promomtion.
      * @return Main Item in the promotion.
      */
     public int getPromoMain() {
@@ -64,6 +65,7 @@ import com.cz2002.ss10.RestaurantApp;
     }
 
     /**
+     * Mutator for the Main in the promotion.
      * @param promoMain
      */
     public void setPromoMain(int promoMain) {
@@ -71,6 +73,7 @@ import com.cz2002.ss10.RestaurantApp;
     }
 
     /**
+     * Accessor for the Appetiser in the promotion.
      * @return The Appetiser in the promotion item.
      */
     public int getPromoAppetiser() {
@@ -78,13 +81,15 @@ import com.cz2002.ss10.RestaurantApp;
     }
 
     /**
-     * @param promoAppetiser
+     * Mutator for the Appetiser in the promotion.
+     * @param promoAppetiser Appetiser in the promotion.
      */
     public void setPromoAppetiser(int promoAppetiser) {
         this.promoAppetiser = promoAppetiser;
     }
 
     /**
+     * Accessor for Dessert in the promotion.
      * @return Dessert in the promotion item.
      */
     public int getPromoDessert() {
@@ -92,14 +97,15 @@ import com.cz2002.ss10.RestaurantApp;
     }
 
     /**
-
-     * @param promoDessert
+     * Mutator for the Dessert in the promotion.
+     * @param promoDessert Dessert in the promotion.
      */
     public void setPromoDessert(int promoDessert) {
         this.promoDessert = promoDessert;
     }
 
     /**
+     * Accessor for the Drink in the promotion. 
      * @return Drink in the promoItem.
      */
     public int getPromoDrink() {
@@ -107,7 +113,8 @@ import com.cz2002.ss10.RestaurantApp;
     }
 
     /**
-     * @param promoDrink
+     * Mutator for the Drink in the promotion.
+     * @param promoDrink Drink in the promotion.
      */
     public void setPromoDrink(int promoDrink) {
         this.promoDrink = promoDrink;
@@ -115,8 +122,7 @@ import com.cz2002.ss10.RestaurantApp;
 
     /**
      * Finds and returns promotion object of desired ID
-     *
-     * @param promoID
+     * @param promoID Id associated with the promotion.
      * @return promotionObject
      */
 

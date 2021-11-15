@@ -21,7 +21,6 @@ public class MenuItem extends RestaurantItem {
 
 	/**
      * Method to Construct Menu Item Object
-     *
      * @param id          
      * @param name       
      * @param itemType        
@@ -34,13 +33,9 @@ public class MenuItem extends RestaurantItem {
         this.description = description;
     }
 
-    /**
-	 * 
-	 * Accessors and Mutators
-	 */
 
-	/**
-	 * 
+	/** 
+     * Accessor for the description
 	 * @return description of the item 
 	 */
 	public String getDescription() {
@@ -48,24 +43,24 @@ public class MenuItem extends RestaurantItem {
 	}
 
 	/**
-	 * 
-	 * @param description
+	 * Mutator for the description
+	 * @param description description of item
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * 
-	 * @return type of the item 
+	 * Accessor for the itemType
+	 * @return itemType type of the item 
 	 */
 	public MenuItemType getMenuItemType() {
 		return itemType;
 	}
 
 	/**
-	 * 
-	 * @param menuItemType
+     * Mutator for Menu Item Type
+	 * @param menuItemType An integer that corresponds to a particular item type.
 	 */
 	public void setMenuItemType(int itemType) {
 		this.itemType = intToItemType(itemType);
@@ -74,7 +69,7 @@ public class MenuItem extends RestaurantItem {
 
 
 	/**
-     *
+     * Returns the item type corresponding to the integer number entered.
      * @param type The menu item's type, in integer form.
      * @return The menu item's type in its enum equivalent form.
      */
@@ -91,7 +86,7 @@ public class MenuItem extends RestaurantItem {
     /**
      * Find and return menu item of a specific item ID.
      * @param itemId Id of the menu item desired.
-     * @return menu item object with the associated ID.
+     * @return menu item object with the specific ID.
      */
 
     public static MenuItem retrieveMenuItem(int itemId) {
@@ -103,9 +98,9 @@ public class MenuItem extends RestaurantItem {
     }
 
 	/**
-     *
-     * @param desiredType 
-     * @return menuItemFunnel 
+     * Returns an arraylist of items in the Menu, sorted by item type. 
+     * @param desiredType item type to be filtered by.
+     * @return menuItemFunnel Arraylist of menuItem sorted by Objects.
      */
 
     public static ArrayList<MenuItem> funneledMenuItemList(MenuItem.MenuItemType desiredType) {
@@ -125,9 +120,9 @@ public class MenuItem extends RestaurantItem {
 
     /**
      * Checks type of the items in the array
-     *
-     * @param menuArrayList    Make an arraylist with only items of desired type
-     * @param desiredItemType type of the menu item added to the promotion
+     * @param menuArrayList   Make an arraylist with only items of desired type
+     * @param desiredItemType Type of the menu item added to the promotion
+     * @return True/False Boolean that indicates whether the item is of desired type or not
      */
     public static boolean typeCheck(ArrayList<MenuItem> menuArrayList, int desiredItemType) {
         for (MenuItem itemObj : menuArrayList) { 
