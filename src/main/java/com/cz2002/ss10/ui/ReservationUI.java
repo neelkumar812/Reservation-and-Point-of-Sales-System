@@ -1,18 +1,10 @@
 package com.cz2002.ss10.ui;
 
 import com.cz2002.ss10.RestaurantApp;
-import com.cz2002.ss10.objects.food.MenuItem;
-import com.cz2002.ss10.objects.food.PromoItem;
-import com.cz2002.ss10.objects.food.RestaurantItem;
-import com.cz2002.ss10.objects.logistics.Order;
 import com.cz2002.ss10.objects.logistics.Table;
-import com.cz2002.ss10.objects.person.Staff;
 import com.cz2002.ss10.operations.RestaurantService;
-
-import org.w3c.dom.css.Counter;
-
 import java.util.*;
-import com.cz2002.ss10.RestaurantApp;
+
 
 /**
  * OrderUI Class
@@ -37,7 +29,7 @@ public class ReservationUI
         int customerPhone;
         int tempTableNumber = 0;
         int tempReservationId;
-        ArrayList<RestaurantItem> tempOrderItems;
+        //ArrayList<RestaurantItem> tempOrderItems;
 
         System.out.println("Welcome to the reservation creation page!");
 
@@ -145,7 +137,8 @@ public class ReservationUI
         
         //Creating the reservation
         RestaurantService.createNewReservation(customerName, customerPhone, pax, tempTableNumber, tempReservationId);
-    }
+        sc.close();
+    } 
 
 }
 

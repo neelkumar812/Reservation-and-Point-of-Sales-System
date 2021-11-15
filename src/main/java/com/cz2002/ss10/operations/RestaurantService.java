@@ -4,7 +4,6 @@ import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.logistics.*;
 import com.cz2002.ss10.objects.person.*;
 import com.cz2002.ss10.objects.food.*;
-import com.cz2002.ss10.logistics.Reservation;
 import java.util.*;
 import java.time.*;
 
@@ -12,7 +11,7 @@ import java.time.*;
 public class RestaurantService {
 
     public static final int TABLESEATCAP =25;
-
+    private static int cancellationCounter = 1000;
     Scanner sc = new Scanner(System.in);
 
     //Constructor
@@ -29,6 +28,7 @@ public class RestaurantService {
      {
         Order temp = new Order(staff, membershipType, tableNumber, orderID, orderItems);
         RestaurantApp.orders.add(temp);
+        System.out.println("New order created!");
         
     }
 
@@ -88,27 +88,7 @@ public class RestaurantService {
         System.out.println("Final Total:                                       $" + finalTotal);
         System.out.println("                Payment made via credit/debit card :) .                 ");
         
-		
     }
-
-    /**
-     
-    /**
-     * 
-     * @param customerName
-     * @param reservationId
-     */
-    public void cancelReservation(int telNo) {
-        // TODO - implement RestaurantService.cancelReservation
-         for(int i = 0;i<=RestaurantApp.reservations.size();i++){
-            if(RestaurantApp.reservations.get(i).getCustomerContact()== telNo){
-                RestaurantApp.reservations.get(i).cancelReservation();
-                break;
-            }
-        }
-        
-    }
-
     /**
      * 
      * @param customerName
@@ -118,10 +98,9 @@ public class RestaurantService {
      * @param reservationTime
      */
     public static void createNewReservation(String customerName, int customerContact, int dinerSize, int tableNumber, int reservationID) {
-        // TODO - implement RestaurantService.createNewReservation
-        
+        Reservation temp = new Reservation(customerName, customerContact, dinerSize, tableNumber, reservationID);
+        RestaurantApp.reservations.add(temp);
         System.out.println("Reservation ssuccessfully created");
-        
     }
 
     /**
@@ -129,8 +108,19 @@ public class RestaurantService {
      * @param customerName
      * @param reservationId
      */
-    public void cancelReservation(String customerName, int reservationId) {
-        // TODO - implement RestaurantService
+    public static void cancelReservation(String customerName, int reservationId) {
+        for(int i = 0; i<RestaurantApp.reservations.size();i++){
+            if(RestaurantApp.reservations.get(i).getReservationId() == reservationId)
+            {
+                RestaurantApp.reservations.remove(i);
+                System.out.println("Reservation for " + customerName + "has been cancelled");
+                cancellationCounter++;
+                System.out.println("Cancellation ID: " + cancellationCounter );
+                break;
+            }
+            
+        }
+        System.out.println("Error cancelling reservation, please try again!");
         
     }
 
@@ -138,27 +128,26 @@ public class RestaurantService {
      * 
      * @param reservationId
      */
-    public static boolean checkReservation(int telNo) {
-        // TODO - implement RestaurantService.checkReservation
-        boolean existResv = false;
+    public static void checkReservation(int reservationID) {
 
+        boolean existResv = false;
         for(int i = 0;i<=RestaurantApp.reservations.size();i++){
-            if(RestaurantApp.reservations.get(i).getCustomerContact()== telNo){
-                existResv= true;
-                System.out.println("Reservation for "+ RestaurantApp.reservations.get(i).getCustomerName + " for the session of " + RestaurantApp.reservations.get(i).getResvSession() + " at " + RestaurantApp.reservations.get(i).getResvTime);
+            if(RestaurantApp.reservations.get(i).getReservationId() == reservationID){
+                System.out.println("There is a reservation for "+ RestaurantApp.reservations.get(i).getDinerSize() + " people who are designated table number " + RestaurantApp.reservations.get(i).getTableNumber());
+                System.out.println("Reservation details are as follows: ");
+                System.out.println("---------------------");
+                System.out.println("Customer Name: " + RestaurantApp.reservations.get(i).getCustomerName());
+                System.out.println("Customer Contact Number: " + RestaurantApp.reservations.get(i).getCustomerContact());
+                System.out.println("Reservation Date: " + RestaurantApp.reservations.get(i).getReservationDate());
+                System.out.println("Reservation Time: " + RestaurantApp.reservations.get(i).getReservationTime());
+                System.out.println("Reservation ID: " + RestaurantApp.reservations.get(i).getReservationId());
+                existResv = true;
+                break;
             }
         }
-
-        return existResv;
+        if(existResv == false) System.out.println("Reservation not found!");
     }
-    public class ReservationNotFoundException extends Exception {
-        public ReservationNotFoundException() {
-        }
-
-        public ReservationNotFoundException(String message) {
-            super(message);
-        }
-    }
+    
 
     
 
