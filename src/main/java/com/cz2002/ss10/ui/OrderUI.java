@@ -4,15 +4,10 @@ import com.cz2002.ss10.RestaurantApp;
 import com.cz2002.ss10.objects.food.MenuItem;
 import com.cz2002.ss10.objects.food.PromoItem;
 import com.cz2002.ss10.objects.food.RestaurantItem;
-import com.cz2002.ss10.objects.logistics.Order;
-import com.cz2002.ss10.objects.person.Staff;
 import com.cz2002.ss10.operations.RestaurantMenu;
 import com.cz2002.ss10.operations.RestaurantService;
 
-import org.w3c.dom.css.Counter;
-
 import java.util.*;
-import com.cz2002.ss10.RestaurantApp;
 
 /**
  * OrderUI Class
@@ -33,7 +28,6 @@ public class OrderUI
     public static void createNewOrder()
     {
 
-        int counter = 0;
         Scanner sc = new Scanner(System.in);
         int flag = 0;
         Boolean isMember;
@@ -53,7 +47,7 @@ public class OrderUI
         tempOrderId = sc.nextInt();
        
         //Ask table number
-        System.out.println("Please enter table number");
+        System.out.println("Please enter table number:");
         tempTableNumber = sc.nextInt();
         if(tempTableNumber < 25 && RestaurantApp.tables.get(tempTableNumber-1).getOccupancy() == false){
             flag = 0;            
@@ -66,21 +60,11 @@ public class OrderUI
             if(flag == 1) System.out.println("Please enter a table from the available list");
         }
 
-        //Ask Staff Details and setting staff details
-        System.out.println(" Please enter Staff Details");
-        System.out.println("============================");
-        System.out.println("         Staff name? ");
-        RestaurantApp.staffs.get(counter).setName(sc.next());
-        System.out.println("        Staff gender? ");
-        RestaurantApp.staffs.get(counter).setGender(sc.next().charAt(0));
-        System.out.println("      Staff employeeID? ");
-        RestaurantApp.staffs.get(counter).setStaffID(sc.nextInt());
-        System.out.println("       Staff job title? ");
-        RestaurantApp.staffs.get(counter).setJobTitle(sc.next());
-        System.out.println("============================");
-        counter++;
+        System.out.println("What is your staff id?");
+        int staffId = sc.nextInt();
 
-                //Ask the items ordered
+
+        //Ask the items ordered
         // Ask what Users want to order: Promotion Menu or Normal Menu?
         // Print Each Specific Menu 
         // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
@@ -171,7 +155,7 @@ public class OrderUI
          * @snesboola can help out with this part, basically this section asks the staff to input everything the user ordered. 
          * I think if you can also reference to another class which takes user input forOrders?
          */
-        RestaurantService.createNewOrder(RestaurantApp.staffs.get(counter), isMember, tempTableNumber, tempOrderId, tempOrderItems);
+        RestaurantService.createNewOrder(RestaurantApp.staffs.get(staffId), isMember, tempTableNumber, tempOrderId, tempOrderItems);
         
 
         // Ask what Users want to order: Promotion Menu or Normal Menu?
