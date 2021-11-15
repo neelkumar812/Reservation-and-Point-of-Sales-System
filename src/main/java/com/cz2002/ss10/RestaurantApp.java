@@ -34,18 +34,19 @@ public class RestaurantApp {
 	/**
 	 * The list of menuitems loaded into the program
 	 */
-	static public ArrayList<MenuItem> menuItems;
+	 public static ArrayList<MenuItem> menuItems;
 
 	/**
 	 * The list of promoitems loaded into the program
 	 */
-	static public ArrayList<PromoItem> promotionItems;
-	static public ArrayList<Reservation> reservations;
-	static public ArrayList<Staff> staffs;
-	static public LocalTime openingTime;
-	static public LocalTime closingTime;
-	static public ArrayList<Order> orders;
-	Scanner sc = new Scanner(System.in);
+	 public static ArrayList<PromoItem> promotionItems;
+	 public static ArrayList<Reservation> reservations;
+	 public static ArrayList<Staff> staffs;
+	 public static LocalTime openingTime;
+	public static LocalTime closingTime;
+	public static ArrayList<Order> orders;
+	
+	public static Scanner sc = new Scanner(System.in);;
 
 	public static void setPromotionItems(ArrayList<PromoItem> promotionItems) {
 		RestaurantApp.promotionItems = promotionItems;
@@ -101,6 +102,9 @@ public class RestaurantApp {
 		tempOrder.add(RestaurantApp.menuItems.get(0));
 		tempOrder.add(RestaurantApp.menuItems.get(1));
 		RestaurantApp.orders.add(new Order(RestaurantApp.staffs.get(0), false, 1, 1, tempOrder));
+		RestaurantApp.orders.add(new Order(RestaurantApp.staffs.get(1), true, 2, 2, tempOrder));
+		RestaurantApp.orders.add(new Order(RestaurantApp.staffs.get(2), true, 3, 3, tempOrder));
+		//RestaurantApp.tables.get(0).setOccupancy(true);
 	}
 
 	// Main Menu UI NOT COMPLETE
@@ -111,7 +115,6 @@ public class RestaurantApp {
 			System.out.println(TABLESEATCAP + " tables loaded");
 			initializeAllObjects();
 		}
-		Scanner sc = new Scanner(System.in);
 		int choice;
 
 		do {
@@ -123,7 +126,7 @@ public class RestaurantApp {
 			System.out.println("                  0. Exit Application                 ");
 			System.out.println("=====================================================");
 
-			choice = sc.nextInt();
+			choice = RestaurantApp.sc.nextInt();
 
 			switch (choice) {
 			case 1: // calls handle menu UI
@@ -131,19 +134,19 @@ public class RestaurantApp {
 				break;
 			case 2: // calls handle Management UI
 				RestaurantApp.handleManagement(choice);
-
 				break;
 			case 3: // calls handle Service UI
 				RestaurantApp.handleService(choice);
 				break;
 			case 0:
+			    RestaurantApp.sc.close();
 				System.exit(0);
 			default:
 				System.out.println("Invalid Choice");
 			}
 
 		} while (choice != 0);
-		sc.close();
+		 
 	}
 
 	/**
@@ -164,8 +167,7 @@ public class RestaurantApp {
 			System.out.println("                  0. Exit App                                 ");
 			System.out.println("==============================================================");
 
-			Scanner sc = new Scanner(System.in);
-			choice = sc.nextInt();
+			choice = RestaurantApp.sc.nextInt();
 
 			switch (choice) {
 			case 1:
@@ -191,7 +193,7 @@ public class RestaurantApp {
 				break;
 
 			}
-			sc.close();
+			 
 		} while (choice != 0);
 	}
 
@@ -203,7 +205,6 @@ public class RestaurantApp {
 	 */
 	public static void handleManagement(int operation) {
 		int selection;
-		Scanner sc = new Scanner(System.in);
 		do {
 			System.out.println("==================================================================");
 			System.out.println("Welcome to the Management Handler. Please select an option below:");
@@ -213,22 +214,22 @@ public class RestaurantApp {
 			System.out.println("                  4. Back to main menu                		     ");
 			System.out.println("=================================================================");
 
-			selection = sc.nextInt();
+			selection = RestaurantApp.sc.nextInt();
 
 			switch (selection) {
 			case 1: // Add new staff
 				int choice = StaffUI.getStaffInsertionChoice();
 				// Add new staff by CSV
 				if (choice == 1) {
+					String filePath = StaffUI.getFilePath();
+					RestaurantManagement.addStaff(filePath);
+					System.out.println("Staff added successfully!");
+				} else {
+					// Add new staff manually
 					ArrayList<String> staffDetails = StaffUI.getDetails();
 					RestaurantManagement.addStaff(staffDetails.get(0), staffDetails.get(1).charAt(0),
 							(int) Integer.valueOf(staffDetails.get(2)), staffDetails.get(3));
 					System.out.println("Staffs added successfully!");
-				} else {
-					// Add new staff manually
-					String filePath = StaffUI.getFilePath();
-					RestaurantManagement.addStaff(filePath);
-					System.out.println("Staff added successfully!");
 				}
 				break;
 			case 2: // Remove staff
@@ -247,9 +248,7 @@ public class RestaurantApp {
 					// Generate Revenue Report CSV
 					String filePath = RevenueReportUI.getFilePath();
 					RestaurantManagement.generateRevenueReport(RestaurantApp.orders, duration, filePath);
-
 				}
-
 				break;
 			case 4: // Return to main menu
 				RestaurantApp.main(null);
@@ -258,9 +257,8 @@ public class RestaurantApp {
 				System.out.println("Please enter a valid choice ");
 				break;
 			}
-			sc.close();
-
-		} while (selection != 4);
+		} while (selection != -1);
+		 
 
 	}
 
@@ -270,7 +268,6 @@ public class RestaurantApp {
 	 */
 	public static void handleService(int operation) {
 		int selection;
-		Scanner sc = new Scanner(System.in);
 
 		do {
 			System.out.println("==============================================================");
@@ -285,7 +282,7 @@ public class RestaurantApp {
 			System.out.println("                  8. Back to main menu                		  ");
 			System.out.println("==============================================================");
 
-			selection = sc.nextInt();
+			selection = RestaurantApp.sc.nextInt();
 
 			switch (selection) {
 			case 1: // Gets the available tables
@@ -306,15 +303,16 @@ public class RestaurantApp {
 				}
 				else {
 					System.out.println("Enter the orderId for settling payment");
-				askOrderId = sc.nextInt();
+				askOrderId = RestaurantApp.sc.nextInt();
 				System.out.println("Enter the table number for settling payment");
-				askTableNo = sc.nextInt();
+				askTableNo = RestaurantApp.sc.nextInt();
 				RestaurantService.settlePayment(askTableNo, askOrderId);
 				}
 				break;
 
 			case 3: // create new order
 				OrderUI.createNewOrder();
+				RestaurantApp.sc.nextLine();
 				break;
 			case 4: // Check orders
 			    if (RestaurantApp.orders == null || RestaurantApp.orders.isEmpty()){
@@ -322,30 +320,32 @@ public class RestaurantApp {
 				}
 				else {
 				System.out.println("Here are all the current orders: ");
-				for (int i = 0; i < orders.size(); i++) {
-					System.out.println("The order ID: " + orders.get(i).getOrderId());
-					System.out.println("The order subTotal: " + orders.get(i).getSubtotal());
-					System.out.println("The Table number for this order : " + orders.get(i).getTableNumber());
-					System.out.println("Created at : " + orders.get(i).getCreatedAt());
-					System.out.println("Is paid : " + orders.get(i).getIsPaid());
+				for (int i = 0; i < RestaurantApp.orders.size(); i++) {
+					System.out.println("The order ID: " + RestaurantApp.orders.get(i).getOrderId());
+					System.out.println("The order subtotal: " + RestaurantApp.orders.get(i).calculateSubtotal());
+					System.out.println("The Table number for this order : " + RestaurantApp.orders.get(i).getTableNumber());
+					System.out.println("Created at : " + RestaurantApp.orders.get(i).getCreatedAt());
+					System.out.println("Is paid : " + RestaurantApp.orders.get(i).getIsPaid());
+					System.out.println("\n");
 				}
 				}
 				break;
 			case 5: // Create new reservation
 				ReservationUI.createNewReservation();
+				RestaurantApp.sc.nextLine();
 				break;
 			case 6: // Cancel Reservation
 
 				System.out.println("Please enter Customer Name: ");
-				String tempCustName = sc.next();
+				String tempCustName = RestaurantApp.sc.next();
 				System.out.println("Please enter Reservation ID for cancellation: ");
-				int tempResvID = sc.nextInt();
+				int tempResvID = RestaurantApp.sc.nextInt();
 				RestaurantService.cancelReservation(tempCustName, tempResvID);
 				break;
 			case 7: // Check Reservation
 
 				System.out.println("Please enter Reservation ID for checking: ");
-				int checkResvID = sc.nextInt();
+				int checkResvID = RestaurantApp.sc.nextInt();
 				RestaurantService.checkReservation(checkResvID);
 				break;
 			case 8: // Return to main menu
@@ -358,7 +358,7 @@ public class RestaurantApp {
 
 		} while (selection != 8);
 
-		sc.close();
+		 
 	}
 
 	public static ArrayList<Table> getAvailableTables() {

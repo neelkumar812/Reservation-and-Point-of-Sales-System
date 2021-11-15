@@ -61,7 +61,7 @@ public class Order {
 	}
 
 	public double getSubtotal() {
-		return getSubtotal();
+		return subtotal;
 	}
 
 	public int getTableNumber() {

@@ -31,7 +31,6 @@ public class OrderUI
     public static void createNewOrder()
     {
 
-        Scanner sc = new Scanner(System.in);
         int flag = 0;
         Boolean isMember;
         int tempTableNumber;
@@ -43,15 +42,15 @@ public class OrderUI
         
         //Ask if member
         System.out.println("Is the customer a member? Enter true for yes false for no");
-        isMember = sc.nextBoolean();
+        isMember = RestaurantApp.sc.nextBoolean();
 
         //Ask for OrderID
         System.out.println("What is the order ID? ");
-        tempOrderId = sc.nextInt();
+        tempOrderId = RestaurantApp.sc.nextInt();
        
         //Ask table number
         System.out.println("Please enter table number:");
-        tempTableNumber = sc.nextInt();
+        tempTableNumber = RestaurantApp.sc.nextInt();
         if(tempTableNumber < 25 && RestaurantApp.tables.get(tempTableNumber-1).getOccupancy() == false){
             flag = 0;            
         }
@@ -64,7 +63,7 @@ public class OrderUI
         }
 
         System.out.println("What is your staff id?");
-        int staffId = sc.nextInt();
+        int staffId = RestaurantApp.sc.nextInt();
 
 
         //Ask the items ordered
@@ -79,7 +78,7 @@ public class OrderUI
         System.out.println("            2. Ala-Carte Menu             ");
         System.out.println("==========================================");
         System.out.println("     Enter the number of your choice:     ");
-        choice = sc.nextInt();
+        choice = RestaurantApp.sc.nextInt();
         }while(choice<1 || choice > 2);
 
         switch(choice){
@@ -88,13 +87,13 @@ public class OrderUI
         boolean menuItemExists = false;
         while (!menuItemExists) {
             System.out.println("Enter the ID of Menu item to add: \n");
-            int orderItemID = sc.nextInt(); 
+            int orderItemID = RestaurantApp.sc.nextInt(); 
             if (MenuItem.retrieveMenuItem(orderItemID) == null) 
             System.out.println("Enter a valid menu item ID.");
             else {
                 menuItemExists = true;
                 System.out.println("Enter quantity of item: \n");
-                int itemQuantity = sc.nextInt();
+                int itemQuantity = RestaurantApp.sc.nextInt();
                 for(int i = 0; i < itemQuantity; i++){
                     for (int j = 0; j < (RestaurantApp.menuItems.size()); j++) {
                         MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
@@ -116,13 +115,13 @@ public class OrderUI
             boolean promoItemExists = false;
             while (!promoItemExists) {
                 System.out.println("Enter the ID of Promo item to add: \n");
-                int orderItemID = sc.nextInt(); 
+                int orderItemID = RestaurantApp.sc.nextInt(); 
                 if (PromoItem.retrievePromotion(orderItemID) == null) 
                 System.out.println("Enter a valid promo item ID.");
                 else {
                     promoItemExists = true;
                     System.out.println("Enter quantity of item: \n");
-                    int promoQuantity = sc.nextInt();
+                    int promoQuantity = RestaurantApp.sc.nextInt();
                     for(int i = 0; i < promoQuantity; i++){
                         for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) {
                          PromoItem promoItemObj = RestaurantApp.promotionItems.get(i); 

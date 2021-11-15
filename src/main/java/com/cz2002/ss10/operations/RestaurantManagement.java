@@ -62,9 +62,8 @@ public class RestaurantManagement {
 		LocalDate date = LocalDate.now();
 		if (reportPeriod == ReportDuration.DAY) {
 			// traverse through array for orders on today's date
-
 			ordersForDuration = orders.stream()
-					.filter(order -> order.getCreatedAt().toLocalDate().isAfter(LocalDate.now()))
+					//.filter(order -> order.getCreatedAt().toLocalDate().isAfter(LocalDate.now().minusDays(1)))
 					.collect(Collectors.toCollection(ArrayList::new));
 		} else if (reportPeriod == ReportDuration.MONTH) {
 			date = LocalDate.now().withDayOfMonth(1);

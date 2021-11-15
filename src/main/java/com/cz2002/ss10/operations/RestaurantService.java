@@ -11,7 +11,6 @@ public class RestaurantService {
 
     public static final int TABLESEATCAP = 25;
     private static int cancellationCounter = 1000;
-    Scanner sc = new Scanner(System.in);
 
     // Constructor
     public RestaurantService() {
@@ -142,7 +141,7 @@ public class RestaurantService {
     
         Reservation temp = new Reservation(resId, resDate, resTime, contactNumber, name, tableNumber, dinerSize);
         RestaurantApp.reservations.add(temp);
-        System.out.println("Reservation ssuccessfully created");
+        System.out.println("Reservation successfully created");
     }
 
     /**
@@ -151,17 +150,21 @@ public class RestaurantService {
      * @param reservationId
      */
     public static void cancelReservation(String customerName, int reservationId) {
+        boolean isNotCancelled = true;
         for (int i = 0; i < RestaurantApp.reservations.size(); i++) {
             if (RestaurantApp.reservations.get(i).getReservationId() == reservationId) {
                 RestaurantApp.reservations.remove(i);
                 System.out.println("Reservation for " + customerName + "has been cancelled");
+                isNotCancelled = true;
                 cancellationCounter++;
                 System.out.println("Cancellation ID: " + cancellationCounter);
                 break;
             }
 
         }
+        if (isNotCancelled){
         System.out.println("Error cancelling reservation, please try again!");
+        }
 
     }
 
@@ -172,7 +175,7 @@ public class RestaurantService {
     public static void checkReservation(int reservationID) {
 
         boolean existResv = false;
-        for (int i = 0; i <= RestaurantApp.reservations.size(); i++) {
+        for (int i = 0; i < RestaurantApp.reservations.size(); i++) {
             if (RestaurantApp.reservations.get(i).getReservationId() == reservationID) {
                 System.out.println("There is a reservation for " + RestaurantApp.reservations.get(i).getDinerSize()
                         + " people who are designated table number "

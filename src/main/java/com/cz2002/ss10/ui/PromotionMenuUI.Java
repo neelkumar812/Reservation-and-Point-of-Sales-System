@@ -2,6 +2,7 @@ package com.cz2002.ss10.ui;
 import java.util.*;
 import com.cz2002.ss10.objects.food.*;
 import com.cz2002.ss10.operations.RestaurantMenu;
+import com.cz2002.ss10.RestaurantApp;
 
 /**
  * PromotionMenuUI Class
@@ -20,7 +21,6 @@ public class PromotionMenuUI {
     PromotionMenuUI(){}
     
     public static int promotionMenuHandler() {
-        Scanner sc = new Scanner(System.in);
         int choice = 0;
         do {
             System.out.println("Which Action would you like to perform?");
@@ -30,7 +30,7 @@ public class PromotionMenuUI {
             System.out.println("4. Delete promotion");
             System.out.println("5. Go to Main Menu");
             System.out.println("0. Exit App");
-            choice = sc.nextInt();
+            choice = RestaurantApp.sc.nextInt();
             switch (choice) {
                 case 1: 
                 PromotionMenuUI.printPromotionUI();
@@ -52,7 +52,7 @@ public class PromotionMenuUI {
                 default:
                     System.out.println("Invalid choice.");
             }
-            sc.close();
+             
             return 0;
         
         } while (choice < 0 || choice > 5);
@@ -81,7 +81,6 @@ public class PromotionMenuUI {
      // Else prompt again 
 
      private static void addNewPromotionUI(){
-        Scanner sc = new Scanner(System.in);
         String newName;
         double newPrice;
         int newAppetiser = 1;
@@ -99,11 +98,11 @@ public class PromotionMenuUI {
         ArrayList<MenuItem> filteredDrinkMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DRINK);
 
         System.out.println("Enter new promotion set name: ");
-        sc.nextLine(); 
-        newName = sc.nextLine();
+        RestaurantApp.sc.nextLine(); 
+        newName = RestaurantApp.sc.nextLine();
 
         System.out.println("Enter new promotion's price: ");
-        newPrice = sc.nextInt();
+        newPrice = RestaurantApp.sc.nextInt();
 
         System.out.println("All Appetiser Items");
         System.out.printf("%-10s %-50s %-10s %-10s %-10s\n", "ID", "Name", "Type", "Price", "Description");
@@ -113,7 +112,7 @@ public class PromotionMenuUI {
 
         while (!appetiserFound) {
             System.out.println("Enter new promotion's appetiser ID: ");
-            newAppetiser = sc.nextInt();
+            newAppetiser = RestaurantApp.sc.nextInt();
             mainFound = MenuItem.typeCheck(filteredAppetisersMenu, newAppetiser);
             if (!appetiserFound) System.out.println("Enter a valid main ID.");
         }
@@ -126,7 +125,7 @@ public class PromotionMenuUI {
 
         while (!mainFound) {
             System.out.println("Enter new promotion's main ID: ");
-            newMain = sc.nextInt();
+            newMain = RestaurantApp.sc.nextInt();
             mainFound = MenuItem.typeCheck(filteredMainMenu, newMain);
             if (!mainFound) System.out.println("Enter a valid main ID.");
         }
@@ -139,7 +138,7 @@ public class PromotionMenuUI {
 
         while (!dessertFound) {
             System.out.println("Enter new promotion's dessert ID: ");
-            newDessert = sc.nextInt();
+            newDessert = RestaurantApp.sc.nextInt();
             dessertFound = MenuItem.typeCheck(filteredDessertMenu, newDessert);
             if (!dessertFound) System.out.println("Enter a valid dessert ID.");
         }
@@ -152,11 +151,11 @@ public class PromotionMenuUI {
 
         while (!drinkFound) {
             System.out.println("Enter new promotion's drink ID: ");
-            newDrink = sc.nextInt();
+            newDrink = RestaurantApp.sc.nextInt();
             drinkFound = MenuItem.typeCheck(filteredDrinkMenu, newDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
-        sc.close();
+         
         RestaurantMenu.createPromoItem(newName, newPrice, newAppetiser, newMain, newDessert, newDrink);
 
      }
@@ -168,7 +167,6 @@ public class PromotionMenuUI {
      */
 
     private static void editPromotionUI(){
-        Scanner sc = new Scanner(System.in);
         String editPromoName;
         double editPromoPrice;
         int editPromoID = 1;
@@ -190,7 +188,7 @@ public class PromotionMenuUI {
 
         while (!promoFound) {
             System.out.println("Enter the ID of the promotion to be edited: ");
-            editPromoID = sc.nextInt(); 
+            editPromoID = RestaurantApp.sc.nextInt(); 
             if (PromoItem.retrievePromotion(editPromoID) == null)
              System.out.println("Invalid ID. Please enter a valid promo item ID.");
             else promoFound = true;
@@ -199,16 +197,16 @@ public class PromotionMenuUI {
         //retrieve menu item with editItemID check.
         if (PromoItem.retrievePromotion(editPromoID) == null){
             System.out.println("Invalid ID. Promotion not found.");
-            sc.close();
+             
             return;
         }
 
         System.out.println("Enter edited promotion set name: ");
-        sc.nextLine(); //required if previous scanner takes in int, and now string is required
-        editPromoName = sc.nextLine();
+        RestaurantApp.sc.nextLine(); //required if previous scanner takes in int, and now string is required
+        editPromoName = RestaurantApp.sc.nextLine();
 
         System.out.println("Enter updated price for the promotion: ");
-        editPromoPrice = sc.nextInt();
+        editPromoPrice = RestaurantApp.sc.nextDouble();
 
         //Code to print filtered menu of appetisers 
         System.out.println("All Appetiser Items");
@@ -219,7 +217,7 @@ public class PromotionMenuUI {
 
         while (!appetiserFound) {
             System.out.println("Enter updated Appetiser ID for the promotion: ");
-            editPromoMain = sc.nextInt();
+            editPromoMain = RestaurantApp.sc.nextInt();
             mainFound = MenuItem.typeCheck(filteredAppetisersMenu, editPromoMain);
             if (!appetiserFound) System.out.println("Enter a valid Appetiser ID.");
         }
@@ -234,7 +232,7 @@ public class PromotionMenuUI {
 
         while (!mainFound) {
             System.out.println("Enter Updated main ID for the Promotion: ");
-            editPromoMain = sc.nextInt();
+            editPromoMain = RestaurantApp.sc.nextInt();
             mainFound = MenuItem.typeCheck(filteredMainMenu, editPromoMain);
             if (!mainFound) System.out.println("Enter a valid main ID.");
         }
@@ -247,7 +245,7 @@ public class PromotionMenuUI {
 
         while (!dessertFound) {
             System.out.println("Enter Updated dessert ID for the Promotion: ");
-            editPromoDessert = sc.nextInt();
+            editPromoDessert = RestaurantApp.sc.nextInt();
             dessertFound = MenuItem.typeCheck(filteredDessertMenu, editPromoDessert);
             if (!dessertFound) System.out.println("Enter a valid dessert ID.");
         }
@@ -261,11 +259,11 @@ public class PromotionMenuUI {
 
         while (!drinkFound) {
             System.out.println("Enter Updated drink ID for the promotion: ");
-            editPromoDrink = sc.nextInt();
+            editPromoDrink = RestaurantApp.sc.nextInt();
             drinkFound = MenuItem.typeCheck(filteredDrinkMenu, editPromoDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
-        sc.close();
+         
         RestaurantMenu.editPromoItem(editPromoID, editPromoName, editPromoPrice, editPromoAppetiser, editPromoMain, editPromoDessert, editPromoDrink);
     }
 
@@ -275,18 +273,17 @@ public class PromotionMenuUI {
      */
     
     private static void deletePromotionUI(){
-        Scanner sc = new Scanner(System.in);
         int targetID = 1;
         boolean promoFound = false;
         RestaurantMenu.printpromotionItems();
         while (!promoFound) {
             System.out.println("Enter ID of the Promotion to be Deleted : ");
-            targetID = sc.nextInt();
+            targetID = RestaurantApp.sc.nextInt();
             if (PromoItem.retrievePromotion(targetID) == null) System.out.println("Enter a valid Promotion item ID.");
             else promoFound = true;
         }
         RestaurantMenu.deletePromoItem(targetID);
-        sc.close();
+         
     }
        
 }
