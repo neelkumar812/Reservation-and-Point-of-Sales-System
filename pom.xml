@@ -83,6 +83,14 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+                <mainClass>com.cz2002.ss10.RestaurantApp</mainClass>
+            </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>

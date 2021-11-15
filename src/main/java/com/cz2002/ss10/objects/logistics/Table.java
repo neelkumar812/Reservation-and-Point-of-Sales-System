@@ -14,6 +14,12 @@ public class Table {
 	private int tableNumber;
 	private Boolean isOccupied = false;
 
+	public Table(){
+		this.seatingCapacity = -1;
+        this.tableNumber = -1;
+        this.isOccupied = false;
+	}
+
 	/**
 	 * @param seatingCapacity
 	 * @param tableNumber

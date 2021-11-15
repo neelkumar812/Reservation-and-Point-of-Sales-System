@@ -104,7 +104,6 @@ public class MenuItem extends RestaurantItem {
      */
 
     public static ArrayList<MenuItem> funneledMenuItemList(MenuItem.MenuItemType desiredType) {
-
         ArrayList<MenuItem> menuItemFunnel = new ArrayList<>();
         if (desiredType == MenuItem.MenuItemType.ALL) {
             return RestaurantApp.menuItems; 

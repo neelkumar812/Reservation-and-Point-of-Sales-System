@@ -57,32 +57,40 @@ public class RestaurantApp {
 	// for example the first 5 are two seaters, next 5 are 4 seaters and so on and
 	// so forth
 	public static ArrayList<Table> initializeTables() {
-		Table[] tableList = new Table[TABLESEATCAP];
-
+		tables = new ArrayList<Table>();
 		for (int i = 0; i < TABLESEATCAP; i++) {
 			if (i < 5)
-				tableList[i] = new Table(2, i + 1, false);
+				tables.add(new Table(2, i + 1, false));
 			else if (i < 10 && i > 4)
-				tableList[i] = new Table(4, i + 1, false);
+				tables.add(new Table(4, i + 1, false));
 			else if (i < 15 && i > 9)
-				tableList[i] = new Table(6, i + 1, false);
+				tables.add(new Table(6, i + 1, false));
 			else if (i < 20 && i > 14)
-				tableList[i] = new Table(8, i + 1, false);
+				tables.add(new Table(8, i + 1, false));
 			else if (i > 19)
-				tableList[i] = new Table(10, i + 1, false);
-		}
-		for (int i = 0; i < TABLESEATCAP; i++) {
-			tables.add(tableList[i]);
+				tables.add(new Table(10, i + 1, false));
 		}
 		return tables;
 	}
 
+	public static void initializeAllObjects(){
+		RestaurantApp.menuItems = new ArrayList<MenuItem>();
+		RestaurantApp.promotionItems= new ArrayList<PromoItem>();
+		RestaurantApp.reservations = new ArrayList<Reservation>();
+		RestaurantApp.staffs = new ArrayList<Staff>();
+		RestaurantApp.openingTime = LocalTime.parse("08:00:00");
+		RestaurantApp.closingTime = LocalTime.parse("22:30:00");
+		RestaurantApp.orders = new ArrayList<Order>();
+	}
+
 	// Main Menu UI NOT COMPLETE
 	public static void main(String[] Args) {
-
-		System.out.println("Initializing all tables as empty to begin with");
-		initializeTables();
-		System.out.println(TABLESEATCAP + " tables loaded");
+		if (tables == null) {
+			System.out.println("Initializing all tables as empty to begin with");
+			tables = initializeTables();
+			System.out.println(TABLESEATCAP + " tables loaded");
+			initializeAllObjects();
+		}
 		Scanner sc = new Scanner(System.in);
 		int choice;
 
@@ -103,14 +111,15 @@ public class RestaurantApp {
 				break;
 			case 2: // calls handle Management UI
 				RestaurantApp.handleManagement(choice);
+
 				break;
 			case 3: // calls handle Service UI
 				RestaurantApp.handleService(choice);
 				break;
 			case 0:
-				break;
+				System.exit(0);
 			default:
-				System.out.println("Invalid Chocice");
+				System.out.println("Invalid Choice");
 			}
 
 		} while (choice != 0);
@@ -131,41 +140,42 @@ public class RestaurantApp {
 			System.out.println("                  3. Edit existing menu item                  ");
 			System.out.println("                  4. Delete menu item                         ");
 			System.out.println("                  5. Handle Promotions                        ");
-			System.out.println("                  5. Exit to main menu                        ");
+			System.out.println("                  6. Exit to main menu                        ");
 			System.out.println("                  0. Exit App                                 ");
 			System.out.println("==============================================================");
-			
+
 			Scanner sc = new Scanner(System.in);
 			choice = sc.nextInt();
 
 			switch (choice) {
-				case 1: 
-					FoodMenuUI.printMenuUI();
-					break;
-				case 2: 
-					FoodMenuUI.addNewMenuItemUI();
-					break;
-				case 3: 
-				    FoodMenuUI.editMenuItemUI();
-					break;
-				case 4: 
-				    FoodMenuUI.deleteMenuItemUI();
-					break;
-				case 5:
-					PromotionMenuUI.promotionMenuHandler();
-				case 0:
-					break;
-				default:
-				   System.out.println("Invalid Choice.");
-				   break;
-				
+			case 1:
+				FoodMenuUI.printMenuUI();
+				break;
+			case 2:
+				FoodMenuUI.addNewMenuItemUI();
+				break;
+			case 3:
+				FoodMenuUI.editMenuItemUI();
+				break;
+			case 4:
+				FoodMenuUI.deleteMenuItemUI();
+				break;
+			case 5:
+				PromotionMenuUI.promotionMenuHandler();
+			case 6:
+				RestaurantApp.main(null);
+			case 0:
+				System.exit(0);
+			default:
+				System.out.println("Invalid Choice.");
+				break;
+
 			}
 			sc.close();
-		} while (choice < 0 || choice > 6);
+		} while (choice != 0);
 	}
 
-	//Comment
-
+	// Comment
 
 	/**
 	 * 
@@ -222,6 +232,7 @@ public class RestaurantApp {
 
 				break;
 			case 4: // Return to main menu
+				RestaurantApp.main(null);
 				break;
 			default:
 				System.out.println("Please enter a valid choice ");
@@ -256,61 +267,70 @@ public class RestaurantApp {
 
 			selection = sc.nextInt();
 
-			switch(selection){
-				case 1: //Gets the available tables
-					getAvailableTables();
-					break;
-				case 2: //Settle Payments
-					int askTableNo;
-					int askOrderId;
-					System.out.println("Enter the orderId for settling payment");
-					askOrderId = sc.nextInt();
-					System.out.println("Enter the table number for settling payment");
-					askTableNo = sc.nextInt();
-					RestaurantService.settlePayment(askTableNo, askOrderId);
-					break;
-					
-				case 3: //create new order 
-					OrderUI.createNewOrder();
-					break;
-				case 4: //Check orders
-					System.out.println("Here are all the current orders: ");
-					for(int i = 0; i < orders.size(); i++){
-						System.out.println("The order ID: " + orders.get(i).getOrderId());
-						System.out.println("The order subTotal: " + orders.get(i).getSubtotal());
-						System.out.println("The Table number for this order : " + orders.get(i).getTableNumber());
-						System.out.println("Created at : " + orders.get(i).getCreatedAt());
-						System.out.println("Is paid : " + orders.get(i).getIsPaid());
-					}
-					break;
-				case 5: //Create new reservation
-					ReservationUI.createNewReservation();
-					break;
-				case 6: //Cancel Reservation
-					
-					System.out.println("Please enter Customer Name: ");
-					String tempCustName = sc.next();
-					System.out.println("Please enter Reservation ID for cancellation: ");
-					int tempResvID = sc.nextInt();
-					RestaurantService.cancelReservation(tempCustName, tempResvID);
-					break;
-				case 7: //Check Reservation
-					
-					System.out.println("Please enter Reservation ID for checking: ");
-					int checkResvID = sc.nextInt();
-					RestaurantService.checkReservation(checkResvID);
-					break;
-				case 8: // Return to main menu 
-					break;
-				default:
-					System.out.println("Please enter a valid choice ");
-					break;
+			switch (selection) {
+			case 1: // Gets the available tables
+				System.out.println("Here are the available tables:");
+				Iterator<Table> availTable = getAvailableTables().iterator();
+				while (availTable.hasNext()) {
+					Table temporary = availTable.next();
+					System.out.println("Table ID: " + temporary.getTableNumber() + " Seating Capacity: "
+							+ temporary.getSeatingCap());
+				}
+
+				break;
+			case 2: // Settle Payments
+				int askTableNo;
+				int askOrderId;
+				System.out.println("Enter the orderId for settling payment");
+				askOrderId = sc.nextInt();
+				System.out.println("Enter the table number for settling payment");
+				askTableNo = sc.nextInt();
+				RestaurantService.settlePayment(askTableNo, askOrderId);
+				break;
+
+			case 3: // create new order
+				OrderUI.createNewOrder();
+				break;
+			case 4: // Check orders
+				System.out.println("Here are all the current orders: ");
+				for (int i = 0; i < orders.size(); i++) {
+					System.out.println("The order ID: " + orders.get(i).getOrderId());
+					System.out.println("The order subTotal: " + orders.get(i).getSubtotal());
+					System.out.println("The Table number for this order : " + orders.get(i).getTableNumber());
+					System.out.println("Created at : " + orders.get(i).getCreatedAt());
+					System.out.println("Is paid : " + orders.get(i).getIsPaid());
+				}
+				break;
+			case 5: // Create new reservation
+				ReservationUI.createNewReservation();
+				break;
+			case 6: // Cancel Reservation
+
+				System.out.println("Please enter Customer Name: ");
+				String tempCustName = sc.next();
+				System.out.println("Please enter Reservation ID for cancellation: ");
+				int tempResvID = sc.nextInt();
+				RestaurantService.cancelReservation(tempCustName, tempResvID);
+				break;
+			case 7: // Check Reservation
+
+				System.out.println("Please enter Reservation ID for checking: ");
+				int checkResvID = sc.nextInt();
+				RestaurantService.checkReservation(checkResvID);
+				break;
+			case 8: // Return to main menu
+			    RestaurantApp.main(null);
+				break;
+			default:
+				System.out.println("Please enter a valid choice ");
+				break;
 			}
 
 		} while (selection != 8);
 
 		sc.close();
 	}
+
 	public static ArrayList<Table> getAvailableTables() {
 		ArrayList<Table> temp = new ArrayList<Table>();
 		for (int i = 0; i < TABLESEATCAP; i++) {
