@@ -7,7 +7,7 @@ public class Reservation {
 	private int reservationId;	
 	private LocalDate reservationDate;
 	private LocalTime reservationTime;
-	private int customerContact;	//assume customer contact number is unqiue
+	private int customerContact;
 	private int tableNumber;
 	private String customerName;
 	private int dinerSize;
@@ -88,6 +88,5 @@ public class Reservation {
 	public int getDinerSize(){
         return this.dinerSize;
     }
-
 
 }

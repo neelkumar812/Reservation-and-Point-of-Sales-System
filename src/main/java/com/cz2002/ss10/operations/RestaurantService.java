@@ -14,6 +14,8 @@ public class RestaurantService {
     private static int cancellationCounter = 1000;
     Scanner sc = new Scanner(System.in);
 
+    public static ArrayList<RestaurantItem> tempOrderItems;
+
     //Constructor
     public RestaurantService(){}
     /**
@@ -31,6 +33,56 @@ public class RestaurantService {
         System.out.println("New order created!");
         
     }
+
+    /**
+     * @param itemID
+     * @param quantity
+     * 
+     * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
+     */
+
+    
+    public static void addItemToOrder(int itemID, int quantity){
+
+         for(int i = 0; i < quantity; i++){
+
+            for (int j = 0; j < (RestaurantApp.menuItems.size()); j++) {
+                MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
+                if (itemID == menuItemObj.getId()) {
+                    RestaurantService.tempOrderItems.add(menuItemObj);
+                        System.out.println("Menu item has been added to Order");
+                        return;
+                }
+            }
+
+        }
+
+    }
+
+        /**
+     * @param itemID
+     * @param quantity
+     * 
+     * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
+     */
+
+    
+    public static void addPromoItemToOrder(int itemID, int quantity){
+
+        for(int i = 0; i < quantity; i++){
+
+           for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) {
+            PromoItem promoItemObj = RestaurantApp.promotionItems.get(i); 
+               if (itemID == promoItemObj.getId()) {
+                   RestaurantService.tempOrderItems.add(promoItemObj);
+                       System.out.println("Promotion item has been added to Order");
+                       return;
+               }
+           }
+
+       }
+
+   }
 
     //SettlePayments essentially does all the calculation stuff, and calls PrintOrderInvoice in the end
     public static void settlePayment(int tableNumber, int orderId) 

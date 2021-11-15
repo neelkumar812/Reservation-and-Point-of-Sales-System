@@ -94,11 +94,10 @@ public class FoodMenuUI{
         newItemPrice = sc.nextDouble();
 
         RestaurantMenu.addMenuItem(newItemType, newItemName, newItemDescription, newItemPrice);
-        System.out.println("Add successful. New menu item has been successfully added.");
         }
 
     public static void editMenuItemUI() {
-        int editItemID;
+        int editItemID = 0;
         String updatedItemName;
         int updatedItemType;
         String updatedItemDescription;
@@ -139,7 +138,7 @@ public class FoodMenuUI{
         System.out.println("Enter Updated price: ");
         updatedItemPrice = sc.nextDouble();
 
-        RestaurantMenu.addMenuItem(updatedItemType, updatedItemName, updatedItemDescription, updatedItemPrice);
+        RestaurantMenu.editMenuItem(editItemID, updatedItemType, updatedItemName, updatedItemDescription, updatedItemPrice);
 
     }
 
