@@ -7,7 +7,7 @@ public class Reservation {
 	private int reservationId;	
 	private LocalDate reservationDate;
 	private LocalTime reservationTime;
-	private int customerContact;	//assume customer contact number is unqiue
+	private int customerContact;
 	private int tableNumber;
 	private String customerName;
 	private int dinerSize;
@@ -23,11 +23,11 @@ public class Reservation {
 	 * @param dinerSize
 	 */
 	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
-		reservationId=resId;
-		reservationDate=resDate;
-		reservationTime=resTime;
-		customerContact=contactNumber;
-		customerName=name;
+		this.reservationId=resId;
+		this.reservationDate=resDate;
+		this.reservationTime=resTime;
+		this.customerContact=contactNumber;
+		this.customerName=name;
 		this.dinerSize = dinerSize;
 	}
 
@@ -86,20 +86,5 @@ public class Reservation {
 	public int getDinerSize(){
         return this.dinerSize;
     }
-
-	public void cancelReservation() {
-		// TODO - implement Reservation.cancelReservation
-		this.reservationDate = null;
-		this.reservationTime= null;
-	    this.tableNumber = -1;
-		this.dinerSize= -1;
-		this.customerContact = -1;
-		
-		System.out.println("Reservation for "+ this.customerName + "is cancelled (Reservation ID: "+ this.reservationId+")");
-
-		this.reservationId = -1;
-		this.customerName= null;
-		
-	}
 
 }
