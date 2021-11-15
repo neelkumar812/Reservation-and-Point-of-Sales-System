@@ -41,20 +41,22 @@ public class ReservationUI
         System.out.println("Welcome to the reservation creation page!");
 
         System.out.println("What date would this reservation be for?");
+        System.out.println("Enter the date in the format: YYYY-MM-DD");
         dateHolder = sc.nextLine(); 
         resDate = LocalDate.parse(dateHolder);
 
         System.out.println("What time would this reservation be for?");
+        System.out.println("Enter the time in the format: HH-MM-SS");
         dateHolder = sc.nextLine(); 
         resTime = LocalTime.parse(dateHolder);
 
         // check local time is in between opening and closing hours
-        do {
+        while (!(resTime.isAfter(LocalTime.parse("08:00:00"))) && (resTime.isBefore(LocalTime.parse("22:30:00")))) {
             System.out.println("Invalid timing chosen! Our operational hours are 08:00:00 to 22:30:00!");
             System.out.println("Please enter a new time for your reservation.");
             dateHolder = sc.nextLine(); 
             resTime = LocalTime.parse(dateHolder);
-        } while (!(resTime.isAfter(LocalTime.parse("08:00:00"))) && (resTime.isBefore(LocalTime.parse("22:30:00"))));
+        };
         
         //Assigning a table based on number of people
         System.out.println("How many people is the reservation for? ( MAX 10 PAX )");
@@ -66,7 +68,7 @@ public class ReservationUI
                     Table temp = new Table(pax, i+1, true);
                     RestaurantApp.tables.remove(i);
                     RestaurantApp.tables.add(i, temp); //i'm not sure if this line of code works 
-                    System.out.println("Table no. " + i+1 + "is available!");
+                    System.out.println("Table no. " + ((Integer)(i+1)).toString() + "is available!");
                     tempTableNumber = i+1;
                     break;
                 }
