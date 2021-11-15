@@ -5,6 +5,8 @@ import com.cz2002.ss10.objects.logistics.Table;
 import com.cz2002.ss10.operations.RestaurantService;
 import java.util.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * OrderUI Class
@@ -29,10 +31,31 @@ public class ReservationUI
         int customerPhone;
         int tempTableNumber = 0;
         int tempReservationId;
-        //ArrayList<RestaurantItem> tempOrderItems;
+        String dateHolder;
+        LocalDate resDate;
+        LocalTime resTime;
+        
+        //TODO if have time, check through reservations for any free tables at the same time
+        // TODO oh no i realised what's the point of setting table occupancy when it's reserved if the date and time is not now 
 
         System.out.println("Welcome to the reservation creation page!");
 
+        System.out.println("What date would this reservation be for?");
+        dateHolder = sc.nextLine(); 
+        resDate = LocalDate.parse(dateHolder);
+
+        System.out.println("What time would this reservation be for?");
+        dateHolder = sc.nextLine(); 
+        resTime = LocalTime.parse(dateHolder);
+
+        // check local time is in between opening and closing hours
+        do {
+            System.out.println("Invalid timing chosen! Our operational hours are 08:00:00 to 22:30:00!");
+            System.out.println("Please enter a new time for your reservation.");
+            dateHolder = sc.nextLine(); 
+            resTime = LocalTime.parse(dateHolder);
+        } while (!(resTime.isAfter(LocalTime.parse("08:00:00"))) && (resTime.isBefore(LocalTime.parse("22:30:00"))));
+        
         //Assigning a table based on number of people
         System.out.println("How many people is the reservation for? ( MAX 10 PAX )");
         pax = sc.nextInt(); 
@@ -136,7 +159,7 @@ public class ReservationUI
         System.out.println("You have been assigned Table number: " + tempTableNumber);
         
         //Creating the reservation
-        RestaurantService.createNewReservation(customerName, customerPhone, pax, tempTableNumber, tempReservationId);
+        RestaurantService.createNewReservation(tempReservationId, resDate, resTime, customerName, customerPhone, tempTableNumber, pax);
         sc.close();
     } 
 

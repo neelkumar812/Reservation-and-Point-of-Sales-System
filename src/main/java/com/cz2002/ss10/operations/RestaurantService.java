@@ -138,9 +138,9 @@ public class RestaurantService {
      * @param reservationDate
      * @param reservationTime
      */
-    public static void createNewReservation(String customerName, int customerContact, int dinerSize, int tableNumber,
-            int reservationID) {
-        Reservation temp = new Reservation(customerName, customerContact, dinerSize, tableNumber, reservationID);
+    public static void createNewReservation(int resId, LocalDate resDate, LocalTime resTime, String name, int contactNumber, int tableNumber, int dinerSize) {
+    
+        Reservation temp = new Reservation(resId, resDate, resTime, contactNumber, name, tableNumber, dinerSize);
         RestaurantApp.reservations.add(temp);
         System.out.println("Reservation ssuccessfully created");
     }

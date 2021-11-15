@@ -10,6 +10,7 @@ public class Reservation {
 	private int customerContact;
 	private int tableNumber;
 	private int dinerSize;
+	private String customerName;
 	
 	
 	/**
@@ -21,12 +22,14 @@ public class Reservation {
 	 * @param name
 	 * @param dinerSize
 	 */
-	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int dinerSize) {
-		reservationId=resId;
-		reservationDate=resDate;
-		reservationTime=resTime;
-		customerContact=contactNumber;
+	public Reservation(int resId, LocalDate resDate, LocalTime resTime, int contactNumber, String name, int tableNumber, int dinerSize) {
+		this.reservationId=resId;
+		this.reservationDate=resDate;
+		this.reservationTime=resTime;
+		this.customerContact=contactNumber;
 		this.dinerSize = dinerSize;
+		this.tableNumber = tableNumber;
+		this.customerName = name;
 	}
 
 	public void setReservationId(int resId){
@@ -61,6 +64,13 @@ public class Reservation {
         return this.customerContact;
     }
 
+	public String getCustomerName(){
+		return this.customerName;
+	}
+
+	public void setCustomerName(String name){
+		this.customerName = name;
+	}
 	public void setTableNumber(int tableNo){
         this.tableNumber= tableNo;
     }

@@ -21,7 +21,7 @@ public class InvoiceCsv implements IExportCsv {
 			File f = new File(filePath);
 			FileWriter writer = new FileWriter(f, true);
 
-			writer.write(this.paidAtAsString);
+			writer.write(this.paidAtAsString + ",,");
 			writer.write(System.getProperty("line.separator"));
 
 			// add headers
@@ -33,7 +33,7 @@ public class InvoiceCsv implements IExportCsv {
 			writer.write(formattedCsvString);
 			writer.write(System.getProperty("line.separator"));
 
-			writer.write("Total: " + this.orderTotalAsString);
+			writer.write("Total: " + this.orderTotalAsString + ",,");
 			writer.write(System.getProperty("line.separator"));
 
 			writer.close();
