@@ -167,6 +167,7 @@ public class PromotionMenuUI {
         Scanner sc = new Scanner(System.in);
         String editPromoName;
         double editPromoPrice;
+        int editPromoID = 1;
         int editPromoAppetiser = 1;
         int editPromoMain = 2;
         int editPromoDrink = 3;
@@ -175,12 +176,27 @@ public class PromotionMenuUI {
         boolean mainFound = false;
         boolean dessertFound = false;
         boolean drinkFound = false;
+        boolean promoFound = false;
 
 
         ArrayList<MenuItem> filteredAppetisersMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.APPETISERS);
         ArrayList<MenuItem> filteredMainMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.MAIN);   
         ArrayList<MenuItem> filteredDessertMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DESSERT);
         ArrayList<MenuItem> filteredDrinkMenu = MenuItem.funneledMenuItemList(MenuItem.MenuItemType.DRINK);
+
+        while (!promoFound) {
+            System.out.println("Enter the ID of the promotion to be edited: ");
+            editPromoID = sc.nextInt(); 
+            if (PromoItem.retrievePromotion(editPromoID) == null)
+             System.out.println("Invalid ID. Please enter a valid promo item ID.");
+            else promoFound = true;
+        }
+
+        //retrieve menu item with editItemID check.
+        if (PromoItem.retrievePromotion(editPromoID) == null){
+            System.out.println("Invalid ID. Promotion not found.");
+            return;
+        }
 
         System.out.println("Enter edited promotion set name: ");
         sc.nextLine(); //required if previous scanner takes in int, and now string is required
@@ -200,7 +216,7 @@ public class PromotionMenuUI {
             System.out.println("Enter updated Appetiser ID for the promotion: ");
             editPromoMain = sc.nextInt();
             mainFound = MenuItem.typeCheck(filteredAppetisersMenu, editPromoMain);
-            if (!appetiserFound) System.out.println("Enter a valid main ID.");
+            if (!appetiserFound) System.out.println("Enter a valid Appetiser ID.");
         }
 
 
@@ -244,7 +260,7 @@ public class PromotionMenuUI {
             drinkFound = MenuItem.typeCheck(filteredDrinkMenu, editPromoDrink);
             if (!drinkFound) System.out.println("Enter a valid drink ID.");
         }
-        RestaurantMenu.editPromoItem(editPromoName, editPromoPrice, editPromoAppetiser, editPromoMain, editPromoDessert, editPromoDrink);
+        RestaurantMenu.editPromoItem(editPromoID, editPromoName, editPromoPrice, editPromoAppetiser, editPromoMain, editPromoDessert, editPromoDrink);
     }
 
     /**

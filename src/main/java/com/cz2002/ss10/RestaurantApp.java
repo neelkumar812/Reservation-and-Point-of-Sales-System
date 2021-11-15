@@ -132,7 +132,7 @@ public class RestaurantApp {
 			System.out.println("                  4. Delete menu item                         ");
 			System.out.println("                  5. Handle Promotions                        ");
 			System.out.println("                  5. Exit to main menu                        ");
-			System.out.println("                  0.Exit App                                  ");
+			System.out.println("                  0. Exit App                                 ");
 			System.out.println("==============================================================");
 			
 			Scanner sc = new Scanner(System.in);

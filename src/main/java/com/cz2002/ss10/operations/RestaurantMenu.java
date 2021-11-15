@@ -67,7 +67,7 @@ public class RestaurantMenu {
 	}
 
 	/**
-	 * Removes the object from the MenuItem ArrayList. Removes Promotion if it contains item object to be delete.
+	 * Removes the object from the MenuItem ArrayList. Removes Promotion if it contains item object to be deleted.
 	 * @param itemID 
 	 */
 	public static void deleteMenuItem(int itemID) {
@@ -132,12 +132,12 @@ public class RestaurantMenu {
 
 	/**
 	 * Creates a Promotion Item object and adds it to the promotionItems Arraylist.
-	 * @param PromoName 
-	 * @param PromoPrice 
-	 * @param PromoAppetiser
-	 * @param PromoMain
-	 * @param PromoDessert
-	 * @param PromoDrinks
+	 * @param PromoName Name of the promotion.
+	 * @param PromoPrice Price of the promotion.
+	 * @param PromoAppetiser Appetiser in the current promotion.
+	 * @param PromoMain Main in the current promotion.
+	 * @param PromoDessert Dessert in the current promotion.
+	 * @param PromoDrinks Drinks in the current promotion.
 	 */
 	public static void createPromoItem(String PromoName, Double PromoPrice, int PromoAppetiser, int PromoMain, int PromoDessert, int PromoDrink) {
 		PromoItem promotionObj = RestaurantApp.promotionItems.get((RestaurantApp.promotionItems.size())-1);
@@ -150,16 +150,20 @@ public class RestaurantMenu {
 
 	/**
 	 * Updates Existing Promotion Object in the ArrayList.
-	 * @param
+	 * @param PromoID Id of the Promotion Object to be Updates.
+	 * @param PromoName Updated PromoName.
+	 * @param PromoPrice Updated PromoPrice
+	 * @param PromoAppetiser Updated Appetiser 
+	 * @param PromoMain Updated Main
+	 * @param PromoDessert Updated Dessert
 	 */
-	public static void editPromoItem(String PromoName, Double PromoPrice, int PromoAppetiser, int PromoMain, int PromoDessert, int PromoDrink) {
+	public static void editPromoItem(int PromoID, String PromoName, Double PromoPrice, int PromoAppetiser, int PromoMain, int PromoDessert, int PromoDrink) {
 
 		for (int i=0; i<(RestaurantApp.promotionItems.size()); i++) {
-			int editPromoID = 0;
             PromoItem promoObj = RestaurantApp.promotionItems.get(i);
-            if (editPromoID == promoObj.getId()) {
+            if (PromoID == promoObj.getId()) {
 			// Note to self: Arraylist returns a reference to the object, so any edits will be reflected.
-                    PromoItem promo = PromoItem.retrievePromotion(editPromoID);
+                    PromoItem promo = PromoItem.retrievePromotion(PromoID);
                     promo.setName(PromoName);
                     promo.setPrice(PromoPrice);
 					promo.setPromoAppetiser(PromoAppetiser);

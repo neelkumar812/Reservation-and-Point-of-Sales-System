@@ -87,6 +87,8 @@ public class OrderUI
         System.out.println("============================");
         counter++;
 
+        OrderUI.getOrderItem();
+
         //Ask the items ordered
         // Ask what Users want to order: Promotion Menu or Normal Menu?
         // Print Each Specific Menu 
@@ -140,7 +142,7 @@ public class OrderUI
                 menuItemExists = true;
                 System.out.println("Enter quantity of item: \n");
                 int itemQuantity = sc.nextInt();
-                RestaurantService.addItemToOrder(orderItemID, itemQuantity);
+                OrderUI.addItemToOrder(orderItemID, itemQuantity);
             }
         }
             break;
@@ -157,13 +159,63 @@ public class OrderUI
                     promoItemExists = true;
                     System.out.println("Enter quantity of item: \n");
                     int promoQuantity = sc.nextInt();
-                    RestaurantService.addPromoItemToOrder(orderItemID, promoQuantity);
+                    this.addPromoItemToOrder(orderItemID, promoQuantity);
                 }
             }
             break;
 
             default: System.out.println("Invalid Choice");
         };
+
+            /**
+     * @param itemID
+     * @param quantity
+     * 
+     * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
+     */
+
+    
+    public static void addItemToOrder(int itemID, int quantity){
+
+        for(int i = 0; i < quantity; i++){
+
+           for (int j = 0; j < (RestaurantApp.menuItems.size()); j++) {
+               MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
+               if (itemID == menuItemObj.getId()) {
+                   RestaurantService.tempOrderItems.add(menuItemObj);
+                       System.out.println("Menu item has been added to Order");
+                       return;
+               }
+           }
+
+       }
+
+   }
+
+       /**
+    * @param itemID
+    * @param quantity
+    * 
+    * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
+    */
+
+   
+   public void addPromoItemToOrder(int itemID, int quantity){
+
+       for(int i = 0; i < quantity; i++){
+
+          for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) {
+           PromoItem promoItemObj = RestaurantApp.promotionItems.get(i); 
+              if (itemID == promoItemObj.getId()) {
+                  RestaurantService.tempOrderItems.add(promoItemObj);
+                      System.out.println("Promotion item has been added to Order");
+                      return;
+              }
+          }
+
+      }
+
+  }
 
 
 
