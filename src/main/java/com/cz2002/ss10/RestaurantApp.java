@@ -121,7 +121,7 @@ public class RestaurantApp {
 	 * 
 	 * @param operation
 	 */
-	public static int handleMenu(int operation) {
+	public static void handleMenu(int operation) {
 		int choice;
 		do {
 			System.out.println("==============================================================");
@@ -153,14 +153,14 @@ public class RestaurantApp {
 					break;
 				case 5:
 					PromotionMenuUI.promotionMenuHandler();
-				case 6:
-					return -1;
 				case 0:
-					return 1;
+					break;
 				default:
 				   System.out.println("Invalid Choice.");
+				   break;
+				
 			}
-		return 0;
+			sc.close();
 		} while (choice < 0 || choice > 6);
 	}
 
@@ -227,6 +227,7 @@ public class RestaurantApp {
 				System.out.println("Please enter a valid choice ");
 				break;
 			}
+			sc.close();
 
 		} while (selection != 4);
 
