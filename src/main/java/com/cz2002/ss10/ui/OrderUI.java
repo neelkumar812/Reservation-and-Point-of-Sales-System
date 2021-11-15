@@ -27,6 +27,8 @@ public class OrderUI
 
     //constructor
     public OrderUI(){}
+
+
     
     public static void createNewOrder()
     {
@@ -87,7 +89,86 @@ public class OrderUI
         System.out.println("============================");
         counter++;
 
-        OrderUI.getOrderItem();
+                //Ask the items ordered
+        // Ask what Users want to order: Promotion Menu or Normal Menu?
+        // Print Each Specific Menu 
+        // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
+        int choice;
+        do{
+        System.out.println(" Which Menu would you like to order from? ");
+        System.out.println("==========================================");
+        System.out.println("            1. Promotion Menu             ");
+        System.out.println("            2. Ala-Carte Menu             ");
+        System.out.println("==========================================");
+        System.out.println("     Enter the number of your choice:     ");
+        choice = sc.nextInt();
+        }while(choice<1 || choice > 2);
+
+        switch(choice){
+        case(1): 
+        RestaurantMenu.printMenu(MenuItem.MenuItemType.ALL);
+        boolean menuItemExists = false;
+        while (!menuItemExists) {
+            System.out.println("Enter the ID of Menu item to add: \n");
+            int orderItemID = sc.nextInt(); 
+            if (MenuItem.retrieveMenuItem(orderItemID) == null) 
+            System.out.println("Enter a valid menu item ID.");
+            else {
+                menuItemExists = true;
+                System.out.println("Enter quantity of item: \n");
+                int itemQuantity = sc.nextInt();
+                for(int i = 0; i < itemQuantity; i++){
+                    for (int j = 0; j < (RestaurantApp.menuItems.size()); j++) {
+                        MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
+                        if (orderItemID == menuItemObj.getId()) {
+                            tempOrderItems.add(menuItemObj);
+                                System.out.println("Menu item has been added to Order");
+                                return;
+                        }
+                    }
+         
+                }
+         
+            }
+        }
+            break;
+
+            case(2):
+            RestaurantMenu.printpromotionItems();
+            boolean promoItemExists = false;
+            while (!promoItemExists) {
+                System.out.println("Enter the ID of Promo item to add: \n");
+                int orderItemID = sc.nextInt(); 
+                if (PromoItem.retrievePromotion(orderItemID) == null) 
+                System.out.println("Enter a valid promo item ID.");
+                else {
+                    promoItemExists = true;
+                    System.out.println("Enter quantity of item: \n");
+                    int promoQuantity = sc.nextInt();
+                    for(int i = 0; i < promoQuantity; i++){
+                        for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) {
+                         PromoItem promoItemObj = RestaurantApp.promotionItems.get(i); 
+                            if (orderItemID == promoItemObj.getId()) {
+                                tempOrderItems.add(promoItemObj);
+                                    System.out.println("Promotion item has been added to Order");
+                                    return;
+                            }
+                        }
+              
+                    }
+                    
+
+                }
+            }
+            break;
+            default: System.out.println("Invalid Choice");
+            break;
+        };
+        
+
+
+
+
 
         //Ask the items ordered
         // Ask what Users want to order: Promotion Menu or Normal Menu?
@@ -109,125 +190,7 @@ public class OrderUI
         
     }
 
-    public static void getOrderItem(){
 
-        //Ask the items ordered
-        // Ask what Users want to order: Promotion Menu or Normal Menu?
-        // Print Each Specific Menu 
-        // Take and Add the specific item id into the the tempOrderItems (Restraunt Item) ArrayList
-        int choice;
-        Scanner sc = new Scanner(System.in);
-
-        do{
-        System.out.println(" Which Menu would you like to order from? ");
-        System.out.println("==========================================");
-        System.out.println("            1. Promotion Menu             ");
-        System.out.println("            2. Ala-Carte Menu             ");
-        System.out.println("==========================================");
-        System.out.println("     Enter the number of your choice:     ");
-        choice = sc.nextInt();
-        }while(choice<1 || choice > 2);
-
-        switch(choice){
-
-        case(1): 
-        RestaurantMenu.printMenu(MenuItem.MenuItemType.ALL);
-        boolean menuItemExists = false;
-        while (!menuItemExists) {
-            System.out.println("Enter the ID of Menu item to add: \n");
-            int orderItemID = sc.nextInt(); 
-            if (MenuItem.retrieveMenuItem(orderItemID) == null) 
-            System.out.println("Enter a valid menu item ID.");
-            else {
-                menuItemExists = true;
-                System.out.println("Enter quantity of item: \n");
-                int itemQuantity = sc.nextInt();
-                OrderUI.addItemToOrder(orderItemID, itemQuantity);
-            }
-        }
-            break;
-
-            case(2):
-            RestaurantMenu.printpromotionItems();
-            boolean promoItemExists = false;
-            while (!promoItemExists) {
-                System.out.println("Enter the ID of Promo item to add: \n");
-                int orderItemID = sc.nextInt(); 
-                if (PromoItem.retrievePromotion(orderItemID) == null) 
-                System.out.println("Enter a valid promo item ID.");
-                else {
-                    promoItemExists = true;
-                    System.out.println("Enter quantity of item: \n");
-                    int promoQuantity = sc.nextInt();
-                    this.addPromoItemToOrder(orderItemID, promoQuantity);
-                }
-            }
-            break;
-
-            default: System.out.println("Invalid Choice");
-        };
-
-            /**
-     * @param itemID
-     * @param quantity
-     * 
-     * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
-     */
-
-    
-    public static void addItemToOrder(int itemID, int quantity){
-
-        for(int i = 0; i < quantity; i++){
-
-           for (int j = 0; j < (RestaurantApp.menuItems.size()); j++) {
-               MenuItem menuItemObj = RestaurantApp.menuItems.get(i); 
-               if (itemID == menuItemObj.getId()) {
-                   RestaurantService.tempOrderItems.add(menuItemObj);
-                       System.out.println("Menu item has been added to Order");
-                       return;
-               }
-           }
-
-       }
-
-   }
-
-       /**
-    * @param itemID
-    * @param quantity
-    * 
-    * If the quantity is 2 this method will add Two Items to the Arraylist of temp Order Items.
-    */
-
-   
-   public void addPromoItemToOrder(int itemID, int quantity){
-
-       for(int i = 0; i < quantity; i++){
-
-          for (int j = 0; j < (RestaurantApp.promotionItems.size()); j++) {
-           PromoItem promoItemObj = RestaurantApp.promotionItems.get(i); 
-              if (itemID == promoItemObj.getId()) {
-                  RestaurantService.tempOrderItems.add(promoItemObj);
-                      System.out.println("Promotion item has been added to Order");
-                      return;
-              }
-          }
-
-      }
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-    }
 
 }
 

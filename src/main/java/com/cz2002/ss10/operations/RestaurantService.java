@@ -14,8 +14,6 @@ public class RestaurantService {
     private static int cancellationCounter = 1000;
     Scanner sc = new Scanner(System.in);
 
-    public static ArrayList<RestaurantItem> tempOrderItems;
-
     //Constructor
     public RestaurantService(){}
     /**
